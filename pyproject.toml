@@ -1,6 +1,6 @@
 [project]
-name = "y2"
-version = "0.0.2"
+name = "y2-py"
+version = "0.0.3"
 description = "The official Python library for the y2 API"
 dynamic = ["readme"]
 license = "Apache-2.0"
