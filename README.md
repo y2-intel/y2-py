@@ -1,7 +1,7 @@
 # Y2 Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/y2.svg?label=pypi%20(stable))](https://pypi.org/project/y2/)
+[![PyPI version](https://img.shields.io/pypi/v/y2-py.svg?label=pypi%20(stable))](https://pypi.org/project/y2-py/)
 
 The Y2 Python library provides convenient access to the Y2 REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -17,7 +17,7 @@ The REST API documentation can be found on [y2.yeetum.com](https://y2.yeetum.com
 
 ```sh
 # install from PyPI
-pip install y2
+pip install y2-py
 ```
 
 ## Usage
@@ -73,7 +73,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install y2[aiohttp]
+pip install y2-py[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
