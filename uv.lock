@@ -1602,7 +1602,7 @@ wheels = [
 
 [[package]]
 name = "y2-py"
-version = "0.0.3"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
