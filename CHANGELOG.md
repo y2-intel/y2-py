@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-12-31)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/y2-intel/y2-py/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([32aa037](https://github.com/y2-intel/y2-py/commit/32aa0375b37f757ecf4e55769f9883b28006d647))
+
 ## 0.1.0 (2025-12-28)
 
 Full Changelog: [v0.0.3...v0.1.0](https://github.com/y2-intel/y2-py/compare/v0.0.3...v0.1.0)
