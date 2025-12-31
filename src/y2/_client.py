@@ -81,7 +81,7 @@ class Y2(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("Y2_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.y2.dev/v1"
+            base_url = f"https://api.y2.dev/api/v1"
 
         super().__init__(
             version=__version__,
@@ -267,7 +267,7 @@ class AsyncY2(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("Y2_BASE_URL")
         if base_url is None:
-            base_url = f"https://api.y2.dev/v1"
+            base_url = f"https://api.y2.dev/api/v1"
 
         super().__init__(
             version=__version__,
