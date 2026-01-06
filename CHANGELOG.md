@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2026-01-06)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/y2-intel/y2-py/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **internal:** codegen related update ([38f3008](https://github.com/y2-intel/y2-py/commit/38f30086f2f78de68b56799d36b0aefed9ea557c))
+
 ## 0.2.0 (2025-12-31)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/y2-intel/y2-py/compare/v0.1.0...v0.2.0)
