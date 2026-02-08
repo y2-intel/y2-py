@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0 (2026-01-30)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/y2-intel/y2-py/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **client:** add custom JSON encoder for extended type support ([e85356a](https://github.com/y2-intel/y2-py/commit/e85356a381475ffbe08fb959284ecb2d571f0aff))
+* **client:** add support for binary request streaming ([a8f65b3](https://github.com/y2-intel/y2-py/commit/a8f65b35488abe14d21442ab57d99f7885949d21))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([897862a](https://github.com/y2-intel/y2-py/commit/897862a888389466e8b43b5c8b768f1c5537b196))
+* **internal:** codegen related update ([38f3008](https://github.com/y2-intel/y2-py/commit/38f30086f2f78de68b56799d36b0aefed9ea557c))
+* **internal:** update `actions/checkout` version ([61ea208](https://github.com/y2-intel/y2-py/commit/61ea2080efa36f79ebf6c2962b8e0f29183e8fde))
+
 ## 0.2.0 (2025-12-31)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/y2-intel/y2-py/compare/v0.1.0...v0.2.0)
