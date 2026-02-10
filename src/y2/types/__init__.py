@@ -9,10 +9,17 @@ from .news_list_params import NewsListParams as NewsListParams
 from .news_list_response import NewsListResponse as NewsListResponse
 from .report_list_params import ReportListParams as ReportListParams
 from .report_list_response import ReportListResponse as ReportListResponse
+from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_list_response import ProfileListResponse as ProfileListResponse
+from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
 from .news_get_recaps_params import NewsGetRecapsParams as NewsGetRecapsParams
+from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
+from .profile_delete_response import ProfileDeleteResponse as ProfileDeleteResponse
+from .profile_update_response import ProfileUpdateResponse as ProfileUpdateResponse
 from .news_get_recaps_response import NewsGetRecapsResponse as NewsGetRecapsResponse
 from .news_list_feeds_response import NewsListFeedsResponse as NewsListFeedsResponse
 from .report_retrieve_response import ReportRetrieveResponse as ReportRetrieveResponse
 from .report_retrieve_audio_params import ReportRetrieveAudioParams as ReportRetrieveAudioParams
+from .profile_partial_update_params import ProfilePartialUpdateParams as ProfilePartialUpdateParams
 from .report_retrieve_audio_response import ReportRetrieveAudioResponse as ReportRetrieveAudioResponse
+from .profile_partial_update_response import ProfilePartialUpdateResponse as ProfilePartialUpdateResponse

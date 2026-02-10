@@ -106,6 +106,29 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from y2 import Y2
+
+client = Y2()
+
+profile = client.profiles.create(
+    frequency="daily",
+    name="Cybersecurity Weekly",
+    schedule_time_of_day="09:00",
+    topic="Cybersecurity threats, vulnerabilities, and defense strategies",
+    recursion_config={
+        "enabled": True,
+        "max_depth": 1,
+        "strategy": "breadth-first",
+    },
+)
+print(profile.recursion_config)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `y2.APIConnectionError` is raised.

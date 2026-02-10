@@ -22,12 +22,22 @@ Methods:
 Types:
 
 ```python
-from y2.types import ProfileListResponse
+from y2.types import (
+    ProfileCreateResponse,
+    ProfileUpdateResponse,
+    ProfileListResponse,
+    ProfileDeleteResponse,
+    ProfilePartialUpdateResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /profiles">client.profiles.<a href="./src/y2/resources/profiles.py">create</a>(\*\*<a href="src/y2/types/profile_create_params.py">params</a>) -> <a href="./src/y2/types/profile_create_response.py">ProfileCreateResponse</a></code>
+- <code title="put /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">update</a>(profile_id, \*\*<a href="src/y2/types/profile_update_params.py">params</a>) -> <a href="./src/y2/types/profile_update_response.py">ProfileUpdateResponse</a></code>
 - <code title="get /profiles">client.profiles.<a href="./src/y2/resources/profiles.py">list</a>() -> <a href="./src/y2/types/profile_list_response.py">ProfileListResponse</a></code>
+- <code title="delete /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">delete</a>(profile_id) -> <a href="./src/y2/types/profile_delete_response.py">ProfileDeleteResponse</a></code>
+- <code title="patch /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">partial_update</a>(profile_id, \*\*<a href="src/y2/types/profile_partial_update_params.py">params</a>) -> <a href="./src/y2/types/profile_partial_update_response.py">ProfilePartialUpdateResponse</a></code>
 
 # News
 
