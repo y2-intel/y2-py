@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2026-02-10)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/y2-intel/y2-py/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* **internal:** bump dependencies ([dd8b46a](https://github.com/y2-intel/y2-py/commit/dd8b46a2ccbd81f9692e07e2e7fdc8b76c724f89))
+
 ## 0.3.0 (2026-01-30)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/y2-intel/y2-py/compare/v0.2.0...v0.3.0)
