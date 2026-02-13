@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 (2026-02-13)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/y2-intel/y2-py/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* format all `api.md` files ([d69710d](https://github.com/y2-intel/y2-py/commit/d69710d70b69922ba6844ab854e4eccc6d9ec843))
+* **internal:** fix lint error on Python 3.14 ([ebc7607](https://github.com/y2-intel/y2-py/commit/ebc7607e150eaaa20e1c4501633990e51f084505))
+
 ## 0.4.0 (2026-02-10)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/y2-intel/y2-py/compare/v0.3.1...v0.4.0)
