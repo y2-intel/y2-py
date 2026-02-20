@@ -21,13 +21,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestNews:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Y2) -> None:
         news = client.news.list()
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Y2) -> None:
         news = client.news.list(
@@ -36,7 +36,7 @@ class TestNews:
         )
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Y2) -> None:
         response = client.news.with_raw_response.list()
@@ -46,7 +46,7 @@ class TestNews:
         news = response.parse()
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Y2) -> None:
         with client.news.with_streaming_response.list() as response:
@@ -58,13 +58,13 @@ class TestNews:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_recaps(self, client: Y2) -> None:
         news = client.news.get_recaps()
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_recaps_with_all_params(self, client: Y2) -> None:
         news = client.news.get_recaps(
@@ -73,7 +73,7 @@ class TestNews:
         )
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_recaps(self, client: Y2) -> None:
         response = client.news.with_raw_response.get_recaps()
@@ -83,7 +83,7 @@ class TestNews:
         news = response.parse()
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_recaps(self, client: Y2) -> None:
         with client.news.with_streaming_response.get_recaps() as response:
@@ -95,13 +95,13 @@ class TestNews:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_feeds(self, client: Y2) -> None:
         news = client.news.list_feeds()
         assert_matches_type(NewsListFeedsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_feeds(self, client: Y2) -> None:
         response = client.news.with_raw_response.list_feeds()
@@ -111,7 +111,7 @@ class TestNews:
         news = response.parse()
         assert_matches_type(NewsListFeedsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_feeds(self, client: Y2) -> None:
         with client.news.with_streaming_response.list_feeds() as response:
@@ -129,13 +129,13 @@ class TestAsyncNews:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncY2) -> None:
         news = await async_client.news.list()
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncY2) -> None:
         news = await async_client.news.list(
@@ -144,7 +144,7 @@ class TestAsyncNews:
         )
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncY2) -> None:
         response = await async_client.news.with_raw_response.list()
@@ -154,7 +154,7 @@ class TestAsyncNews:
         news = await response.parse()
         assert_matches_type(NewsListResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncY2) -> None:
         async with async_client.news.with_streaming_response.list() as response:
@@ -166,13 +166,13 @@ class TestAsyncNews:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_recaps(self, async_client: AsyncY2) -> None:
         news = await async_client.news.get_recaps()
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_recaps_with_all_params(self, async_client: AsyncY2) -> None:
         news = await async_client.news.get_recaps(
@@ -181,7 +181,7 @@ class TestAsyncNews:
         )
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_recaps(self, async_client: AsyncY2) -> None:
         response = await async_client.news.with_raw_response.get_recaps()
@@ -191,7 +191,7 @@ class TestAsyncNews:
         news = await response.parse()
         assert_matches_type(NewsGetRecapsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_recaps(self, async_client: AsyncY2) -> None:
         async with async_client.news.with_streaming_response.get_recaps() as response:
@@ -203,13 +203,13 @@ class TestAsyncNews:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_feeds(self, async_client: AsyncY2) -> None:
         news = await async_client.news.list_feeds()
         assert_matches_type(NewsListFeedsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_feeds(self, async_client: AsyncY2) -> None:
         response = await async_client.news.with_raw_response.list_feeds()
@@ -219,7 +219,7 @@ class TestAsyncNews:
         news = await response.parse()
         assert_matches_type(NewsListFeedsResponse, news, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_feeds(self, async_client: AsyncY2) -> None:
         async with async_client.news.with_streaming_response.list_feeds() as response:
