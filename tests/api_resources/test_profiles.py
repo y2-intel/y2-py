@@ -23,7 +23,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestProfiles:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Y2) -> None:
         profile = client.profiles.create(
@@ -34,7 +34,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Y2) -> None:
         profile = client.profiles.create(
@@ -56,7 +56,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.create(
@@ -71,7 +71,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.create(
@@ -88,7 +88,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Y2) -> None:
         profile = client.profiles.update(
@@ -96,7 +96,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Y2) -> None:
         profile = client.profiles.update(
@@ -150,7 +150,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.update(
@@ -162,7 +162,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.update(
@@ -176,7 +176,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Y2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
@@ -184,13 +184,13 @@ class TestProfiles:
                 profile_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Y2) -> None:
         profile = client.profiles.list()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.list()
@@ -200,7 +200,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.list() as response:
@@ -212,7 +212,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Y2) -> None:
         profile = client.profiles.delete(
@@ -220,7 +220,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.delete(
@@ -232,7 +232,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.delete(
@@ -246,7 +246,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Y2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
@@ -254,7 +254,7 @@ class TestProfiles:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_partial_update(self, client: Y2) -> None:
         profile = client.profiles.partial_update(
@@ -262,7 +262,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_partial_update_with_all_params(self, client: Y2) -> None:
         profile = client.profiles.partial_update(
@@ -316,7 +316,7 @@ class TestProfiles:
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_partial_update(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.partial_update(
@@ -328,7 +328,7 @@ class TestProfiles:
         profile = response.parse()
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_partial_update(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.partial_update(
@@ -342,7 +342,7 @@ class TestProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_partial_update(self, client: Y2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
@@ -356,7 +356,7 @@ class TestAsyncProfiles:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.create(
@@ -367,7 +367,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.create(
@@ -389,7 +389,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.create(
@@ -404,7 +404,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.create(
@@ -421,7 +421,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.update(
@@ -429,7 +429,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.update(
@@ -483,7 +483,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.update(
@@ -495,7 +495,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.update(
@@ -509,7 +509,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncY2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
@@ -517,13 +517,13 @@ class TestAsyncProfiles:
                 profile_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.list()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.list()
@@ -533,7 +533,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileListResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.list() as response:
@@ -545,7 +545,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.delete(
@@ -553,7 +553,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.delete(
@@ -565,7 +565,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.delete(
@@ -579,7 +579,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncY2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
@@ -587,7 +587,7 @@ class TestAsyncProfiles:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_partial_update(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.partial_update(
@@ -595,7 +595,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_partial_update_with_all_params(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.partial_update(
@@ -649,7 +649,7 @@ class TestAsyncProfiles:
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_partial_update(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.partial_update(
@@ -661,7 +661,7 @@ class TestAsyncProfiles:
         profile = await response.parse()
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_partial_update(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.partial_update(
@@ -675,7 +675,7 @@ class TestAsyncProfiles:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_partial_update(self, async_client: AsyncY2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
