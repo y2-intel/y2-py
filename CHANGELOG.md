@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.1 (2026-02-27)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/y2-intel/y2-py/compare/v0.4.0...v0.4.1)
+
+### Chores
+
+* **ci:** bump uv version ([ae89f6f](https://github.com/y2-intel/y2-py/commit/ae89f6f385332d0fece0e90615b7129c6309ccc0))
+* format all `api.md` files ([d69710d](https://github.com/y2-intel/y2-py/commit/d69710d70b69922ba6844ab854e4eccc6d9ec843))
+* **internal:** add request options to SSE classes ([1906367](https://github.com/y2-intel/y2-py/commit/1906367f1eecb025cb5ed281fddd9084703ac345))
+* **internal:** fix lint error on Python 3.14 ([ebc7607](https://github.com/y2-intel/y2-py/commit/ebc7607e150eaaa20e1c4501633990e51f084505))
+* **internal:** make `test_proxy_environment_variables` more resilient ([54047d5](https://github.com/y2-intel/y2-py/commit/54047d5f9f57249c61d822ac859cd24475738c04))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([aa71652](https://github.com/y2-intel/y2-py/commit/aa7165232a8a70f10dbca2511791174e2c8a638d))
+* **internal:** remove mock server code ([068ea3c](https://github.com/y2-intel/y2-py/commit/068ea3cce65a1711880c53b0c666b4c2a5084839))
+* update mock server docs ([4a6f24a](https://github.com/y2-intel/y2-py/commit/4a6f24ac250d2add7385519b7f80ed6afdce9d68))
+
 ## 0.4.0 (2026-02-10)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/y2-intel/y2-py/compare/v0.3.1...v0.4.0)
