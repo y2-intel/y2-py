@@ -54,13 +54,20 @@ class ProfilesResource(SyncAPIResource):
         name: str,
         schedule_time_of_day: str,
         topic: str,
+        audio_config: profile_create_params.AudioConfig | Omit = omit,
         bluf_structure: str | Omit = omit,
+        branding_template_id: str | Omit = omit,
+        budget_config: profile_create_params.BudgetConfig | Omit = omit,
         custom_prompt: str | Omit = omit,
+        freshness_config: profile_create_params.FreshnessConfig | Omit = omit,
         is_community: bool | Omit = omit,
+        model_config: profile_create_params.ModelConfig | Omit = omit,
         recursion_config: profile_create_params.RecursionConfig | Omit = omit,
         schedule_day_of_month: str | Omit = omit,
         schedule_day_of_week: str | Omit = omit,
+        search_config: profile_create_params.SearchConfig | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
+        tool_config: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -82,17 +89,31 @@ class ProfilesResource(SyncAPIResource):
 
           topic: Topic description for research
 
+          audio_config: Audio generation configuration
+
           bluf_structure: Custom BLUF report structure template
+
+          branding_template_id: Branding template ID (Pro feature)
+
+          budget_config: Cost budget configuration
 
           custom_prompt: Custom system prompt for the AI analyst
 
+          freshness_config: Source freshness configuration
+
           is_community: Whether this is a community (public) profile
+
+          model_config: AI model configuration
 
           schedule_day_of_month: Day of month for monthly profiles
 
           schedule_day_of_week: Day of week for weekly/biweekly profiles
 
+          search_config: Web search configuration
+
           tags: Tags for categorization
+
+          tool_config: Tool configuration for report generation
 
           extra_headers: Send extra headers
 
@@ -110,13 +131,20 @@ class ProfilesResource(SyncAPIResource):
                     "name": name,
                     "schedule_time_of_day": schedule_time_of_day,
                     "topic": topic,
+                    "audio_config": audio_config,
                     "bluf_structure": bluf_structure,
+                    "branding_template_id": branding_template_id,
+                    "budget_config": budget_config,
                     "custom_prompt": custom_prompt,
+                    "freshness_config": freshness_config,
                     "is_community": is_community,
+                    "model_config": model_config,
                     "recursion_config": recursion_config,
                     "schedule_day_of_month": schedule_day_of_month,
                     "schedule_day_of_week": schedule_day_of_week,
+                    "search_config": search_config,
                     "tags": tags,
+                    "tool_config": tool_config,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
@@ -376,13 +404,20 @@ class AsyncProfilesResource(AsyncAPIResource):
         name: str,
         schedule_time_of_day: str,
         topic: str,
+        audio_config: profile_create_params.AudioConfig | Omit = omit,
         bluf_structure: str | Omit = omit,
+        branding_template_id: str | Omit = omit,
+        budget_config: profile_create_params.BudgetConfig | Omit = omit,
         custom_prompt: str | Omit = omit,
+        freshness_config: profile_create_params.FreshnessConfig | Omit = omit,
         is_community: bool | Omit = omit,
+        model_config: profile_create_params.ModelConfig | Omit = omit,
         recursion_config: profile_create_params.RecursionConfig | Omit = omit,
         schedule_day_of_month: str | Omit = omit,
         schedule_day_of_week: str | Omit = omit,
+        search_config: profile_create_params.SearchConfig | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
+        tool_config: object | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -404,17 +439,31 @@ class AsyncProfilesResource(AsyncAPIResource):
 
           topic: Topic description for research
 
+          audio_config: Audio generation configuration
+
           bluf_structure: Custom BLUF report structure template
+
+          branding_template_id: Branding template ID (Pro feature)
+
+          budget_config: Cost budget configuration
 
           custom_prompt: Custom system prompt for the AI analyst
 
+          freshness_config: Source freshness configuration
+
           is_community: Whether this is a community (public) profile
+
+          model_config: AI model configuration
 
           schedule_day_of_month: Day of month for monthly profiles
 
           schedule_day_of_week: Day of week for weekly/biweekly profiles
 
+          search_config: Web search configuration
+
           tags: Tags for categorization
+
+          tool_config: Tool configuration for report generation
 
           extra_headers: Send extra headers
 
@@ -432,13 +481,20 @@ class AsyncProfilesResource(AsyncAPIResource):
                     "name": name,
                     "schedule_time_of_day": schedule_time_of_day,
                     "topic": topic,
+                    "audio_config": audio_config,
                     "bluf_structure": bluf_structure,
+                    "branding_template_id": branding_template_id,
+                    "budget_config": budget_config,
                     "custom_prompt": custom_prompt,
+                    "freshness_config": freshness_config,
                     "is_community": is_community,
+                    "model_config": model_config,
                     "recursion_config": recursion_config,
                     "schedule_day_of_month": schedule_day_of_month,
                     "schedule_day_of_week": schedule_day_of_week,
+                    "search_config": search_config,
                     "tags": tags,
+                    "tool_config": tool_config,
                 },
                 profile_create_params.ProfileCreateParams,
             ),
