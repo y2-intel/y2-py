@@ -120,13 +120,9 @@ profile = client.profiles.create(
     name="Cybersecurity Weekly",
     schedule_time_of_day="09:00",
     topic="Cybersecurity threats, vulnerabilities, and defense strategies",
-    recursion_config={
-        "enabled": True,
-        "max_depth": 1,
-        "strategy": "breadth-first",
-    },
+    audio_config={},
 )
-print(profile.recursion_config)
+print(profile.audio_config)
 ```
 
 ## Handling errors
