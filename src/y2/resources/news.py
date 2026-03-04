@@ -25,6 +25,8 @@ __all__ = ["NewsResource", "AsyncNewsResource"]
 
 
 class NewsResource(SyncAPIResource):
+    """GloriaAI news terminal operations"""
+
     @cached_property
     def with_raw_response(self) -> NewsResourceWithRawResponse:
         """
@@ -165,6 +167,8 @@ class NewsResource(SyncAPIResource):
 
 
 class AsyncNewsResource(AsyncAPIResource):
+    """GloriaAI news terminal operations"""
+
     @cached_property
     def with_raw_response(self) -> AsyncNewsResourceWithRawResponse:
         """

@@ -28,6 +28,8 @@ __all__ = ["ProfilesResource", "AsyncProfilesResource"]
 
 
 class ProfilesResource(SyncAPIResource):
+    """Subscription profile operations"""
+
     @cached_property
     def with_raw_response(self) -> ProfilesResourceWithRawResponse:
         """
@@ -378,6 +380,8 @@ class ProfilesResource(SyncAPIResource):
 
 
 class AsyncProfilesResource(AsyncAPIResource):
+    """Subscription profile operations"""
+
     @cached_property
     def with_raw_response(self) -> AsyncProfilesResourceWithRawResponse:
         """
