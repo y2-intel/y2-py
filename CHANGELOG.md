@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2026-03-04)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/y2-intel/y2-py/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* **api:** api update ([894bca5](https://github.com/y2-intel/y2-py/commit/894bca5be120b8b415bb063627a2a057ad87c9c6))
+
+
+### Chores
+
+* **internal:** codegen related update ([698699c](https://github.com/y2-intel/y2-py/commit/698699c9d1a4c6053a53991ad573dd37519a53bd))
+
 ## 0.4.1 (2026-02-27)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/y2-intel/y2-py/compare/v0.4.0...v0.4.1)
