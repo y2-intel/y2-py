@@ -96,18 +96,21 @@ class Y2(SyncAPIClient):
 
     @cached_property
     def reports(self) -> ReportsResource:
+        """Intelligence report operations"""
         from .resources.reports import ReportsResource
 
         return ReportsResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
+        """Subscription profile operations"""
         from .resources.profiles import ProfilesResource
 
         return ProfilesResource(self)
 
     @cached_property
     def news(self) -> NewsResource:
+        """GloriaAI news terminal operations"""
         from .resources.news import NewsResource
 
         return NewsResource(self)
@@ -282,18 +285,21 @@ class AsyncY2(AsyncAPIClient):
 
     @cached_property
     def reports(self) -> AsyncReportsResource:
+        """Intelligence report operations"""
         from .resources.reports import AsyncReportsResource
 
         return AsyncReportsResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
+        """Subscription profile operations"""
         from .resources.profiles import AsyncProfilesResource
 
         return AsyncProfilesResource(self)
 
     @cached_property
     def news(self) -> AsyncNewsResource:
+        """GloriaAI news terminal operations"""
         from .resources.news import AsyncNewsResource
 
         return AsyncNewsResource(self)
@@ -419,18 +425,21 @@ class Y2WithRawResponse:
 
     @cached_property
     def reports(self) -> reports.ReportsResourceWithRawResponse:
+        """Intelligence report operations"""
         from .resources.reports import ReportsResourceWithRawResponse
 
         return ReportsResourceWithRawResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
+        """Subscription profile operations"""
         from .resources.profiles import ProfilesResourceWithRawResponse
 
         return ProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.NewsResourceWithRawResponse:
+        """GloriaAI news terminal operations"""
         from .resources.news import NewsResourceWithRawResponse
 
         return NewsResourceWithRawResponse(self._client.news)
@@ -444,18 +453,21 @@ class AsyncY2WithRawResponse:
 
     @cached_property
     def reports(self) -> reports.AsyncReportsResourceWithRawResponse:
+        """Intelligence report operations"""
         from .resources.reports import AsyncReportsResourceWithRawResponse
 
         return AsyncReportsResourceWithRawResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
+        """Subscription profile operations"""
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
         return AsyncProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithRawResponse:
+        """GloriaAI news terminal operations"""
         from .resources.news import AsyncNewsResourceWithRawResponse
 
         return AsyncNewsResourceWithRawResponse(self._client.news)
@@ -469,18 +481,21 @@ class Y2WithStreamedResponse:
 
     @cached_property
     def reports(self) -> reports.ReportsResourceWithStreamingResponse:
+        """Intelligence report operations"""
         from .resources.reports import ReportsResourceWithStreamingResponse
 
         return ReportsResourceWithStreamingResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
+        """Subscription profile operations"""
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
         return ProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.NewsResourceWithStreamingResponse:
+        """GloriaAI news terminal operations"""
         from .resources.news import NewsResourceWithStreamingResponse
 
         return NewsResourceWithStreamingResponse(self._client.news)
@@ -494,18 +509,21 @@ class AsyncY2WithStreamedResponse:
 
     @cached_property
     def reports(self) -> reports.AsyncReportsResourceWithStreamingResponse:
+        """Intelligence report operations"""
         from .resources.reports import AsyncReportsResourceWithStreamingResponse
 
         return AsyncReportsResourceWithStreamingResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
+        """Subscription profile operations"""
         from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
 
         return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithStreamingResponse:
+        """GloriaAI news terminal operations"""
         from .resources.news import AsyncNewsResourceWithStreamingResponse
 
         return AsyncNewsResourceWithStreamingResponse(self._client.news)

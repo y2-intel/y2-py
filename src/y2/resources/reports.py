@@ -24,6 +24,8 @@ __all__ = ["ReportsResource", "AsyncReportsResource"]
 
 
 class ReportsResource(SyncAPIResource):
+    """Intelligence report operations"""
+
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
         """
@@ -169,6 +171,8 @@ class ReportsResource(SyncAPIResource):
 
 
 class AsyncReportsResource(AsyncAPIResource):
+    """Intelligence report operations"""
+
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
         """

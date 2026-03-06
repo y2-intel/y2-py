@@ -42,9 +42,31 @@ class TestProfiles:
             name="Cybersecurity Weekly",
             schedule_time_of_day="09:00",
             topic="Cybersecurity threats, vulnerabilities, and defense strategies",
+            audio_config={
+                "enabled": True,
+                "speed": 0,
+                "voice_id": "voiceId",
+            },
             bluf_structure="blufStructure",
+            branding_template_id="brandingTemplateId",
+            budget_config={
+                "alert_threshold": 0,
+                "max_cost_per_report": 0,
+            },
             custom_prompt="customPrompt",
+            freshness_config={
+                "enabled": True,
+                "max_age_ms": 0,
+                "prefer_recent_sources": True,
+                "recency_weight": 0,
+                "validate_links": True,
+            },
             is_community=True,
+            model_config={
+                "max_output_tokens": 0,
+                "model_id": "modelId",
+                "temperature": 0,
+            },
             recursion_config={
                 "enabled": True,
                 "max_depth": 1,
@@ -52,7 +74,16 @@ class TestProfiles:
             },
             schedule_day_of_month="1",
             schedule_day_of_week="monday",
+            search_config={
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "max_results": 0,
+                "search_depth": "basic",
+                "time_range": "timeRange",
+                "topic": "topic",
+            },
             tags=["string"],
+            tool_config={},
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
@@ -375,9 +406,31 @@ class TestAsyncProfiles:
             name="Cybersecurity Weekly",
             schedule_time_of_day="09:00",
             topic="Cybersecurity threats, vulnerabilities, and defense strategies",
+            audio_config={
+                "enabled": True,
+                "speed": 0,
+                "voice_id": "voiceId",
+            },
             bluf_structure="blufStructure",
+            branding_template_id="brandingTemplateId",
+            budget_config={
+                "alert_threshold": 0,
+                "max_cost_per_report": 0,
+            },
             custom_prompt="customPrompt",
+            freshness_config={
+                "enabled": True,
+                "max_age_ms": 0,
+                "prefer_recent_sources": True,
+                "recency_weight": 0,
+                "validate_links": True,
+            },
             is_community=True,
+            model_config={
+                "max_output_tokens": 0,
+                "model_id": "modelId",
+                "temperature": 0,
+            },
             recursion_config={
                 "enabled": True,
                 "max_depth": 1,
@@ -385,7 +438,16 @@ class TestAsyncProfiles:
             },
             schedule_day_of_month="1",
             schedule_day_of_week="monday",
+            search_config={
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "max_results": 0,
+                "search_depth": "basic",
+                "time_range": "timeRange",
+                "topic": "topic",
+            },
             tags=["string"],
+            tool_config={},
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
