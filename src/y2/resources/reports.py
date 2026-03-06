@@ -97,7 +97,7 @@ class ReportsResource(SyncAPIResource):
         by generation date (newest first).
 
         Args:
-          limit: Maximum number of reports to return
+          limit: Maximum number of reports to return (hard-capped at 5)
 
           profile_id: Filter reports by profile ID
 
@@ -244,7 +244,7 @@ class AsyncReportsResource(AsyncAPIResource):
         by generation date (newest first).
 
         Args:
-          limit: Maximum number of reports to return
+          limit: Maximum number of reports to return (hard-capped at 5)
 
           profile_id: Filter reports by profile ID
 
