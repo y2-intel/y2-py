@@ -31,10 +31,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import news, reports, profiles
+    from .resources import news, osint, reports, profiles, webhooks, subscriptions
     from .resources.news import NewsResource, AsyncNewsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.profiles import ProfilesResource, AsyncProfilesResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
+    from .resources.osint.osint import OsintResource, AsyncOsintResource
+    from .resources.subscriptions import SubscriptionsResource, AsyncSubscriptionsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Y2", "AsyncY2", "Client", "AsyncClient"]
 
@@ -114,6 +117,27 @@ class Y2(SyncAPIClient):
         from .resources.news import NewsResource
 
         return NewsResource(self)
+
+    @cached_property
+    def webhooks(self) -> WebhooksResource:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import WebhooksResource
+
+        return WebhooksResource(self)
+
+    @cached_property
+    def subscriptions(self) -> SubscriptionsResource:
+        """Subscription delivery management"""
+        from .resources.subscriptions import SubscriptionsResource
+
+        return SubscriptionsResource(self)
+
+    @cached_property
+    def osint(self) -> OsintResource:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import OsintResource
+
+        return OsintResource(self)
 
     @cached_property
     def with_raw_response(self) -> Y2WithRawResponse:
@@ -305,6 +329,27 @@ class AsyncY2(AsyncAPIClient):
         return AsyncNewsResource(self)
 
     @cached_property
+    def webhooks(self) -> AsyncWebhooksResource:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import AsyncWebhooksResource
+
+        return AsyncWebhooksResource(self)
+
+    @cached_property
+    def subscriptions(self) -> AsyncSubscriptionsResource:
+        """Subscription delivery management"""
+        from .resources.subscriptions import AsyncSubscriptionsResource
+
+        return AsyncSubscriptionsResource(self)
+
+    @cached_property
+    def osint(self) -> AsyncOsintResource:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import AsyncOsintResource
+
+        return AsyncOsintResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncY2WithRawResponse:
         return AsyncY2WithRawResponse(self)
 
@@ -444,6 +489,27 @@ class Y2WithRawResponse:
 
         return NewsResourceWithRawResponse(self._client.news)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import WebhooksResourceWithRawResponse
+
+        return WebhooksResourceWithRawResponse(self._client.webhooks)
+
+    @cached_property
+    def subscriptions(self) -> subscriptions.SubscriptionsResourceWithRawResponse:
+        """Subscription delivery management"""
+        from .resources.subscriptions import SubscriptionsResourceWithRawResponse
+
+        return SubscriptionsResourceWithRawResponse(self._client.subscriptions)
+
+    @cached_property
+    def osint(self) -> osint.OsintResourceWithRawResponse:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import OsintResourceWithRawResponse
+
+        return OsintResourceWithRawResponse(self._client.osint)
+
 
 class AsyncY2WithRawResponse:
     _client: AsyncY2
@@ -471,6 +537,27 @@ class AsyncY2WithRawResponse:
         from .resources.news import AsyncNewsResourceWithRawResponse
 
         return AsyncNewsResourceWithRawResponse(self._client.news)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
+
+        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
+
+    @cached_property
+    def subscriptions(self) -> subscriptions.AsyncSubscriptionsResourceWithRawResponse:
+        """Subscription delivery management"""
+        from .resources.subscriptions import AsyncSubscriptionsResourceWithRawResponse
+
+        return AsyncSubscriptionsResourceWithRawResponse(self._client.subscriptions)
+
+    @cached_property
+    def osint(self) -> osint.AsyncOsintResourceWithRawResponse:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import AsyncOsintResourceWithRawResponse
+
+        return AsyncOsintResourceWithRawResponse(self._client.osint)
 
 
 class Y2WithStreamedResponse:
@@ -500,6 +587,27 @@ class Y2WithStreamedResponse:
 
         return NewsResourceWithStreamingResponse(self._client.news)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import WebhooksResourceWithStreamingResponse
+
+        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
+
+    @cached_property
+    def subscriptions(self) -> subscriptions.SubscriptionsResourceWithStreamingResponse:
+        """Subscription delivery management"""
+        from .resources.subscriptions import SubscriptionsResourceWithStreamingResponse
+
+        return SubscriptionsResourceWithStreamingResponse(self._client.subscriptions)
+
+    @cached_property
+    def osint(self) -> osint.OsintResourceWithStreamingResponse:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import OsintResourceWithStreamingResponse
+
+        return OsintResourceWithStreamingResponse(self._client.osint)
+
 
 class AsyncY2WithStreamedResponse:
     _client: AsyncY2
@@ -527,6 +635,27 @@ class AsyncY2WithStreamedResponse:
         from .resources.news import AsyncNewsResourceWithStreamingResponse
 
         return AsyncNewsResourceWithStreamingResponse(self._client.news)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+        """Webhook configuration management (Pro feature)"""
+        from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
+
+        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+
+    @cached_property
+    def subscriptions(self) -> subscriptions.AsyncSubscriptionsResourceWithStreamingResponse:
+        """Subscription delivery management"""
+        from .resources.subscriptions import AsyncSubscriptionsResourceWithStreamingResponse
+
+        return AsyncSubscriptionsResourceWithStreamingResponse(self._client.subscriptions)
+
+    @cached_property
+    def osint(self) -> osint.AsyncOsintResourceWithStreamingResponse:
+        """Situation Room OSINT intelligence operations"""
+        from .resources.osint import AsyncOsintResourceWithStreamingResponse
+
+        return AsyncOsintResourceWithStreamingResponse(self._client.osint)
 
 
 Client = Y2
