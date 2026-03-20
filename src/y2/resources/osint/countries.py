@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -74,7 +74,7 @@ class CountriesResource(SyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return self._get(
-            f"/osint/countries/{country_code}/cii",
+            path_template("/osint/countries/{country_code}/cii", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -111,7 +111,7 @@ class CountriesResource(SyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return self._get(
-            f"/osint/countries/{country_code}/news",
+            path_template("/osint/countries/{country_code}/news", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -150,7 +150,7 @@ class CountriesResource(SyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return self._get(
-            f"/osint/countries/{country_code}/brief",
+            path_template("/osint/countries/{country_code}/brief", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -187,7 +187,7 @@ class CountriesResource(SyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return self._get(
-            f"/osint/countries/{country_code}/predictions",
+            path_template("/osint/countries/{country_code}/predictions", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -227,7 +227,7 @@ class CountriesResource(SyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return self._get(
-            f"/osint/countries/{country_code}/markets",
+            path_template("/osint/countries/{country_code}/markets", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -284,7 +284,7 @@ class AsyncCountriesResource(AsyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return await self._get(
-            f"/osint/countries/{country_code}/cii",
+            path_template("/osint/countries/{country_code}/cii", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -321,7 +321,7 @@ class AsyncCountriesResource(AsyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return await self._get(
-            f"/osint/countries/{country_code}/news",
+            path_template("/osint/countries/{country_code}/news", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -362,7 +362,7 @@ class AsyncCountriesResource(AsyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return await self._get(
-            f"/osint/countries/{country_code}/brief",
+            path_template("/osint/countries/{country_code}/brief", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -399,7 +399,7 @@ class AsyncCountriesResource(AsyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return await self._get(
-            f"/osint/countries/{country_code}/predictions",
+            path_template("/osint/countries/{country_code}/predictions", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -439,7 +439,7 @@ class AsyncCountriesResource(AsyncAPIResource):
         if not country_code:
             raise ValueError(f"Expected a non-empty value for `country_code` but received {country_code!r}")
         return await self._get(
-            f"/osint/countries/{country_code}/markets",
+            path_template("/osint/countries/{country_code}/markets", country_code=country_code),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
