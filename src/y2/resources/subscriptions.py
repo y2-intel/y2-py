@@ -8,7 +8,7 @@ import httpx
 
 from ..types import subscription_update_delivery_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -79,7 +79,7 @@ class SubscriptionsResource(SyncAPIResource):
         if not subscription_id:
             raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         return self._patch(
-            f"/subscriptions/{subscription_id}/delivery",
+            path_template("/subscriptions/{subscription_id}/delivery", subscription_id=subscription_id),
             body=maybe_transform(
                 {
                     "delivery_method": delivery_method,
@@ -150,7 +150,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         if not subscription_id:
             raise ValueError(f"Expected a non-empty value for `subscription_id` but received {subscription_id!r}")
         return await self._patch(
-            f"/subscriptions/{subscription_id}/delivery",
+            path_template("/subscriptions/{subscription_id}/delivery", subscription_id=subscription_id),
             body=await async_maybe_transform(
                 {
                     "delivery_method": delivery_method,
