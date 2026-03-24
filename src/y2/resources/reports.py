@@ -6,7 +6,7 @@ import httpx
 
 from ..types import report_list_params, report_retrieve_audio_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -72,7 +72,7 @@ class ReportsResource(SyncAPIResource):
         if not report_id:
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         return self._get(
-            f"/reports/{report_id}",
+            path_template("/reports/{report_id}", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -97,7 +97,7 @@ class ReportsResource(SyncAPIResource):
         by generation date (newest first).
 
         Args:
-          limit: Maximum number of reports to return
+          limit: Maximum number of reports to return (hard-capped at 5)
 
           profile_id: Filter reports by profile ID
 
@@ -158,7 +158,7 @@ class ReportsResource(SyncAPIResource):
         if not report_id:
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         return self._get(
-            f"/reports/{report_id}/audio",
+            path_template("/reports/{report_id}/audio", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -219,7 +219,7 @@ class AsyncReportsResource(AsyncAPIResource):
         if not report_id:
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         return await self._get(
-            f"/reports/{report_id}",
+            path_template("/reports/{report_id}", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -244,7 +244,7 @@ class AsyncReportsResource(AsyncAPIResource):
         by generation date (newest first).
 
         Args:
-          limit: Maximum number of reports to return
+          limit: Maximum number of reports to return (hard-capped at 5)
 
           profile_id: Filter reports by profile ID
 
@@ -305,7 +305,7 @@ class AsyncReportsResource(AsyncAPIResource):
         if not report_id:
             raise ValueError(f"Expected a non-empty value for `report_id` but received {report_id!r}")
         return await self._get(
-            f"/reports/{report_id}/audio",
+            path_template("/reports/{report_id}/audio", report_id=report_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

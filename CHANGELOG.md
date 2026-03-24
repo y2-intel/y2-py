@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.6.0 (2026-03-24)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/y2-intel/y2-py/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([7ac8aa7](https://github.com/y2-intel/y2-py/commit/7ac8aa7b848808b0351d0aae655f39619f34111f))
+* **api:** manual updates ([bd51662](https://github.com/y2-intel/y2-py/commit/bd51662c507a221c5ce111e5a659e3548984793e))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([97c72ac](https://github.com/y2-intel/y2-py/commit/97c72ac578bfbad7f7b550aa377350b3964763eb))
+* **pydantic:** do not pass `by_alias` unless set ([98b74ba](https://github.com/y2-intel/y2-py/commit/98b74baa394cc9837883c35797c85f32ac47f089))
+* sanitize endpoint path params ([6d82fdf](https://github.com/y2-intel/y2-py/commit/6d82fdf3827fd6bde5319506eb8b5b27cd6532ef))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([a6dc82b](https://github.com/y2-intel/y2-py/commit/a6dc82b2fa7b7ce51b3656f5044bb399372520fc))
+* **internal:** tweak CI branches ([bc0443e](https://github.com/y2-intel/y2-py/commit/bc0443e88062b2f25ba444e4411d5f189878f0f6))
+* **internal:** update gitignore ([f5f35c3](https://github.com/y2-intel/y2-py/commit/f5f35c37c951e6127730f9065aae297bdbf72214))
+* update SDK settings ([c75bd15](https://github.com/y2-intel/y2-py/commit/c75bd15c12658bbc53c88ba8e349b541a94970ac))
+* update SDK settings ([aa71298](https://github.com/y2-intel/y2-py/commit/aa71298ab717275b107e39e6a284b23f33c0e374))
+
 ## 0.5.0 (2026-03-04)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/y2-intel/y2-py/compare/v0.4.1...v0.5.0)
