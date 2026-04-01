@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.1 (2026-04-01)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/y2-intel/y2-py/compare/v0.6.0...v0.6.1)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([895dd59](https://github.com/y2-intel/y2-py/commit/895dd5901ea0ab39499a792324529600d9baeee6))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([3d0ea28](https://github.com/y2-intel/y2-py/commit/3d0ea2899e62f3553a9de3a456623c9824f8c719))
+
 ## 0.6.0 (2026-03-24)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/y2-intel/y2-py/compare/v0.5.0...v0.6.0)
