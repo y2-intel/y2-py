@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.7.0 (2026-05-01)
+
+Full Changelog: [v0.6.1...v0.7.0](https://github.com/y2-intel/y2-py/compare/v0.6.1...v0.7.0)
+
+### Features
+
+* support setting headers via env ([fb318a5](https://github.com/y2-intel/y2-py/commit/fb318a5404740aa0a464f7b2f53d16626f37ab16))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([7b0ab7b](https://github.com/y2-intel/y2-py/commit/7b0ab7b98e45f1e4137536a02f20c1e50549b4c1))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([7d163c8](https://github.com/y2-intel/y2-py/commit/7d163c84d84d605761ee8afcec5093ff0e99c030))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([bf8a64a](https://github.com/y2-intel/y2-py/commit/bf8a64a8e0a94580841254af1086b153b053c703))
+
 ## 0.6.1 (2026-04-11)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/y2-intel/y2-py/compare/v0.6.0...v0.6.1)
