@@ -11,6 +11,13 @@ __all__ = ["CountryGetPredictionMarketsResponse", "Data", "Meta"]
 
 
 class Data(BaseModel):
+    """
+    Polymarket-only prediction market shape returned by
+    `/osint/countries/{countryCode}/predictions`. The unified
+    Polymarket+Kalshi shape returned by `/osint/prediction-markets`
+    is documented separately as `PredictionMarket`.
+    """
+
     market_id: str = FieldInfo(alias="marketId")
     """Prediction market identifier"""
 
@@ -54,6 +61,12 @@ class Meta(BaseModel):
 
 
 class CountryGetPredictionMarketsResponse(BaseModel):
+    """
+    Response wrapper for `/osint/countries/{countryCode}/predictions`.
+    See `PredictionMarketListResponse` for the unified
+    Polymarket+Kalshi response wrapper used by `/osint/prediction-markets`.
+    """
+
     data: List[Data]
 
     meta: Meta
