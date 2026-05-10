@@ -62,6 +62,11 @@ class CountriesResource(SyncAPIResource):
         Returns the per-country Conflict Indicators Index (CII) score, including
         baseline, delta, and component breakdown.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -96,6 +101,11 @@ class CountriesResource(SyncAPIResource):
         """
         Returns recent news items specific to a given country, sourced from the OSINT
         event pipeline.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of news items to return
@@ -138,6 +148,11 @@ class CountriesResource(SyncAPIResource):
         Briefs are
         generated periodically and cached.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -172,6 +187,11 @@ class CountriesResource(SyncAPIResource):
         """
         Returns prediction market data for a specific country, including probabilities
         and trading volumes.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of predictions to return
@@ -214,6 +234,11 @@ class CountriesResource(SyncAPIResource):
         """
         Returns the primary stock market index data for a specific country, including
         weekly change and currency.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           extra_headers: Send extra headers
@@ -272,6 +297,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         Returns the per-country Conflict Indicators Index (CII) score, including
         baseline, delta, and component breakdown.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -306,6 +336,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         """
         Returns recent news items specific to a given country, sourced from the OSINT
         event pipeline.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of news items to return
@@ -350,6 +385,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         Briefs are
         generated periodically and cached.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -384,6 +424,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         """
         Returns prediction market data for a specific country, including probabilities
         and trading volumes.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of predictions to return
@@ -426,6 +471,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         """
         Returns the primary stock market index data for a specific country, including
         weekly change and currency.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           extra_headers: Send extra headers

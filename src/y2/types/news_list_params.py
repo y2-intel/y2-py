@@ -13,8 +13,8 @@ class NewsListParams(TypedDict, total=False):
 
     topics: str
     """
-    Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, aptos,
-    base, bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning,
-    macro, ondo, perps, ripple, rwa, solana, tech, virtuals. Default: crypto,
-    ai_agents, macro, bitcoin, ethereum, tech
+    Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
+    bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+    on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
+    Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
     """

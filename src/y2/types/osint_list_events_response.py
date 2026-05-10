@@ -8,7 +8,15 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["OsintListEventsResponse", "Data", "DataCoordinates", "Meta", "MetaFilters"]
+__all__ = [
+    "OsintListEventsResponse",
+    "Data",
+    "DataCoordinates",
+    "DataProvenance",
+    "DataProvenanceEntity",
+    "Meta",
+    "MetaFilters",
+]
 
 
 class DataCoordinates(BaseModel):
@@ -19,6 +27,35 @@ class DataCoordinates(BaseModel):
 
     lon: Optional[float] = None
     """Longitude"""
+
+
+class DataProvenanceEntity(BaseModel):
+    name: str
+    """Entity name"""
+
+    type: Literal["person", "organization", "country", "location"]
+    """Entity type"""
+
+
+class DataProvenance(BaseModel):
+    """Extraction provenance metadata.
+
+    Populated only when
+    `sourceType === "y2_report"`; null for all other sources.
+    Returned by `/osint/regional`.
+    """
+
+    source: Literal["y2_report"]
+    """Source identifier (always "y2_report")"""
+
+    classification: Optional[Literal["ongoing", "past", "forecast", "analysis"]] = None
+    """Event temporal classification from GroundSource methodology"""
+
+    confidence: Optional[float] = None
+    """Extraction confidence score (0.5-1.0)"""
+
+    entities: Optional[List[DataProvenanceEntity]] = None
+    """Named entities extracted from the report"""
 
 
 class Data(BaseModel):
@@ -75,6 +112,13 @@ class Data(BaseModel):
 
     location_name: Optional[str] = FieldInfo(alias="locationName", default=None)
     """Human-readable location name"""
+
+    provenance: Optional[DataProvenance] = None
+    """Extraction provenance metadata.
+
+    Populated only when `sourceType === "y2_report"`; null for all other sources.
+    Returned by `/osint/regional`.
+    """
 
     region: Optional[Literal["mena", "africa", "latam", "asiapac", "europe", "namerica"]] = None
     """Geographic region identifier"""

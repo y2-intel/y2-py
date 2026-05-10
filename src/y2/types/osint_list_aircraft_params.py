@@ -12,4 +12,4 @@ class OsintListAircraftParams(TypedDict, total=False):
     """Maximum number of aircraft to return"""
 
     theater: str
-    """Filter by theater ID (e.g. "iran", "taiwan", "baltic")"""
+    """Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")"""

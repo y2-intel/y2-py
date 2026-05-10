@@ -117,6 +117,11 @@ class OsintResource(SyncAPIResource):
         conflict indicator with a score from 0-100 and a delta showing recent change.
         Supports filtering by region and category.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           category: Filter by event category
 
@@ -167,6 +172,24 @@ class OsintResource(SyncAPIResource):
         Returns GPS interference zones detected via ADS-B navigation accuracy
         degradation analysis, aggregated into H3 hex cells.
 
+        Coverage spans 22 theaters with tiered refresh cadence calibrated to fit the
+        shared Wingbits quota:
+
+        | Tier      | Cadence   | Theaters                                                                                        |
+        | --------- | --------- | ----------------------------------------------------------------------------------------------- |
+        | Hot       | Hourly    | iran, blacksea, israelgaza, redsea, taiwan, scs                                                 |
+        | Watch     | Every 3h  | emed, korea, caucasus, kaliningrad-tight, finland-russia, us-south, bashi-luzon, east-china-sea |
+        | Perimeter | Every 6h  | us-pacom-west, us-northeast, aleutian-bering, baltic-south, giuk-greenland                      |
+        | Daily     | Every 24h | baltic-north, us-north, arctic-greenland-pass                                                   |
+
+        Records expire 30 minutes after fetch; clients polling for fresh interference
+        zones should align polling cadence to the tier of interest.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of zones to return
 
@@ -211,8 +234,19 @@ class OsintResource(SyncAPIResource):
     ) -> OsintGetMilitaryPostureResponse:
         """
         Returns military posture assessments for monitored theaters, based on detected
-        military aircraft activity from the OpenSky Network. Each theater has a posture
-        level (normal, elevated, critical) and aircraft breakdown by type.
+        military aircraft activity from the Wingbits ADS-B network. Each theater has a
+        posture level (normal, elevated, critical) and aircraft breakdown by type.
+
+        > **Status (May 2026):** Posture is computed from the aircraft tracking
+        > pipeline, which is temporarily feature-flagged off to conserve the shared
+        > Wingbits quota. This endpoint remains available but may return empty or stale
+        > results until aircraft ingestion is re-enabled. GPS jamming
+        > (`/osint/gps-jamming`) is unaffected.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of items to return
@@ -252,13 +286,23 @@ class OsintResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListAircraftResponse:
         """
-        Returns tracked military aircraft positions from the OpenSky Network, filtered
-        and classified by type (tanker, AWACS, fighter, etc.).
+        Returns tracked military aircraft positions from the Wingbits ADS-B network,
+        filtered and classified by type (tanker, AWACS, fighter, etc.).
+
+        > **Status (May 2026):** Aircraft ingestion is temporarily feature-flagged off
+        > to dedicate the shared Wingbits quota to GPS interference detection. This
+        > endpoint remains available but may return empty or stale results until
+        > ingestion is re-enabled. GPS jamming (`/osint/gps-jamming`) is unaffected.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of aircraft to return
 
-          theater: Filter by theater ID (e.g. "iran", "taiwan", "baltic")
+          theater: Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")
 
           extra_headers: Send extra headers
 
@@ -317,6 +361,11 @@ class OsintResource(SyncAPIResource):
         Supports filtering by
         category, severity, region, and country.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           category: Filter by event category
 
@@ -367,6 +416,11 @@ class OsintResource(SyncAPIResource):
         Returns naval vessel positions sourced from USNI fleet tracker data, including
         carrier strike groups and individual warships.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of vessels to return
 
@@ -414,6 +468,11 @@ class OsintResource(SyncAPIResource):
 
         Events without
         coordinates are excluded.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of events to return
@@ -511,6 +570,11 @@ class AsyncOsintResource(AsyncAPIResource):
         conflict indicator with a score from 0-100 and a delta showing recent change.
         Supports filtering by region and category.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           category: Filter by event category
 
@@ -561,6 +625,24 @@ class AsyncOsintResource(AsyncAPIResource):
         Returns GPS interference zones detected via ADS-B navigation accuracy
         degradation analysis, aggregated into H3 hex cells.
 
+        Coverage spans 22 theaters with tiered refresh cadence calibrated to fit the
+        shared Wingbits quota:
+
+        | Tier      | Cadence   | Theaters                                                                                        |
+        | --------- | --------- | ----------------------------------------------------------------------------------------------- |
+        | Hot       | Hourly    | iran, blacksea, israelgaza, redsea, taiwan, scs                                                 |
+        | Watch     | Every 3h  | emed, korea, caucasus, kaliningrad-tight, finland-russia, us-south, bashi-luzon, east-china-sea |
+        | Perimeter | Every 6h  | us-pacom-west, us-northeast, aleutian-bering, baltic-south, giuk-greenland                      |
+        | Daily     | Every 24h | baltic-north, us-north, arctic-greenland-pass                                                   |
+
+        Records expire 30 minutes after fetch; clients polling for fresh interference
+        zones should align polling cadence to the tier of interest.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of zones to return
 
@@ -605,8 +687,19 @@ class AsyncOsintResource(AsyncAPIResource):
     ) -> OsintGetMilitaryPostureResponse:
         """
         Returns military posture assessments for monitored theaters, based on detected
-        military aircraft activity from the OpenSky Network. Each theater has a posture
-        level (normal, elevated, critical) and aircraft breakdown by type.
+        military aircraft activity from the Wingbits ADS-B network. Each theater has a
+        posture level (normal, elevated, critical) and aircraft breakdown by type.
+
+        > **Status (May 2026):** Posture is computed from the aircraft tracking
+        > pipeline, which is temporarily feature-flagged off to conserve the shared
+        > Wingbits quota. This endpoint remains available but may return empty or stale
+        > results until aircraft ingestion is re-enabled. GPS jamming
+        > (`/osint/gps-jamming`) is unaffected.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of items to return
@@ -646,13 +739,23 @@ class AsyncOsintResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListAircraftResponse:
         """
-        Returns tracked military aircraft positions from the OpenSky Network, filtered
-        and classified by type (tanker, AWACS, fighter, etc.).
+        Returns tracked military aircraft positions from the Wingbits ADS-B network,
+        filtered and classified by type (tanker, AWACS, fighter, etc.).
+
+        > **Status (May 2026):** Aircraft ingestion is temporarily feature-flagged off
+        > to dedicate the shared Wingbits quota to GPS interference detection. This
+        > endpoint remains available but may return empty or stale results until
+        > ingestion is re-enabled. GPS jamming (`/osint/gps-jamming`) is unaffected.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of aircraft to return
 
-          theater: Filter by theater ID (e.g. "iran", "taiwan", "baltic")
+          theater: Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")
 
           extra_headers: Send extra headers
 
@@ -711,6 +814,11 @@ class AsyncOsintResource(AsyncAPIResource):
         Supports filtering by
         category, severity, region, and country.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           category: Filter by event category
 
@@ -761,6 +869,11 @@ class AsyncOsintResource(AsyncAPIResource):
         Returns naval vessel positions sourced from USNI fleet tracker data, including
         carrier strike groups and individual warships.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of vessels to return
 
@@ -808,6 +921,11 @@ class AsyncOsintResource(AsyncAPIResource):
 
         Events without
         coordinates are excluded.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of events to return

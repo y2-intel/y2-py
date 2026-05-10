@@ -60,6 +60,11 @@ class ReportsResource(SyncAPIResource):
         Returns the full content of a specific intelligence report, including HTML
         content, sources, and audio metadata.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -95,6 +100,11 @@ class ReportsResource(SyncAPIResource):
 
         Results are sorted
         by generation date (newest first).
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of reports to return (hard-capped at 5)
@@ -143,6 +153,11 @@ class ReportsResource(SyncAPIResource):
 
         Requires the
         `reports:audio` scope.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           redirect: If true, returns 302 redirect to audio CDN URL
@@ -207,6 +222,11 @@ class AsyncReportsResource(AsyncAPIResource):
         Returns the full content of a specific intelligence report, including HTML
         content, sources, and audio metadata.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           extra_headers: Send extra headers
 
@@ -242,6 +262,11 @@ class AsyncReportsResource(AsyncAPIResource):
 
         Results are sorted
         by generation date (newest first).
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           limit: Maximum number of reports to return (hard-capped at 5)
@@ -290,6 +315,11 @@ class AsyncReportsResource(AsyncAPIResource):
 
         Requires the
         `reports:audio` scope.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
 
         Args:
           redirect: If true, returns 302 redirect to audio CDN URL
