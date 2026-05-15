@@ -42,7 +42,7 @@ class Data(BaseModel):
     """Current military posture assessment"""
 
     theater: str
-    """Theater name (e.g. "iran", "taiwan", "baltic")"""
+    """Theater name (e.g. "iran", "taiwan", "blacksea", "scs")"""
 
     breakdown: Optional[DataBreakdown] = None
     """Aircraft count by type"""

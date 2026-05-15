@@ -63,13 +63,18 @@ class NewsResource(SyncAPIResource):
         Supports filtering by
         topics and pagination.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, aptos,
-              base, bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning,
-              macro, ondo, perps, ripple, rwa, solana, tech, virtuals. Default: crypto,
-              ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
+              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
+              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
 
           extra_headers: Send extra headers
 
@@ -113,12 +118,17 @@ class NewsResource(SyncAPIResource):
         Returns AI-generated recap summaries for specified topics within a given
         timeframe.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, aptos, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              ondo, perps, ripple, rwa, solana, tech, virtuals
+          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
+              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
 
           extra_headers: Send extra headers
 
@@ -156,7 +166,14 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """Returns all available news feed topics with descriptions."""
+        """
+        Returns all available news feed topics with descriptions.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+        """
         return self._get(
             "/news/feeds",
             options=make_request_options(
@@ -205,13 +222,18 @@ class AsyncNewsResource(AsyncAPIResource):
         Supports filtering by
         topics and pagination.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, aptos,
-              base, bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning,
-              macro, ondo, perps, ripple, rwa, solana, tech, virtuals. Default: crypto,
-              ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
+              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
+              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
 
           extra_headers: Send extra headers
 
@@ -255,12 +277,17 @@ class AsyncNewsResource(AsyncAPIResource):
         Returns AI-generated recap summaries for specified topics within a given
         timeframe.
 
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, aptos, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              ondo, perps, ripple, rwa, solana, tech, virtuals
+          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
+              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
 
           extra_headers: Send extra headers
 
@@ -298,7 +325,14 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """Returns all available news feed topics with descriptions."""
+        """
+        Returns all available news feed topics with descriptions.
+
+        This endpoint also supports x402 pay-per-request access. Requests with a valid
+        Bearer token use the normal API-key flow. Requests without Authorization return
+        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        `PAYMENT-SIGNATURE`.
+        """
         return await self._get(
             "/news/feeds",
             options=make_request_options(

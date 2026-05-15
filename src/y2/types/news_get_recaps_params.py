@@ -15,7 +15,7 @@ class NewsGetRecapsParams(TypedDict, total=False):
 
     topics: str
     """
-    Comma-separated list of topics. Valid topics: ai, ai_agents, aptos, base,
-    bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-    ondo, perps, ripple, rwa, solana, tech, virtuals
+    Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
+    crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
+    on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
     """
