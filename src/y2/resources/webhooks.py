@@ -28,7 +28,7 @@ __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
 
 
 class WebhooksResource(SyncAPIResource):
-    """Webhook configuration management (Pro feature)"""
+    """Webhook configuration management (Lite and Pro feature)"""
 
     @cached_property
     def with_raw_response(self) -> WebhooksResourceWithRawResponse:
@@ -65,8 +65,8 @@ class WebhooksResource(SyncAPIResource):
     ) -> WebhookCreateResponse:
         """Creates a new webhook configuration.
 
-        Requires an active Pro subscription. The
-        webhook URL must be HTTPS and pass SSRF security validation.
+        Requires an active Lite or Pro
+        subscription. The webhook URL must be HTTPS and pass SSRF security validation.
 
         Args:
           name: Webhook display name
@@ -247,7 +247,7 @@ class WebhooksResource(SyncAPIResource):
 
 
 class AsyncWebhooksResource(AsyncAPIResource):
-    """Webhook configuration management (Pro feature)"""
+    """Webhook configuration management (Lite and Pro feature)"""
 
     @cached_property
     def with_raw_response(self) -> AsyncWebhooksResourceWithRawResponse:
@@ -284,8 +284,8 @@ class AsyncWebhooksResource(AsyncAPIResource):
     ) -> WebhookCreateResponse:
         """Creates a new webhook configuration.
 
-        Requires an active Pro subscription. The
-        webhook URL must be HTTPS and pass SSRF security validation.
+        Requires an active Lite or Pro
+        subscription. The webhook URL must be HTTPS and pass SSRF security validation.
 
         Args:
           name: Webhook display name

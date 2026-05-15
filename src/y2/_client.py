@@ -133,7 +133,7 @@ class Y2(SyncAPIClient):
 
     @cached_property
     def webhooks(self) -> WebhooksResource:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
@@ -352,7 +352,7 @@ class AsyncY2(AsyncAPIClient):
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import AsyncWebhooksResource
 
         return AsyncWebhooksResource(self)
@@ -513,7 +513,7 @@ class Y2WithRawResponse:
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import WebhooksResourceWithRawResponse
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
@@ -562,7 +562,7 @@ class AsyncY2WithRawResponse:
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
@@ -611,7 +611,7 @@ class Y2WithStreamedResponse:
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import WebhooksResourceWithStreamingResponse
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
@@ -660,7 +660,7 @@ class AsyncY2WithStreamedResponse:
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration management (Lite and Pro feature)"""
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)

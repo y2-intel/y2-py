@@ -38,7 +38,7 @@ class ProfileCreateParams(TypedDict, total=False):
     """Custom BLUF report structure template"""
 
     branding_template_id: Annotated[str, PropertyInfo(alias="brandingTemplateId")]
-    """Branding template ID (Pro feature)"""
+    """Branding template ID (Lite and Pro feature)"""
 
     budget_config: Annotated[BudgetConfig, PropertyInfo(alias="budgetConfig")]
     """Cost budget configuration"""
