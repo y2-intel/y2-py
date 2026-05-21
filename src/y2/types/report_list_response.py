@@ -7,7 +7,22 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["ReportListResponse", "Data", "Meta"]
+__all__ = ["ReportListResponse", "Data", "DataIntelligence", "DataIntelligenceOntologyGraph", "Meta"]
+
+
+class DataIntelligenceOntologyGraph(BaseModel):
+    edge_count: Optional[int] = FieldInfo(alias="edgeCount", default=None)
+
+    incident_count: Optional[int] = FieldInfo(alias="incidentCount", default=None)
+
+    node_count: Optional[int] = FieldInfo(alias="nodeCount", default=None)
+
+
+class DataIntelligence(BaseModel):
+    ontology_graph: Optional[DataIntelligenceOntologyGraph] = FieldInfo(alias="ontologyGraph", default=None)
+
+    sigint_signal_count: Optional[int] = FieldInfo(alias="sigintSignalCount", default=None)
+    """Number of emergent SIGINT signals attached to the report"""
 
 
 class Data(BaseModel):
@@ -25,6 +40,8 @@ class Data(BaseModel):
 
     has_audio: Optional[bool] = FieldInfo(alias="hasAudio", default=None)
     """Whether audio narration is available"""
+
+    intelligence: Optional[DataIntelligence] = None
 
     model: Optional[str] = None
     """LLM model used for generation"""
