@@ -50,6 +50,7 @@ class SubscriptionsResource(SyncAPIResource):
         subscription_id: str,
         *,
         delivery_method: Literal["email", "sms", "webhook", "both_email_sms"],
+        email_audience: Literal["individual", "workspace"] | Omit = omit,
         webhook_config_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -61,10 +62,14 @@ class SubscriptionsResource(SyncAPIResource):
         """Changes the delivery method for a subscription.
 
         When setting to `webhook`, a
-        valid `webhookConfigId` must be provided. The webhook must be active.
+        valid `webhookConfigId` must be provided. The webhook must be active. Set
+        `emailAudience` to `workspace` to email active workspace members on workspace
+        plans that support member seats.
 
         Args:
           delivery_method: Subscription delivery method
+
+          email_audience: Email recipients for email-capable subscription delivery
 
           webhook_config_id: Required when deliveryMethod is "webhook"
 
@@ -83,6 +88,7 @@ class SubscriptionsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "delivery_method": delivery_method,
+                    "email_audience": email_audience,
                     "webhook_config_id": webhook_config_id,
                 },
                 subscription_update_delivery_params.SubscriptionUpdateDeliveryParams,
@@ -121,6 +127,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         subscription_id: str,
         *,
         delivery_method: Literal["email", "sms", "webhook", "both_email_sms"],
+        email_audience: Literal["individual", "workspace"] | Omit = omit,
         webhook_config_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -132,10 +139,14 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         """Changes the delivery method for a subscription.
 
         When setting to `webhook`, a
-        valid `webhookConfigId` must be provided. The webhook must be active.
+        valid `webhookConfigId` must be provided. The webhook must be active. Set
+        `emailAudience` to `workspace` to email active workspace members on workspace
+        plans that support member seats.
 
         Args:
           delivery_method: Subscription delivery method
+
+          email_audience: Email recipients for email-capable subscription delivery
 
           webhook_config_id: Required when deliveryMethod is "webhook"
 
@@ -154,6 +165,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "delivery_method": delivery_method,
+                    "email_audience": email_audience,
                     "webhook_config_id": webhook_config_id,
                 },
                 subscription_update_delivery_params.SubscriptionUpdateDeliveryParams,

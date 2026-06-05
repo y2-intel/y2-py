@@ -59,6 +59,9 @@ class Data(BaseModel):
 
     subscription_id: str = FieldInfo(alias="subscriptionId")
 
+    email_audience: Optional[Literal["individual", "workspace"]] = FieldInfo(alias="emailAudience", default=None)
+    """Email recipients for email-capable subscription delivery"""
+
     profile: Optional[DataProfile] = None
 
 
