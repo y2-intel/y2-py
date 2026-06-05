@@ -95,7 +95,7 @@ class ProfilesResource(SyncAPIResource):
 
           bluf_structure: Custom BLUF report structure template
 
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           budget_config: Cost budget configuration
 
@@ -191,7 +191,7 @@ class ProfilesResource(SyncAPIResource):
         owned by the authenticated user can be updated.
 
         Args:
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           frequency: Report generation frequency
 
@@ -331,7 +331,7 @@ class ProfilesResource(SyncAPIResource):
         profiles owned by the authenticated user can be updated.
 
         Args:
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           frequency: Report generation frequency
 
@@ -447,7 +447,7 @@ class AsyncProfilesResource(AsyncAPIResource):
 
           bluf_structure: Custom BLUF report structure template
 
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           budget_config: Cost budget configuration
 
@@ -543,7 +543,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         owned by the authenticated user can be updated.
 
         Args:
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           frequency: Report generation frequency
 
@@ -683,7 +683,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         profiles owned by the authenticated user can be updated.
 
         Args:
-          branding_template_id: Branding template ID (Lite and Pro feature)
+          branding_template_id: Branding template ID (paid workspace feature)
 
           frequency: Report generation frequency
 

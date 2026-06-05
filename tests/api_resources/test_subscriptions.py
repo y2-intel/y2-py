@@ -32,6 +32,7 @@ class TestSubscriptions:
         subscription = client.subscriptions.update_delivery(
             subscription_id="subscriptionId",
             delivery_method="email",
+            email_audience="individual",
             webhook_config_id="webhookConfigId",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])
@@ -94,6 +95,7 @@ class TestAsyncSubscriptions:
         subscription = await async_client.subscriptions.update_delivery(
             subscription_id="subscriptionId",
             delivery_method="email",
+            email_audience="individual",
             webhook_config_id="webhookConfigId",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])

@@ -18,6 +18,9 @@ class Data(BaseModel):
 
     success: bool
 
+    email_audience: Optional[Literal["individual", "workspace"]] = FieldInfo(alias="emailAudience", default=None)
+    """Email recipients for email-capable subscription delivery"""
+
 
 class Meta(BaseModel):
     message: Optional[str] = None
