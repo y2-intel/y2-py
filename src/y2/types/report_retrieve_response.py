@@ -20,6 +20,7 @@ __all__ = [
     "DataIntelligenceOntologyGraphNode",
     "DataIntelligenceSigint",
     "DataIntelligenceSigintSignal",
+    "DataIntelligenceSigintSignalSubject",
     "DataMetadata",
     "DataMetadataFreshnessMetadata",
     "DataMetadataRecursionMetadata",
@@ -114,6 +115,37 @@ class DataIntelligenceOntologyGraph(BaseModel):
     topic: Optional[str] = None
 
 
+class DataIntelligenceSigintSignalSubject(BaseModel):
+    kind: Literal[
+        "person",
+        "organization",
+        "country",
+        "region",
+        "vessel",
+        "aircraft",
+        "facility",
+        "asset",
+        "indicator",
+        "cve",
+        "malware_family",
+        "threat_actor",
+        "vendor",
+        "software",
+        "ai_model",
+        "api_service",
+        "protocol",
+    ]
+
+    label: str
+    """Human-readable subject label"""
+
+    normalized_key: str = FieldInfo(alias="normalizedKey")
+    """Stable ontology subject key used for filtering"""
+
+    entity_id: Optional[str] = FieldInfo(alias="entityId", default=None)
+    """Linked ontology entity ID when resolved"""
+
+
 class DataIntelligenceSigintSignal(BaseModel):
     action_type: Literal[
         "invest", "patch", "upgrade", "strategy", "hedge", "monitor", "mitigate", "escalate", "defer", "allocate"
@@ -146,6 +178,12 @@ class DataIntelligenceSigintSignal(BaseModel):
 
     title: str
     """Short signal title"""
+
+    subjects: Optional[List[DataIntelligenceSigintSignalSubject]] = None
+    """Ontology-aligned signal subjects"""
+
+    tags: Optional[List[str]] = None
+    """Lowercase filtering tokens for domains, actions, priorities, and subjects"""
 
 
 class DataIntelligenceSigint(BaseModel):
