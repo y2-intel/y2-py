@@ -25,7 +25,7 @@ __all__ = ["NewsResource", "AsyncNewsResource"]
 
 
 class NewsResource(SyncAPIResource):
-    """GloriaAI news terminal operations"""
+    """Y2 News Terminal operations"""
 
     @cached_property
     def with_raw_response(self) -> NewsResourceWithRawResponse:
@@ -58,10 +58,10 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the GloriaAI terminal cache.
+        """Returns news items from the Y2 News Terminal cache.
 
-        Supports filtering by
-        topics and pagination.
+        Supports filtering by topics
+        and pagination.
 
         This endpoint also supports x402 pay-per-request access. Requests with a valid
         Bearer token use the normal API-key flow. Requests without Authorization return
@@ -184,7 +184,7 @@ class NewsResource(SyncAPIResource):
 
 
 class AsyncNewsResource(AsyncAPIResource):
-    """GloriaAI news terminal operations"""
+    """Y2 News Terminal operations"""
 
     @cached_property
     def with_raw_response(self) -> AsyncNewsResourceWithRawResponse:
@@ -217,10 +217,10 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the GloriaAI terminal cache.
+        """Returns news items from the Y2 News Terminal cache.
 
-        Supports filtering by
-        topics and pagination.
+        Supports filtering by topics
+        and pagination.
 
         This endpoint also supports x402 pay-per-request access. Requests with a valid
         Bearer token use the normal API-key flow. Requests without Authorization return

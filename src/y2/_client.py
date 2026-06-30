@@ -126,7 +126,7 @@ class Y2(SyncAPIClient):
 
     @cached_property
     def news(self) -> NewsResource:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import NewsResource
 
         return NewsResource(self)
@@ -345,7 +345,7 @@ class AsyncY2(AsyncAPIClient):
 
     @cached_property
     def news(self) -> AsyncNewsResource:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import AsyncNewsResource
 
         return AsyncNewsResource(self)
@@ -506,7 +506,7 @@ class Y2WithRawResponse:
 
     @cached_property
     def news(self) -> news.NewsResourceWithRawResponse:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import NewsResourceWithRawResponse
 
         return NewsResourceWithRawResponse(self._client.news)
@@ -555,7 +555,7 @@ class AsyncY2WithRawResponse:
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithRawResponse:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import AsyncNewsResourceWithRawResponse
 
         return AsyncNewsResourceWithRawResponse(self._client.news)
@@ -604,7 +604,7 @@ class Y2WithStreamedResponse:
 
     @cached_property
     def news(self) -> news.NewsResourceWithStreamingResponse:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import NewsResourceWithStreamingResponse
 
         return NewsResourceWithStreamingResponse(self._client.news)
@@ -653,7 +653,7 @@ class AsyncY2WithStreamedResponse:
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithStreamingResponse:
-        """GloriaAI news terminal operations"""
+        """Y2 News Terminal operations"""
         from .resources.news import AsyncNewsResourceWithStreamingResponse
 
         return AsyncNewsResourceWithStreamingResponse(self._client.news)
