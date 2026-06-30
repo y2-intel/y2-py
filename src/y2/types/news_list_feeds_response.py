@@ -10,7 +10,7 @@ __all__ = ["NewsListFeedsResponse", "Data", "Meta"]
 
 class Data(BaseModel):
     id: TopicEnum
-    """Available news feed topics from GloriaAI"""
+    """Available Y2 News Terminal feed topics"""
 
     name: str
     """Human-readable name"""
