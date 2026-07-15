@@ -26,7 +26,7 @@ __all__ = ["CountriesResource", "AsyncCountriesResource"]
 
 
 class CountriesResource(SyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> CountriesResourceWithRawResponse:
@@ -59,12 +59,12 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryInstabilityIndexResponse:
         """
-        Returns the per-country Conflict Indicators Index (CII) score, including
-        baseline, delta, and component breakdown.
+        Returns a country's Conflict Indicators Index (CII) score, baseline, delta, and
+        components.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -99,12 +99,11 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryNewsResponse:
         """
-        Returns recent news items specific to a given country, sourced from the OSINT
-        event pipeline.
+        Returns recent country news from the OSINT event pipeline.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -143,14 +142,12 @@ class CountriesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetIntelligenceBriefResponse:
-        """Returns an AI-generated intelligence brief for a specific country.
+        """
+        Returns a periodically generated, cached intelligence brief for a country.
 
-        Briefs are
-        generated periodically and cached.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -185,12 +182,11 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetPredictionMarketsResponse:
         """
-        Returns prediction market data for a specific country, including probabilities
-        and trading volumes.
+        Returns prediction-market probabilities and trading volumes for a country.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -232,12 +228,11 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetStockMarketIndexResponse:
         """
-        Returns the primary stock market index data for a specific country, including
-        weekly change and currency.
+        Returns a country's primary stock index, weekly change, and currency.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -261,7 +256,7 @@ class CountriesResource(SyncAPIResource):
 
 
 class AsyncCountriesResource(AsyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> AsyncCountriesResourceWithRawResponse:
@@ -294,12 +289,12 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryInstabilityIndexResponse:
         """
-        Returns the per-country Conflict Indicators Index (CII) score, including
-        baseline, delta, and component breakdown.
+        Returns a country's Conflict Indicators Index (CII) score, baseline, delta, and
+        components.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -334,12 +329,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryNewsResponse:
         """
-        Returns recent news items specific to a given country, sourced from the OSINT
-        event pipeline.
+        Returns recent country news from the OSINT event pipeline.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -380,14 +374,12 @@ class AsyncCountriesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetIntelligenceBriefResponse:
-        """Returns an AI-generated intelligence brief for a specific country.
+        """
+        Returns a periodically generated, cached intelligence brief for a country.
 
-        Briefs are
-        generated periodically and cached.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -422,12 +414,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetPredictionMarketsResponse:
         """
-        Returns prediction market data for a specific country, including probabilities
-        and trading volumes.
+        Returns prediction-market probabilities and trading volumes for a country.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -469,12 +460,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetStockMarketIndexResponse:
         """
-        Returns the primary stock market index data for a specific country, including
-        weekly change and currency.
+        Returns a country's primary stock index, weekly change, and currency.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:

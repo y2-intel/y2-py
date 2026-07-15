@@ -24,7 +24,7 @@ __all__ = ["ReportsResource", "AsyncReportsResource"]
 
 
 class ReportsResource(SyncAPIResource):
-    """Intelligence report operations"""
+    """Report retrieval, text, audio, signals, and ontology graphs"""
 
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
@@ -57,12 +57,11 @@ class ReportsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportRetrieveResponse:
         """
-        Returns the full content of a specific intelligence report, including HTML
-        content, sources, and audio metadata.
+        Returns a report's full HTML content, sources, and audio metadata.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -96,14 +95,13 @@ class ReportsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportListResponse:
-        """Returns a list of reports for the user's subscribed profiles.
+        """
+        Lists reports for the user's subscribed profiles by generation date, newest
+        first.
 
-        Results are sorted
-        by generation date (newest first).
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -154,13 +152,13 @@ class ReportsResource(SyncAPIResource):
         Requires the
         `reports:audio` scope.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
-          redirect: If true, returns 302 redirect to audio CDN URL
+          redirect: When true, redirects with `302` to the audio CDN URL
 
           extra_headers: Send extra headers
 
@@ -186,7 +184,7 @@ class ReportsResource(SyncAPIResource):
 
 
 class AsyncReportsResource(AsyncAPIResource):
-    """Intelligence report operations"""
+    """Report retrieval, text, audio, signals, and ontology graphs"""
 
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
@@ -219,12 +217,11 @@ class AsyncReportsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportRetrieveResponse:
         """
-        Returns the full content of a specific intelligence report, including HTML
-        content, sources, and audio metadata.
+        Returns a report's full HTML content, sources, and audio metadata.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -258,14 +255,13 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportListResponse:
-        """Returns a list of reports for the user's subscribed profiles.
+        """
+        Lists reports for the user's subscribed profiles by generation date, newest
+        first.
 
-        Results are sorted
-        by generation date (newest first).
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -316,13 +312,13 @@ class AsyncReportsResource(AsyncAPIResource):
         Requires the
         `reports:audio` scope.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
-          redirect: If true, returns 302 redirect to audio CDN URL
+          redirect: When true, redirects with `302` to the audio CDN URL
 
           extra_headers: Send extra headers
 

@@ -28,7 +28,7 @@ __all__ = ["ProfilesResource", "AsyncProfilesResource"]
 
 
 class ProfilesResource(SyncAPIResource):
-    """Subscription profile operations"""
+    """Profile subscriptions, ownership, and configuration"""
 
     @cached_property
     def with_raw_response(self) -> ProfilesResourceWithRawResponse:
@@ -77,10 +77,9 @@ class ProfilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileCreateResponse:
-        """Creates a new intelligence profile with the specified configuration.
-
-        The profile
-        will be owned by the authenticated user and start with `active` status.
+        """
+        Creates an `active` intelligence profile owned by the authenticated user with
+        the supplied configuration.
 
         Args:
           frequency: Report generation frequency
@@ -185,10 +184,8 @@ class ProfilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileUpdateResponse:
-        """Replaces all mutable fields of an existing intelligence profile.
-
-        Only profiles
-        owned by the authenticated user can be updated.
+        """
+        Replaces every mutable field on a profile owned by the authenticated user.
 
         Args:
           branding_template_id: Branding template ID (paid workspace feature)
@@ -249,8 +246,8 @@ class ProfilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileListResponse:
         """
-        Returns a list of intelligence profiles the user is subscribed to, including
-        subscription status and delivery preferences.
+        Lists the user's subscribed profiles with subscription status and delivery
+        preferences.
         """
         return self._get(
             "/profiles",
@@ -272,9 +269,8 @@ class ProfilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileDeleteResponse:
         """
-        Permanently deletes an intelligence profile and all associated subscriptions.
-        Only profiles owned by the authenticated user can be deleted. This action cannot
-        be undone.
+        Permanently deletes a profile owned by the authenticated user and all its
+        subscriptions. This action cannot be undone.
 
         Args:
           extra_headers: Send extra headers
@@ -324,11 +320,9 @@ class ProfilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfilePartialUpdateResponse:
-        """Partially updates an existing intelligence profile.
-
-        Only the fields included in
-        the request body will be modified; all other fields remain unchanged. Only
-        profiles owned by the authenticated user can be updated.
+        """
+        Updates supplied mutable fields on a profile owned by the authenticated user.
+        Omitted fields remain unchanged.
 
         Args:
           branding_template_id: Branding template ID (paid workspace feature)
@@ -380,7 +374,7 @@ class ProfilesResource(SyncAPIResource):
 
 
 class AsyncProfilesResource(AsyncAPIResource):
-    """Subscription profile operations"""
+    """Profile subscriptions, ownership, and configuration"""
 
     @cached_property
     def with_raw_response(self) -> AsyncProfilesResourceWithRawResponse:
@@ -429,10 +423,9 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileCreateResponse:
-        """Creates a new intelligence profile with the specified configuration.
-
-        The profile
-        will be owned by the authenticated user and start with `active` status.
+        """
+        Creates an `active` intelligence profile owned by the authenticated user with
+        the supplied configuration.
 
         Args:
           frequency: Report generation frequency
@@ -537,10 +530,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileUpdateResponse:
-        """Replaces all mutable fields of an existing intelligence profile.
-
-        Only profiles
-        owned by the authenticated user can be updated.
+        """
+        Replaces every mutable field on a profile owned by the authenticated user.
 
         Args:
           branding_template_id: Branding template ID (paid workspace feature)
@@ -601,8 +592,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileListResponse:
         """
-        Returns a list of intelligence profiles the user is subscribed to, including
-        subscription status and delivery preferences.
+        Lists the user's subscribed profiles with subscription status and delivery
+        preferences.
         """
         return await self._get(
             "/profiles",
@@ -624,9 +615,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileDeleteResponse:
         """
-        Permanently deletes an intelligence profile and all associated subscriptions.
-        Only profiles owned by the authenticated user can be deleted. This action cannot
-        be undone.
+        Permanently deletes a profile owned by the authenticated user and all its
+        subscriptions. This action cannot be undone.
 
         Args:
           extra_headers: Send extra headers
@@ -676,11 +666,9 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfilePartialUpdateResponse:
-        """Partially updates an existing intelligence profile.
-
-        Only the fields included in
-        the request body will be modified; all other fields remain unchanged. Only
-        profiles owned by the authenticated user can be updated.
+        """
+        Updates supplied mutable fields on a profile owned by the authenticated user.
+        Omitted fields remain unchanged.
 
         Args:
           branding_template_id: Branding template ID (paid workspace feature)

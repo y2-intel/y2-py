@@ -20,7 +20,7 @@ class Data(BaseModel):
     """Consecutive failure count (auto-disabled at 5)"""
 
     has_secret: bool = FieldInfo(alias="hasSecret")
-    """Whether a secret is configured (actual secret is never exposed)"""
+    """True when configured; never exposes the secret"""
 
     is_active: bool = FieldInfo(alias="isActive")
     """Whether the webhook is active"""

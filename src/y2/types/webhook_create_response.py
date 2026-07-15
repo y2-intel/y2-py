@@ -11,7 +11,7 @@ __all__ = ["WebhookCreateResponse", "Data", "Meta"]
 
 class Data(BaseModel):
     webhook_id: str = FieldInfo(alias="webhookId")
-    """The ID of the newly created webhook configuration"""
+    """Created webhook configuration ID"""
 
 
 class Meta(BaseModel):

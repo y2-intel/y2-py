@@ -9,4 +9,4 @@ __all__ = ["ReportRetrieveAudioParams"]
 
 class ReportRetrieveAudioParams(TypedDict, total=False):
     redirect: bool
-    """If true, returns 302 redirect to audio CDN URL"""
+    """When true, redirects with `302` to the audio CDN URL"""

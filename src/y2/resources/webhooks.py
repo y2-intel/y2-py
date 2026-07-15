@@ -28,7 +28,7 @@ __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
 
 
 class WebhooksResource(SyncAPIResource):
-    """Webhook configuration management for paid workspaces"""
+    """Webhook configuration for paid workspaces"""
 
     @cached_property
     def with_raw_response(self) -> WebhooksResourceWithRawResponse:
@@ -63,10 +63,10 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
-        """Creates a new webhook configuration.
+        """Creates a webhook configuration.
 
         Requires a paid workspace plan with webhook
-        access. The webhook URL must be HTTPS and pass SSRF security validation.
+        access. The URL must use HTTPS and pass SSRF validation.
 
         Args:
           name: Webhook display name
@@ -118,10 +118,10 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookUpdateResponse:
-        """Updates an existing webhook configuration.
+        """Updates supplied fields on a webhook configuration.
 
-        All fields are optional. Only
-        provided fields will be updated.
+        Omitted fields remain
+        unchanged.
 
         Args:
           extra_headers: Send extra headers
@@ -162,11 +162,7 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookListResponse:
-        """Returns all webhook configurations for the authenticated user.
-
-        Secrets are
-        masked in the response.
-        """
+        """Lists the authenticated user's webhook configurations. Masks secrets."""
         return self._get(
             "/webhooks",
             options=make_request_options(
@@ -188,8 +184,7 @@ class WebhooksResource(SyncAPIResource):
     ) -> WebhookDeleteResponse:
         """Deletes a webhook configuration.
 
-        Fails with 409 if the webhook is currently in
-        use by any subscriptions.
+        Returns `409` if any subscription uses it.
 
         Args:
           extra_headers: Send extra headers
@@ -221,10 +216,10 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookTestResponse:
-        """Sends a test payload to the webhook URL and returns the result.
+        """Sends a test payload to the webhook URL.
 
-        Returns 422 if
-        the webhook endpoint responds with an error.
+        Returns `422` if the endpoint responds
+        with an error.
 
         Args:
           extra_headers: Send extra headers
@@ -247,7 +242,7 @@ class WebhooksResource(SyncAPIResource):
 
 
 class AsyncWebhooksResource(AsyncAPIResource):
-    """Webhook configuration management for paid workspaces"""
+    """Webhook configuration for paid workspaces"""
 
     @cached_property
     def with_raw_response(self) -> AsyncWebhooksResourceWithRawResponse:
@@ -282,10 +277,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookCreateResponse:
-        """Creates a new webhook configuration.
+        """Creates a webhook configuration.
 
         Requires a paid workspace plan with webhook
-        access. The webhook URL must be HTTPS and pass SSRF security validation.
+        access. The URL must use HTTPS and pass SSRF validation.
 
         Args:
           name: Webhook display name
@@ -337,10 +332,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookUpdateResponse:
-        """Updates an existing webhook configuration.
+        """Updates supplied fields on a webhook configuration.
 
-        All fields are optional. Only
-        provided fields will be updated.
+        Omitted fields remain
+        unchanged.
 
         Args:
           extra_headers: Send extra headers
@@ -381,11 +376,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookListResponse:
-        """Returns all webhook configurations for the authenticated user.
-
-        Secrets are
-        masked in the response.
-        """
+        """Lists the authenticated user's webhook configurations. Masks secrets."""
         return await self._get(
             "/webhooks",
             options=make_request_options(
@@ -407,8 +398,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
     ) -> WebhookDeleteResponse:
         """Deletes a webhook configuration.
 
-        Fails with 409 if the webhook is currently in
-        use by any subscriptions.
+        Returns `409` if any subscription uses it.
 
         Args:
           extra_headers: Send extra headers
@@ -440,10 +430,10 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookTestResponse:
-        """Sends a test payload to the webhook URL and returns the result.
+        """Sends a test payload to the webhook URL.
 
-        Returns 422 if
-        the webhook endpoint responds with an error.
+        Returns `422` if the endpoint responds
+        with an error.
 
         Args:
           extra_headers: Send extra headers
