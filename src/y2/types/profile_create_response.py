@@ -11,7 +11,7 @@ __all__ = ["ProfileCreateResponse", "Data", "Meta"]
 
 class Data(BaseModel):
     profile_id: str = FieldInfo(alias="profileId")
-    """The ID of the newly created profile"""
+    """Created profile ID"""
 
 
 class Meta(BaseModel):

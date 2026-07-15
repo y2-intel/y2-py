@@ -25,7 +25,7 @@ __all__ = ["NewsResource", "AsyncNewsResource"]
 
 
 class NewsResource(SyncAPIResource):
-    """Y2 News Terminal operations"""
+    """News Terminal items, feeds, and AI recaps"""
 
     @cached_property
     def with_raw_response(self) -> NewsResourceWithRawResponse:
@@ -58,14 +58,12 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the Y2 News Terminal cache.
+        """
+        Lists cached Y2 News Terminal items with topic filters and pagination.
 
-        Supports filtering by topics
-        and pagination.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -115,12 +113,11 @@ class NewsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsGetRecapsResponse:
         """
-        Returns AI-generated recap summaries for specified topics within a given
-        timeframe.
+        Lists AI-generated recaps for selected topics and timeframe.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -166,12 +163,13 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """
-        Returns all available news feed topics with descriptions.
+        """Lists news feed topics and descriptions.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request.
+
+        Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return self._get(
@@ -184,7 +182,7 @@ class NewsResource(SyncAPIResource):
 
 
 class AsyncNewsResource(AsyncAPIResource):
-    """Y2 News Terminal operations"""
+    """News Terminal items, feeds, and AI recaps"""
 
     @cached_property
     def with_raw_response(self) -> AsyncNewsResourceWithRawResponse:
@@ -217,14 +215,12 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the Y2 News Terminal cache.
+        """
+        Lists cached Y2 News Terminal items with topic filters and pagination.
 
-        Supports filtering by topics
-        and pagination.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -274,12 +270,11 @@ class AsyncNewsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsGetRecapsResponse:
         """
-        Returns AI-generated recap summaries for specified topics within a given
-        timeframe.
+        Lists AI-generated recaps for selected topics and timeframe.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -325,12 +320,13 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """
-        Returns all available news feed topics with descriptions.
+        """Lists news feed topics and descriptions.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request.
+
+        Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return await self._get(

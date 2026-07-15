@@ -59,12 +59,11 @@ class SubscriptionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionUpdateDeliveryResponse:
-        """Changes the delivery method for a subscription.
+        """Changes a subscription's delivery method.
 
-        When setting to `webhook`, a
-        valid `webhookConfigId` must be provided. The webhook must be active. Set
-        `emailAudience` to `workspace` to email active workspace members on workspace
-        plans that support member seats.
+        Setting `webhook` requires an active
+        `webhookConfigId`. On plans with member seats, set `emailAudience` to
+        `workspace` to email active workspace members.
 
         Args:
           delivery_method: Subscription delivery method
@@ -136,12 +135,11 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionUpdateDeliveryResponse:
-        """Changes the delivery method for a subscription.
+        """Changes a subscription's delivery method.
 
-        When setting to `webhook`, a
-        valid `webhookConfigId` must be provided. The webhook must be active. Set
-        `emailAudience` to `workspace` to email active workspace members on workspace
-        plans that support member seats.
+        Setting `webhook` requires an active
+        `webhookConfigId`. On plans with member seats, set `emailAudience` to
+        `workspace` to email active workspace members.
 
         Args:
           delivery_method: Subscription delivery method

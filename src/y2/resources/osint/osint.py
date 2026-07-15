@@ -54,16 +54,16 @@ __all__ = ["OsintResource", "AsyncOsintResource"]
 
 
 class OsintResource(SyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def countries(self) -> CountriesResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return CountriesResource(self._client)
 
     @cached_property
     def sources(self) -> SourcesResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return SourcesResource(self._client)
 
     @cached_property
@@ -111,15 +111,13 @@ class OsintResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetConflictIndicatorsResponse:
-        """Returns the Conflict Indicators Index (CII) values.
+        """
+        Lists Conflict Indicators Index (CII) values with 0–100 scores and recent-change
+        deltas. Supports region and category filters.
 
-        Each item represents a
-        conflict indicator with a score from 0-100 and a delta showing recent change.
-        Supports filtering by region and category.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -169,11 +167,10 @@ class OsintResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetGpsJammingZonesResponse:
         """
-        Returns GPS interference zones detected via ADS-B navigation accuracy
-        degradation analysis, aggregated into H3 hex cells.
+        Lists GPS interference zones inferred from ADS-B navigation-accuracy degradation
+        and aggregated into H3 cells.
 
-        Coverage spans 22 theaters with tiered refresh cadence calibrated to fit the
-        shared Wingbits quota:
+        Coverage spans 22 theaters on a tiered cadence within the shared Wingbits quota:
 
         | Tier      | Cadence   | Theaters                                                                                        |
         | --------- | --------- | ----------------------------------------------------------------------------------------------- |
@@ -182,12 +179,11 @@ class OsintResource(SyncAPIResource):
         | Perimeter | Every 6h  | us-pacom-west, us-northeast, aleutian-bering, baltic-south, giuk-greenland                      |
         | Daily     | Every 24h | baltic-north, us-north, arctic-greenland-pass                                                   |
 
-        Records expire 30 minutes after fetch; clients polling for fresh interference
-        zones should align polling cadence to the tier of interest.
+        Records expire 30 minutes after fetch. Align polling with the theater's tier.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -233,19 +229,17 @@ class OsintResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetMilitaryPostureResponse:
         """
-        Returns military posture assessments for monitored theaters, based on detected
-        military aircraft activity from the Wingbits ADS-B network. Each theater has a
-        posture level (normal, elevated, critical) and aircraft breakdown by type.
+        Lists theater posture assessments based on Wingbits ADS-B military aircraft
+        activity. Each includes a `normal`, `elevated`, or `critical` posture and
+        aircraft counts by type.
 
-        > **Status (May 2026):** Posture is computed from the aircraft tracking
-        > pipeline, which is temporarily feature-flagged off to conserve the shared
-        > Wingbits quota. This endpoint remains available but may return empty or stale
-        > results until aircraft ingestion is re-enabled. GPS jamming
-        > (`/osint/gps-jamming`) is unaffected.
+        > **Status:** Aircraft ingestion has been disabled since May 8, 2026, to reserve
+        > the shared Wingbits quota for GPS interference detection. This endpoint may
+        > return empty or stale results. `/osint/gps-jamming` is unaffected.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -286,17 +280,16 @@ class OsintResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListAircraftResponse:
         """
-        Returns tracked military aircraft positions from the Wingbits ADS-B network,
-        filtered and classified by type (tanker, AWACS, fighter, etc.).
+        Lists Wingbits ADS-B military aircraft positions, classified by type such as
+        tanker, AWACS, or fighter.
 
-        > **Status (May 2026):** Aircraft ingestion is temporarily feature-flagged off
-        > to dedicate the shared Wingbits quota to GPS interference detection. This
-        > endpoint remains available but may return empty or stale results until
-        > ingestion is re-enabled. GPS jamming (`/osint/gps-jamming`) is unaffected.
+        > **Status:** Aircraft ingestion has been disabled since May 8, 2026, to reserve
+        > the shared Wingbits quota for GPS interference detection. This endpoint may
+        > return empty or stale results. `/osint/gps-jamming` is unaffected.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -356,14 +349,13 @@ class OsintResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListEventsResponse:
-        """Returns OSINT threat events from the Situation Room.
+        """Lists Situation Room threat events.
 
-        Supports filtering by
-        category, severity, region, and country.
+        Supports category and severity filters.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -413,12 +405,11 @@ class OsintResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListVesselsResponse:
         """
-        Returns naval vessel positions sourced from USNI fleet tracker data, including
-        carrier strike groups and individual warships.
+        Lists USNI fleet-tracker positions for carrier strike groups and warships.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -464,14 +455,14 @@ class OsintResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintMapEventsResponse:
-        """Returns OSINT events with geographic coordinates for map display.
+        """Lists geolocated OSINT events for map display.
 
-        Events without
-        coordinates are excluded.
+        Excludes events without
+        coordinates.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -507,16 +498,16 @@ class OsintResource(SyncAPIResource):
 
 
 class AsyncOsintResource(AsyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def countries(self) -> AsyncCountriesResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncCountriesResource(self._client)
 
     @cached_property
     def sources(self) -> AsyncSourcesResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncSourcesResource(self._client)
 
     @cached_property
@@ -564,15 +555,13 @@ class AsyncOsintResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetConflictIndicatorsResponse:
-        """Returns the Conflict Indicators Index (CII) values.
+        """
+        Lists Conflict Indicators Index (CII) values with 0–100 scores and recent-change
+        deltas. Supports region and category filters.
 
-        Each item represents a
-        conflict indicator with a score from 0-100 and a delta showing recent change.
-        Supports filtering by region and category.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -622,11 +611,10 @@ class AsyncOsintResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetGpsJammingZonesResponse:
         """
-        Returns GPS interference zones detected via ADS-B navigation accuracy
-        degradation analysis, aggregated into H3 hex cells.
+        Lists GPS interference zones inferred from ADS-B navigation-accuracy degradation
+        and aggregated into H3 cells.
 
-        Coverage spans 22 theaters with tiered refresh cadence calibrated to fit the
-        shared Wingbits quota:
+        Coverage spans 22 theaters on a tiered cadence within the shared Wingbits quota:
 
         | Tier      | Cadence   | Theaters                                                                                        |
         | --------- | --------- | ----------------------------------------------------------------------------------------------- |
@@ -635,12 +623,11 @@ class AsyncOsintResource(AsyncAPIResource):
         | Perimeter | Every 6h  | us-pacom-west, us-northeast, aleutian-bering, baltic-south, giuk-greenland                      |
         | Daily     | Every 24h | baltic-north, us-north, arctic-greenland-pass                                                   |
 
-        Records expire 30 minutes after fetch; clients polling for fresh interference
-        zones should align polling cadence to the tier of interest.
+        Records expire 30 minutes after fetch. Align polling with the theater's tier.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -686,19 +673,17 @@ class AsyncOsintResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintGetMilitaryPostureResponse:
         """
-        Returns military posture assessments for monitored theaters, based on detected
-        military aircraft activity from the Wingbits ADS-B network. Each theater has a
-        posture level (normal, elevated, critical) and aircraft breakdown by type.
+        Lists theater posture assessments based on Wingbits ADS-B military aircraft
+        activity. Each includes a `normal`, `elevated`, or `critical` posture and
+        aircraft counts by type.
 
-        > **Status (May 2026):** Posture is computed from the aircraft tracking
-        > pipeline, which is temporarily feature-flagged off to conserve the shared
-        > Wingbits quota. This endpoint remains available but may return empty or stale
-        > results until aircraft ingestion is re-enabled. GPS jamming
-        > (`/osint/gps-jamming`) is unaffected.
+        > **Status:** Aircraft ingestion has been disabled since May 8, 2026, to reserve
+        > the shared Wingbits quota for GPS interference detection. This endpoint may
+        > return empty or stale results. `/osint/gps-jamming` is unaffected.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -739,17 +724,16 @@ class AsyncOsintResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListAircraftResponse:
         """
-        Returns tracked military aircraft positions from the Wingbits ADS-B network,
-        filtered and classified by type (tanker, AWACS, fighter, etc.).
+        Lists Wingbits ADS-B military aircraft positions, classified by type such as
+        tanker, AWACS, or fighter.
 
-        > **Status (May 2026):** Aircraft ingestion is temporarily feature-flagged off
-        > to dedicate the shared Wingbits quota to GPS interference detection. This
-        > endpoint remains available but may return empty or stale results until
-        > ingestion is re-enabled. GPS jamming (`/osint/gps-jamming`) is unaffected.
+        > **Status:** Aircraft ingestion has been disabled since May 8, 2026, to reserve
+        > the shared Wingbits quota for GPS interference detection. This endpoint may
+        > return empty or stale results. `/osint/gps-jamming` is unaffected.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -809,14 +793,13 @@ class AsyncOsintResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListEventsResponse:
-        """Returns OSINT threat events from the Situation Room.
+        """Lists Situation Room threat events.
 
-        Supports filtering by
-        category, severity, region, and country.
+        Supports category and severity filters.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -866,12 +849,11 @@ class AsyncOsintResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintListVesselsResponse:
         """
-        Returns naval vessel positions sourced from USNI fleet tracker data, including
-        carrier strike groups and individual warships.
+        Lists USNI fleet-tracker positions for carrier strike groups and warships.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -917,14 +899,14 @@ class AsyncOsintResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OsintMapEventsResponse:
-        """Returns OSINT events with geographic coordinates for map display.
+        """Lists geolocated OSINT events for map display.
 
-        Events without
-        coordinates are excluded.
+        Excludes events without
+        coordinates.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -987,12 +969,12 @@ class OsintResourceWithRawResponse:
 
     @cached_property
     def countries(self) -> CountriesResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return CountriesResourceWithRawResponse(self._osint.countries)
 
     @cached_property
     def sources(self) -> SourcesResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return SourcesResourceWithRawResponse(self._osint.sources)
 
 
@@ -1024,12 +1006,12 @@ class AsyncOsintResourceWithRawResponse:
 
     @cached_property
     def countries(self) -> AsyncCountriesResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncCountriesResourceWithRawResponse(self._osint.countries)
 
     @cached_property
     def sources(self) -> AsyncSourcesResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncSourcesResourceWithRawResponse(self._osint.sources)
 
 
@@ -1061,12 +1043,12 @@ class OsintResourceWithStreamingResponse:
 
     @cached_property
     def countries(self) -> CountriesResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return CountriesResourceWithStreamingResponse(self._osint.countries)
 
     @cached_property
     def sources(self) -> SourcesResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return SourcesResourceWithStreamingResponse(self._osint.sources)
 
 
@@ -1098,10 +1080,10 @@ class AsyncOsintResourceWithStreamingResponse:
 
     @cached_property
     def countries(self) -> AsyncCountriesResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncCountriesResourceWithStreamingResponse(self._osint.countries)
 
     @cached_property
     def sources(self) -> AsyncSourcesResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         return AsyncSourcesResourceWithStreamingResponse(self._osint.sources)
