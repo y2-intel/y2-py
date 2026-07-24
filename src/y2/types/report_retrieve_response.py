@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -12,272 +12,244 @@ from .audio_metadata import AudioMetadata
 __all__ = [
     "ReportRetrieveResponse",
     "Data",
-    "DataContent",
+    "DataAudio",
     "DataIntelligence",
-    "DataIntelligenceOntologyGraph",
-    "DataIntelligenceOntologyGraphEdge",
-    "DataIntelligenceOntologyGraphIncident",
-    "DataIntelligenceOntologyGraphNode",
-    "DataIntelligenceSigint",
-    "DataIntelligenceSigintSignal",
-    "DataIntelligenceSigintSignalSubject",
-    "DataMetadata",
-    "DataMetadataFreshnessMetadata",
-    "DataMetadataRecursionMetadata",
+    "DataIntelligenceGraph",
+    "DataContent",
+    "DataGraph",
+    "DataGraphEdge",
+    "DataGraphEdgeSource",
+    "DataGraphIncident",
+    "DataGraphIncidentSource",
+    "DataGraphNode",
+    "DataGraphNodeSource",
+    "DataGraphSource",
+    "DataProfile",
+    "DataSignal",
+    "DataSignalSource",
+    "DataSignalSubject",
+    "DataSource",
 ]
 
 
+class DataAudio(BaseModel):
+    duration_seconds: Optional[float] = FieldInfo(alias="durationSeconds", default=None)
+
+    media_type: Optional[str] = FieldInfo(alias="mediaType", default=None)
+
+    status: Literal["available", "unavailable"]
+
+
+class DataIntelligenceGraph(BaseModel):
+    edge_count: int = FieldInfo(alias="edgeCount")
+
+    incident_count: int = FieldInfo(alias="incidentCount")
+
+    node_count: int = FieldInfo(alias="nodeCount")
+
+
+class DataIntelligence(BaseModel):
+    graph: Optional[DataIntelligenceGraph] = None
+
+    signal_count: int = FieldInfo(alias="signalCount")
+
+
 class DataContent(BaseModel):
-    html: Optional[str] = None
-    """Full HTML content"""
+    markdown: str
 
-    summary: Optional[str] = None
-    """SMS-friendly summary"""
+    media_type: Literal["text/markdown"] = FieldInfo(alias="mediaType")
 
 
-class DataIntelligenceOntologyGraphEdge(BaseModel):
+class DataGraphEdgeSource(BaseModel):
     id: str
-    """Report-local graph edge ID"""
+
+    url: str
+
+
+class DataGraphEdge(BaseModel):
+    id: str
 
     confidence: float
 
     from_: str = FieldInfo(alias="from")
-    """Source report-local node ID"""
 
-    from_label: str = FieldInfo(alias="fromLabel")
-
-    kind: str
+    source: Optional[DataGraphEdgeSource] = None
 
     to: str
-    """Target report-local node ID"""
 
-    to_label: str = FieldInfo(alias="toLabel")
-
-    evidence_url: Optional[str] = FieldInfo(alias="evidenceUrl", default=None)
+    type: str
 
 
-class DataIntelligenceOntologyGraphIncident(BaseModel):
+class DataGraphIncidentSource(BaseModel):
     id: str
-    """Report-local incident anchor ID"""
+
+    url: str
+
+
+class DataGraphIncident(BaseModel):
+    id: str
 
     category: str
 
-    cited_urls: List[str] = FieldInfo(alias="citedUrls")
+    entity_ids: List[str] = FieldInfo(alias="entityIds")
 
-    event_time: int = FieldInfo(alias="eventTime")
-
-    involved_node_ids: List[str] = FieldInfo(alias="involvedNodeIds")
+    occurred_at: datetime = FieldInfo(alias="occurredAt")
 
     severity: str
 
+    sources: List[DataGraphIncidentSource]
+
     title: str
 
-    incident_id: Optional[str] = FieldInfo(alias="incidentId", default=None)
-    """Linked ontology incident ID, when resolved"""
+    type: Literal["incident"]
 
 
-class DataIntelligenceOntologyGraphNode(BaseModel):
+class DataGraphNodeSource(BaseModel):
     id: str
-    """Report-local graph node ID"""
 
-    evidence_urls: List[str] = FieldInfo(alias="evidenceUrls")
+    url: str
+
+
+class DataGraphNode(BaseModel):
+    id: str
 
     kind: str
 
     label: str
 
-    entity_id: Optional[str] = FieldInfo(alias="entityId", default=None)
-    """Linked ontology entity ID, when resolved"""
+    sources: List[DataGraphNodeSource]
 
     summary: Optional[str] = None
 
+    type: Literal["entity"]
 
-class DataIntelligenceOntologyGraph(BaseModel):
-    citations: List[str]
 
-    edges: List[DataIntelligenceOntologyGraphEdge]
+class DataGraphSource(BaseModel):
+    id: str
 
-    generated_at: int = FieldInfo(alias="generatedAt")
-    """Graph extraction timestamp in milliseconds"""
+    url: str
 
-    incidents: List[DataIntelligenceOntologyGraphIncident]
 
-    nodes: List[DataIntelligenceOntologyGraphNode]
+class DataGraph(BaseModel):
+    edges: List[DataGraphEdge]
 
-    source: Literal["y2_report_graph"]
+    generated_at: datetime = FieldInfo(alias="generatedAt")
+
+    incidents: List[DataGraphIncident]
+
+    nodes: List[DataGraphNode]
+
+    sources: List[DataGraphSource]
 
     summary: str
 
-    model: Optional[str] = None
 
-    prompt_version: Optional[str] = FieldInfo(alias="promptVersion", default=None)
+class DataProfile(BaseModel):
+    id: str
+
+    name: Optional[str] = None
 
     topic: Optional[str] = None
 
 
-class DataIntelligenceSigintSignalSubject(BaseModel):
-    kind: Literal[
-        "person",
-        "organization",
-        "country",
-        "region",
-        "vessel",
-        "aircraft",
-        "facility",
-        "asset",
-        "indicator",
-        "cve",
-        "malware_family",
-        "threat_actor",
-        "vendor",
-        "software",
-        "ai_model",
-        "api_service",
-        "protocol",
-    ]
+class DataSignalSource(BaseModel):
+    id: str
+
+    url: str
+
+
+class DataSignalSubject(BaseModel):
+    entity_id: Optional[str] = FieldInfo(alias="entityId", default=None)
+
+    key: str
+
+    kind: str
 
     label: str
-    """Human-readable subject label"""
-
-    normalized_key: str = FieldInfo(alias="normalizedKey")
-    """Stable ontology subject key used for filtering"""
-
-    entity_id: Optional[str] = FieldInfo(alias="entityId", default=None)
-    """Linked ontology entity ID when resolved"""
 
 
-class DataIntelligenceSigintSignal(BaseModel):
-    action_type: Literal[
-        "invest", "patch", "upgrade", "strategy", "hedge", "monitor", "mitigate", "escalate", "defer", "allocate"
-    ] = FieldInfo(alias="actionType")
+class DataSignal(BaseModel):
+    action_type: str = FieldInfo(alias="actionType")
 
     confidence: float
 
     decision: str
-    """Candidate action or decision hypothesis"""
 
-    domain: Literal[
-        "cyber", "markets", "geopolitical", "operational", "supply_chain", "policy", "military", "technology", "other"
-    ]
+    domain: str
 
-    entity_names: List[str] = FieldInfo(alias="entityNames")
-
-    evidence_urls: List[str] = FieldInfo(alias="evidenceUrls")
-
-    inference_type: Literal["observed", "inferred", "speculative"] = FieldInfo(alias="inferenceType")
+    inference_type: str = FieldInfo(alias="inferenceType")
 
     justification: str
-    """Evidence-grounded rationale"""
 
-    priority: Literal["low", "medium", "high", "critical"]
+    priority: str
 
     signal: str
-    """Concise statement of the inferred signal"""
 
-    time_horizon: Literal["immediate", "near_term", "mid_term", "long_term"] = FieldInfo(alias="timeHorizon")
+    sources: List[DataSignalSource]
+
+    subjects: List[DataSignalSubject]
+
+    tags: List[str]
+
+    time_horizon: str = FieldInfo(alias="timeHorizon")
 
     title: str
-    """Short signal title"""
-
-    subjects: Optional[List[DataIntelligenceSigintSignalSubject]] = None
-    """Ontology-aligned signal subjects"""
-
-    tags: Optional[List[str]] = None
-    """Lowercase filtering tokens for domains, actions, priorities, and subjects"""
 
 
-class DataIntelligenceSigint(BaseModel):
-    signals: List[DataIntelligenceSigintSignal]
+class DataSource(BaseModel):
+    id: str
 
-    generated_at: Optional[int] = FieldInfo(alias="generatedAt", default=None)
-    """Signal extraction timestamp in milliseconds"""
+    language: Optional[str] = None
 
-    summary: Optional[str] = None
-    """One-sentence summary of the dominant emergent signal set"""
+    published_at: Optional[datetime] = FieldInfo(alias="publishedAt", default=None)
 
+    publisher: Optional[str] = None
 
-class DataIntelligence(BaseModel):
-    ontology_graph: Optional[DataIntelligenceOntologyGraph] = FieldInfo(alias="ontologyGraph", default=None)
+    retrieved_at: datetime = FieldInfo(alias="retrievedAt")
 
-    sigint: Optional[DataIntelligenceSigint] = None
+    source_type: str = FieldInfo(alias="sourceType")
 
+    title: Optional[str] = None
 
-class DataMetadataFreshnessMetadata(BaseModel):
-    """Source freshness validation results"""
-
-    accessible_links: Optional[int] = FieldInfo(alias="accessibleLinks", default=None)
-
-    average_age_ms: Optional[int] = FieldInfo(alias="averageAgeMs", default=None)
-    """Average source age in milliseconds"""
-
-    freshness_score: Optional[float] = FieldInfo(alias="freshnessScore", default=None)
-    """Overall freshness score (higher = fresher)"""
-
-    stale_sources_count: Optional[int] = FieldInfo(alias="staleSourcesCount", default=None)
-
-    total_links: Optional[int] = FieldInfo(alias="totalLinks", default=None)
-
-    validated_at: Optional[int] = FieldInfo(alias="validatedAt", default=None)
-
-
-class DataMetadataRecursionMetadata(BaseModel):
-    """Metadata about recursive research execution"""
-
-    depth: Optional[int] = None
-    """Recursion depth achieved (0 = standard report)"""
-
-    fallback_reason: Optional[str] = FieldInfo(alias="fallbackReason", default=None)
-    """Reason if fallback to standard generation occurred"""
-
-    layers_processed: Optional[int] = FieldInfo(alias="layersProcessed", default=None)
-
-    strategy: Optional[Literal["breadth-first", "depth-first", "hybrid"]] = None
-
-    subtopics_generated: Optional[List[str]] = FieldInfo(alias="subtopicsGenerated", default=None)
-
-    total_sources_collected: Optional[int] = FieldInfo(alias="totalSourcesCollected", default=None)
-
-    total_time_ms: Optional[int] = FieldInfo(alias="totalTimeMs", default=None)
-
-    unique_sources_aggregated: Optional[int] = FieldInfo(alias="uniqueSourcesAggregated", default=None)
-
-
-class DataMetadata(BaseModel):
-    freshness_metadata: Optional[DataMetadataFreshnessMetadata] = FieldInfo(alias="freshnessMetadata", default=None)
-    """Source freshness validation results"""
-
-    model: Optional[str] = None
-
-    recursion_metadata: Optional[DataMetadataRecursionMetadata] = FieldInfo(alias="recursionMetadata", default=None)
-    """Metadata about recursive research execution"""
-
-    total_cost: Optional[float] = FieldInfo(alias="totalCost", default=None)
+    url: str
 
 
 class Data(BaseModel):
     id: str
 
-    content: DataContent
+    audio: DataAudio
 
-    generated_at: int = FieldInfo(alias="generatedAt")
+    generated_at: datetime = FieldInfo(alias="generatedAt")
 
-    generated_at_iso: datetime = FieldInfo(alias="generatedAtISO")
+    intelligence: DataIntelligence
+
+    language: str
+
+    links: Dict[str, Optional[str]]
 
     profile_id: str = FieldInfo(alias="profileId")
 
-    audio: Optional[AudioMetadata] = None
+    published_at: datetime = FieldInfo(alias="publishedAt")
 
-    intelligence: Optional[DataIntelligence] = None
+    status: Literal["published"]
 
-    metadata: Optional[DataMetadata] = None
-
-    profile_name: Optional[str] = FieldInfo(alias="profileName", default=None)
-
-    profile_topic: Optional[str] = FieldInfo(alias="profileTopic", default=None)
-
-    sources: Optional[List[str]] = None
+    summary: Optional[str] = None
 
     topic: Optional[str] = None
+
+    type: Literal["report"]
+
+    audio_representation: Optional[AudioMetadata] = FieldInfo(alias="audioRepresentation", default=None)
+
+    content: Optional[DataContent] = None
+
+    graph: Optional[DataGraph] = None
+
+    profile: Optional[DataProfile] = None
+
+    signals: Optional[List[DataSignal]] = None
+
+    sources: Optional[List[DataSource]] = None
 
 
 class ReportRetrieveResponse(BaseModel):

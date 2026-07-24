@@ -9,54 +9,99 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 from .topic_enum import TopicEnum
 
-__all__ = ["NewsListResponse", "Data", "Meta"]
+__all__ = ["NewsListResponse", "Data", "DataLinks", "DataSentiment", "DataSource", "Links", "Meta", "MetaPage"]
+
+
+class DataLinks(BaseModel):
+    canonical: Optional[str] = None
+
+
+class DataSentiment(BaseModel):
+    label: Optional[Literal["bullish", "bearish", "neutral"]] = None
+    """Sentiment classification for news items"""
+
+    value: float
+
+
+class DataSource(BaseModel):
+    id: str
+
+    language: Optional[str] = None
+
+    published_at: datetime = FieldInfo(alias="publishedAt")
+
+    publisher: Optional[str] = None
+
+    retrieved_at: Optional[datetime] = FieldInfo(alias="retrievedAt", default=None)
+
+    source_type: str = FieldInfo(alias="sourceType")
+
+    title: Optional[str] = None
+
+    url: Optional[str] = None
 
 
 class Data(BaseModel):
     id: str
 
-    signal: str
-    """Primary signal/headline"""
-
-    timestamp: int
-    """Unix timestamp (seconds)"""
-
-    timestamp_iso: datetime = FieldInfo(alias="timestampISO")
-
     author: Optional[str] = None
 
-    categories: Optional[List[str]] = None
+    content: str
 
-    content: Optional[str] = None
-    """Full context"""
+    links: DataLinks
 
-    narrative_id: Optional[str] = FieldInfo(alias="narrativeId", default=None)
+    published_at: datetime = FieldInfo(alias="publishedAt")
 
-    sentiment: Optional[Literal["bullish", "bearish", "neutral"]] = None
-    """Sentiment classification for news items"""
+    sentiment: DataSentiment
 
-    sentiment_value: Optional[float] = FieldInfo(alias="sentimentValue", default=None)
+    sources: List[DataSource]
 
-    sources: Optional[List[str]] = None
+    summary: str
 
-    summary: Optional[str] = None
-    """Short context summary"""
+    title: str
 
-    tokens: Optional[List[str]] = None
-    """Related tokens/assets"""
+    topics: List[str]
 
-    tweet_url: Optional[str] = FieldInfo(alias="tweetUrl", default=None)
+    type: Literal["news"]
+
+
+class Links(BaseModel):
+    next: Optional[str] = None
+
+    self: str
+
+
+class MetaPage(BaseModel):
+    has_more: bool = FieldInfo(alias="hasMore")
+
+    limit: int
+
+    next_cursor: Optional[str] = FieldInfo(alias="nextCursor", default=None)
 
 
 class Meta(BaseModel):
-    count: Optional[int] = None
+    as_of: datetime = FieldInfo(alias="asOf")
 
-    limit: Optional[int] = None
+    count: int
 
-    topics: Optional[List[TopicEnum]] = None
+    has_more: bool = FieldInfo(alias="hasMore")
+
+    is_done: bool = FieldInfo(alias="isDone")
+
+    limit: int
+
+    next_cursor: Optional[str] = FieldInfo(alias="nextCursor", default=None)
+
+    page: MetaPage
+
+    page_count: int = FieldInfo(alias="pageCount")
+
+    topics: List[TopicEnum]
 
 
 class NewsListResponse(BaseModel):
     data: List[Data]
+
+    links: Links
 
     meta: Meta

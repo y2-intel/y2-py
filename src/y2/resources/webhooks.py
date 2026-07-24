@@ -7,8 +7,8 @@ from typing import Dict
 import httpx
 
 from ..types import webhook_create_params, webhook_update_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -21,7 +21,6 @@ from .._base_client import make_request_options
 from ..types.webhook_list_response import WebhookListResponse
 from ..types.webhook_test_response import WebhookTestResponse
 from ..types.webhook_create_response import WebhookCreateResponse
-from ..types.webhook_delete_response import WebhookDeleteResponse
 from ..types.webhook_update_response import WebhookUpdateResponse
 
 __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
@@ -56,6 +55,7 @@ class WebhooksResource(SyncAPIResource):
         url: str,
         headers: Dict[str, str] | Omit = omit,
         secret: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -85,6 +85,7 @@ class WebhooksResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**strip_not_given({"Idempotency-Key": idempotency_key}), **(extra_headers or {})}
         return self._post(
             "/webhooks",
             body=maybe_transform(
@@ -106,11 +107,12 @@ class WebhooksResource(SyncAPIResource):
         self,
         webhook_id: str,
         *,
+        name: str,
+        url: str,
         headers: Dict[str, str] | Omit = omit,
         is_active: bool | Omit = omit,
-        name: str | Omit = omit,
         secret: str | Omit = omit,
-        url: str | Omit = omit,
+        if_match: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -118,12 +120,20 @@ class WebhooksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookUpdateResponse:
-        """Updates supplied fields on a webhook configuration.
+        """Replaces every mutable webhook configuration field.
 
-        Omitted fields remain
-        unchanged.
+        `name` and `url` are
+        required; omitted optional fields are reset to their defaults.
 
         Args:
+          name: Webhook display name
+
+          url: Webhook endpoint URL (must be HTTPS)
+
+          headers: Custom headers to include in webhook deliveries
+
+          secret: Shared secret for signature verification
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -134,15 +144,16 @@ class WebhooksResource(SyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {**strip_not_given({"If-Match": if_match}), **(extra_headers or {})}
         return self._put(
             path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             body=maybe_transform(
                 {
+                    "name": name,
+                    "url": url,
                     "headers": headers,
                     "is_active": is_active,
-                    "name": name,
                     "secret": secret,
-                    "url": url,
                 },
                 webhook_update_params.WebhookUpdateParams,
             ),
@@ -175,13 +186,14 @@ class WebhooksResource(SyncAPIResource):
         self,
         webhook_id: str,
         *,
+        if_match: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookDeleteResponse:
+    ) -> None:
         """Deletes a webhook configuration.
 
         Returns `409` if any subscription uses it.
@@ -197,12 +209,14 @@ class WebhooksResource(SyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {**strip_not_given({"If-Match": if_match}), **(extra_headers or {})}
         return self._delete(
             path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDeleteResponse,
+            cast_to=NoneType,
         )
 
     def test(
@@ -270,6 +284,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         url: str,
         headers: Dict[str, str] | Omit = omit,
         secret: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -299,6 +314,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {**strip_not_given({"Idempotency-Key": idempotency_key}), **(extra_headers or {})}
         return await self._post(
             "/webhooks",
             body=await async_maybe_transform(
@@ -320,11 +336,12 @@ class AsyncWebhooksResource(AsyncAPIResource):
         self,
         webhook_id: str,
         *,
+        name: str,
+        url: str,
         headers: Dict[str, str] | Omit = omit,
         is_active: bool | Omit = omit,
-        name: str | Omit = omit,
         secret: str | Omit = omit,
-        url: str | Omit = omit,
+        if_match: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -332,12 +349,20 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WebhookUpdateResponse:
-        """Updates supplied fields on a webhook configuration.
+        """Replaces every mutable webhook configuration field.
 
-        Omitted fields remain
-        unchanged.
+        `name` and `url` are
+        required; omitted optional fields are reset to their defaults.
 
         Args:
+          name: Webhook display name
+
+          url: Webhook endpoint URL (must be HTTPS)
+
+          headers: Custom headers to include in webhook deliveries
+
+          secret: Shared secret for signature verification
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -348,15 +373,16 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {**strip_not_given({"If-Match": if_match}), **(extra_headers or {})}
         return await self._put(
             path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             body=await async_maybe_transform(
                 {
+                    "name": name,
+                    "url": url,
                     "headers": headers,
                     "is_active": is_active,
-                    "name": name,
                     "secret": secret,
-                    "url": url,
                 },
                 webhook_update_params.WebhookUpdateParams,
             ),
@@ -389,13 +415,14 @@ class AsyncWebhooksResource(AsyncAPIResource):
         self,
         webhook_id: str,
         *,
+        if_match: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebhookDeleteResponse:
+    ) -> None:
         """Deletes a webhook configuration.
 
         Returns `409` if any subscription uses it.
@@ -411,12 +438,14 @@ class AsyncWebhooksResource(AsyncAPIResource):
         """
         if not webhook_id:
             raise ValueError(f"Expected a non-empty value for `webhook_id` but received {webhook_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {**strip_not_given({"If-Match": if_match}), **(extra_headers or {})}
         return await self._delete(
             path_template("/webhooks/{webhook_id}", webhook_id=webhook_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebhookDeleteResponse,
+            cast_to=NoneType,
         )
 
     async def test(

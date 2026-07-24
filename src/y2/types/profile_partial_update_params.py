@@ -58,6 +58,8 @@ class ProfilePartialUpdateParams(TypedDict, total=False):
 
     topic: str
 
+    if_match: Annotated[str, PropertyInfo(alias="If-Match")]
+
 
 class AudioConfig(TypedDict, total=False):
     enabled: bool
@@ -95,10 +97,21 @@ class ModelConfig(TypedDict, total=False):
 
 class RecursionConfig(TypedDict, total=False):
     enabled: Required[bool]
+    """When false, runs root-topic research without child subtopics."""
 
     max_depth: Required[Annotated[int, PropertyInfo(alias="maxDepth")]]
+    """Requested child-layer depth.
+
+    The current runtime defaults an enabled value of `0` to `1` and caps values
+    above `1` at one child layer. This field is ignored when `enabled` is false.
+    """
 
     strategy: Required[Literal["breadth-first", "depth-first", "hybrid"]]
+    """Stored strategy preference.
+
+    The current report engine executes its implemented breadth-first child-search
+    path for every value.
+    """
 
 
 class SearchConfig(TypedDict, total=False):

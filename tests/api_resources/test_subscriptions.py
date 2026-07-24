@@ -21,7 +21,7 @@ class TestSubscriptions:
     @parametrize
     def test_method_update_delivery(self, client: Y2) -> None:
         subscription = client.subscriptions.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])
@@ -30,10 +30,10 @@ class TestSubscriptions:
     @parametrize
     def test_method_update_delivery_with_all_params(self, client: Y2) -> None:
         subscription = client.subscriptions.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
             email_audience="individual",
-            webhook_config_id="webhookConfigId",
+            webhook_config_id="whk_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])
 
@@ -41,7 +41,7 @@ class TestSubscriptions:
     @parametrize
     def test_raw_response_update_delivery(self, client: Y2) -> None:
         response = client.subscriptions.with_raw_response.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         )
 
@@ -54,7 +54,7 @@ class TestSubscriptions:
     @parametrize
     def test_streaming_response_update_delivery(self, client: Y2) -> None:
         with client.subscriptions.with_streaming_response.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         ) as response:
             assert not response.is_closed
@@ -84,7 +84,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_update_delivery(self, async_client: AsyncY2) -> None:
         subscription = await async_client.subscriptions.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])
@@ -93,10 +93,10 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_method_update_delivery_with_all_params(self, async_client: AsyncY2) -> None:
         subscription = await async_client.subscriptions.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
             email_audience="individual",
-            webhook_config_id="webhookConfigId",
+            webhook_config_id="whk_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(SubscriptionUpdateDeliveryResponse, subscription, path=["response"])
 
@@ -104,7 +104,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_raw_response_update_delivery(self, async_client: AsyncY2) -> None:
         response = await async_client.subscriptions.with_raw_response.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         )
 
@@ -117,7 +117,7 @@ class TestAsyncSubscriptions:
     @parametrize
     async def test_streaming_response_update_delivery(self, async_client: AsyncY2) -> None:
         async with async_client.subscriptions.with_streaming_response.update_delivery(
-            subscription_id="subscriptionId",
+            subscription_id="sub_210b9798eb53baa4e69d31c1",
             delivery_method="email",
         ) as response:
             assert not response.is_closed

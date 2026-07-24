@@ -1,48 +1,97 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["WebhookListResponse", "Data", "Meta"]
+__all__ = ["WebhookListResponse", "Data", "DataDeliveryHealth", "DataLinks", "DataSigning", "Links", "Meta", "MetaPage"]
+
+
+class DataDeliveryHealth(BaseModel):
+    consecutive_failures: int = FieldInfo(alias="consecutiveFailures")
+
+    last_used_at: Optional[datetime] = FieldInfo(alias="lastUsedAt", default=None)
+
+
+class DataLinks(BaseModel):
+    self: str
+
+    test: str
+
+
+class DataSigning(BaseModel):
+    algorithm: Optional[Literal["hmac-sha256"]] = None
+
+    configured: bool
 
 
 class Data(BaseModel):
     id: str
-    """Webhook configuration ID"""
+    """Stable public webhook configuration ID"""
 
-    created_at: int = FieldInfo(alias="createdAt")
-    """Creation timestamp (ms)"""
+    created_at: datetime = FieldInfo(alias="createdAt")
 
-    failure_count: int = FieldInfo(alias="failureCount")
-    """Consecutive failure count (auto-disabled at 5)"""
+    custom_headers: List[str] = FieldInfo(alias="customHeaders")
+    """Configured header names; values are never returned."""
 
-    has_secret: bool = FieldInfo(alias="hasSecret")
-    """True when configured; never exposes the secret"""
+    delivery_health: DataDeliveryHealth = FieldInfo(alias="deliveryHealth")
 
-    is_active: bool = FieldInfo(alias="isActive")
-    """Whether the webhook is active"""
+    links: DataLinks
 
     name: str
     """Webhook display name"""
 
+    signing: DataSigning
+
+    status: Literal["active", "disabled"]
+
+    type: Literal["webhook"]
+
+    updated_at: datetime = FieldInfo(alias="updatedAt")
+
     url: str
     """Webhook endpoint URL"""
 
-    last_used_at: Optional[int] = FieldInfo(alias="lastUsedAt", default=None)
-    """Last delivery timestamp (ms)"""
 
-    updated_at: Optional[int] = FieldInfo(alias="updatedAt", default=None)
-    """Last update timestamp (ms)"""
+class Links(BaseModel):
+    next: Optional[str] = None
+
+    self: str
+
+
+class MetaPage(BaseModel):
+    has_more: bool = FieldInfo(alias="hasMore")
+
+    limit: int
+
+    next_cursor: Optional[str] = FieldInfo(alias="nextCursor", default=None)
 
 
 class Meta(BaseModel):
-    count: Optional[int] = None
+    as_of: datetime = FieldInfo(alias="asOf")
+
+    count: int
+
+    has_more: bool = FieldInfo(alias="hasMore")
+
+    is_done: bool = FieldInfo(alias="isDone")
+
+    limit: int
+
+    next_cursor: Optional[str] = FieldInfo(alias="nextCursor", default=None)
+
+    page: MetaPage
+
+    page_count: int = FieldInfo(alias="pageCount")
 
 
 class WebhookListResponse(BaseModel):
     data: List[Data]
+
+    links: Links
 
     meta: Meta

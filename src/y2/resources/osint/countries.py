@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -90,6 +92,8 @@ class CountriesResource(SyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -107,6 +111,12 @@ class CountriesResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of news items to return
 
           extra_headers: Send extra headers
@@ -126,7 +136,14 @@ class CountriesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"limit": limit}, country_get_country_news_params.CountryGetCountryNewsParams),
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_country_news_params.CountryGetCountryNewsParams,
+                ),
             ),
             cast_to=CountryGetCountryNewsResponse,
         )
@@ -173,6 +190,8 @@ class CountriesResource(SyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -190,6 +209,11 @@ class CountriesResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
           limit: Maximum number of predictions to return
 
           extra_headers: Send extra headers
@@ -210,7 +234,12 @@ class CountriesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"limit": limit}, country_get_prediction_markets_params.CountryGetPredictionMarketsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_prediction_markets_params.CountryGetPredictionMarketsParams,
                 ),
             ),
             cast_to=CountryGetPredictionMarketsResponse,
@@ -320,6 +349,8 @@ class AsyncCountriesResource(AsyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -337,6 +368,12 @@ class AsyncCountriesResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of news items to return
 
           extra_headers: Send extra headers
@@ -357,7 +394,12 @@ class AsyncCountriesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit}, country_get_country_news_params.CountryGetCountryNewsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_country_news_params.CountryGetCountryNewsParams,
                 ),
             ),
             cast_to=CountryGetCountryNewsResponse,
@@ -405,6 +447,8 @@ class AsyncCountriesResource(AsyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -422,6 +466,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
           limit: Maximum number of predictions to return
 
           extra_headers: Send extra headers
@@ -442,7 +491,12 @@ class AsyncCountriesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit}, country_get_prediction_markets_params.CountryGetPredictionMarketsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_prediction_markets_params.CountryGetPredictionMarketsParams,
                 ),
             ),
             cast_to=CountryGetPredictionMarketsResponse,
