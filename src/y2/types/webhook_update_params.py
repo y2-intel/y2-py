@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -11,12 +11,18 @@ __all__ = ["WebhookUpdateParams"]
 
 
 class WebhookUpdateParams(TypedDict, total=False):
+    name: Required[str]
+    """Webhook display name"""
+
+    url: Required[str]
+    """Webhook endpoint URL (must be HTTPS)"""
+
     headers: Dict[str, str]
+    """Custom headers to include in webhook deliveries"""
 
     is_active: Annotated[bool, PropertyInfo(alias="isActive")]
 
-    name: str
-
     secret: str
+    """Shared secret for signature verification"""
 
-    url: str
+    if_match: Annotated[str, PropertyInfo(alias="If-Match")]

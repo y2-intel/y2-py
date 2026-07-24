@@ -7,19 +7,31 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SubscriptionUpdateDeliveryResponse", "Data", "Meta"]
+__all__ = ["SubscriptionUpdateDeliveryResponse", "Data", "DataDelivery", "DataLinks", "Meta"]
+
+
+class DataDelivery(BaseModel):
+    email_audience: Literal["individual", "workspace"] = FieldInfo(alias="emailAudience")
+    """Email recipients for email-capable subscription delivery"""
+
+    method: Literal["email", "sms", "webhook", "both_email_sms"]
+    """Subscription delivery method"""
+
+    webhook_id: Optional[str] = FieldInfo(alias="webhookId", default=None)
+
+
+class DataLinks(BaseModel):
+    delivery: str
 
 
 class Data(BaseModel):
-    delivery_method: Literal["email", "sms", "webhook", "both_email_sms"] = FieldInfo(alias="deliveryMethod")
-    """Subscription delivery method"""
+    id: str
 
-    subscription_id: str = FieldInfo(alias="subscriptionId")
+    delivery: DataDelivery
 
-    success: bool
+    links: DataLinks
 
-    email_audience: Optional[Literal["individual", "workspace"]] = FieldInfo(alias="emailAudience", default=None)
-    """Email recipients for email-capable subscription delivery"""
+    type: Literal["subscription"]
 
 
 class Meta(BaseModel):

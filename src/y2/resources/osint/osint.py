@@ -102,6 +102,8 @@ class OsintResource(SyncAPIResource):
             "other",
         ]
         | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         region: Literal["mena", "africa", "latam", "asiapac", "europe", "namerica"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -122,6 +124,11 @@ class OsintResource(SyncAPIResource):
 
         Args:
           category: Filter by event category
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
 
           limit: Maximum number of items to return
 
@@ -145,6 +152,8 @@ class OsintResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "category": category,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },
@@ -157,6 +166,8 @@ class OsintResource(SyncAPIResource):
     def get_gps_jamming_zones(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         severity: Literal["low", "moderate", "severe", "critical"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -187,6 +198,12 @@ class OsintResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of zones to return
 
           severity: Filter by interference severity
@@ -208,6 +225,8 @@ class OsintResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "severity": severity,
                     },
@@ -220,6 +239,8 @@ class OsintResource(SyncAPIResource):
     def get_military_posture(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -243,6 +264,12 @@ class OsintResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of items to return
 
           extra_headers: Send extra headers
@@ -261,7 +288,12 @@ class OsintResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"limit": limit}, osint_get_military_posture_params.OsintGetMilitaryPostureParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    osint_get_military_posture_params.OsintGetMilitaryPostureParams,
                 ),
             ),
             cast_to=OsintGetMilitaryPostureResponse,
@@ -270,6 +302,8 @@ class OsintResource(SyncAPIResource):
     def list_aircraft(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         theater: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -293,6 +327,12 @@ class OsintResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of aircraft to return
 
           theater: Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")
@@ -314,6 +354,8 @@ class OsintResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "theater": theater,
                     },
@@ -340,6 +382,8 @@ class OsintResource(SyncAPIResource):
             "other",
         ]
         | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         severity: Literal["low", "medium", "high", "critical"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -360,6 +404,12 @@ class OsintResource(SyncAPIResource):
 
         Args:
           category: Filter by event category
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
 
           limit: Maximum number of events to return
 
@@ -383,6 +433,8 @@ class OsintResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "category": category,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "severity": severity,
                     },
@@ -395,6 +447,8 @@ class OsintResource(SyncAPIResource):
     def list_vessels(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         region: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -413,6 +467,12 @@ class OsintResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of vessels to return
 
           region: Filter by region name
@@ -434,6 +494,8 @@ class OsintResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },
@@ -446,6 +508,8 @@ class OsintResource(SyncAPIResource):
     def map_events(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         region: Literal["mena", "africa", "latam", "asiapac", "europe", "namerica"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -466,6 +530,12 @@ class OsintResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of events to return
 
           region: Filter by geographic region
@@ -487,6 +557,8 @@ class OsintResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },
@@ -546,6 +618,8 @@ class AsyncOsintResource(AsyncAPIResource):
             "other",
         ]
         | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         region: Literal["mena", "africa", "latam", "asiapac", "europe", "namerica"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -566,6 +640,11 @@ class AsyncOsintResource(AsyncAPIResource):
 
         Args:
           category: Filter by event category
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
 
           limit: Maximum number of items to return
 
@@ -589,6 +668,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "category": category,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },
@@ -601,6 +682,8 @@ class AsyncOsintResource(AsyncAPIResource):
     async def get_gps_jamming_zones(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         severity: Literal["low", "moderate", "severe", "critical"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -631,6 +714,12 @@ class AsyncOsintResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of zones to return
 
           severity: Filter by interference severity
@@ -652,6 +741,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "severity": severity,
                     },
@@ -664,6 +755,8 @@ class AsyncOsintResource(AsyncAPIResource):
     async def get_military_posture(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -687,6 +780,12 @@ class AsyncOsintResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of items to return
 
           extra_headers: Send extra headers
@@ -705,7 +804,12 @@ class AsyncOsintResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit}, osint_get_military_posture_params.OsintGetMilitaryPostureParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    osint_get_military_posture_params.OsintGetMilitaryPostureParams,
                 ),
             ),
             cast_to=OsintGetMilitaryPostureResponse,
@@ -714,6 +818,8 @@ class AsyncOsintResource(AsyncAPIResource):
     async def list_aircraft(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         theater: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -737,6 +843,12 @@ class AsyncOsintResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of aircraft to return
 
           theater: Filter by theater ID (e.g. "iran", "taiwan", "blacksea", "scs")
@@ -758,6 +870,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "theater": theater,
                     },
@@ -784,6 +898,8 @@ class AsyncOsintResource(AsyncAPIResource):
             "other",
         ]
         | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         severity: Literal["low", "medium", "high", "critical"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -804,6 +920,12 @@ class AsyncOsintResource(AsyncAPIResource):
 
         Args:
           category: Filter by event category
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
 
           limit: Maximum number of events to return
 
@@ -827,6 +949,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "category": category,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "severity": severity,
                     },
@@ -839,6 +963,8 @@ class AsyncOsintResource(AsyncAPIResource):
     async def list_vessels(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         region: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -857,6 +983,12 @@ class AsyncOsintResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of vessels to return
 
           region: Filter by region name
@@ -878,6 +1010,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },
@@ -890,6 +1024,8 @@ class AsyncOsintResource(AsyncAPIResource):
     async def map_events(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         region: Literal["mena", "africa", "latam", "asiapac", "europe", "namerica"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -910,6 +1046,12 @@ class AsyncOsintResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of events to return
 
           region: Filter by geographic region
@@ -931,6 +1073,8 @@ class AsyncOsintResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "region": region,
                     },

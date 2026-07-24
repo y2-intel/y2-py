@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import TimeframeEnum, news_list_params, news_get_recaps_params
@@ -49,6 +51,8 @@ class NewsResource(SyncAPIResource):
     def list(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         topics: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -67,12 +71,16 @@ class NewsResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Use `ndjson` for row-oriented streaming output.
+
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
-              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Use `GET /news/feeds` to discover
+              the current topic catalog. Default: crypto, geopolitics, macro, equities, ai,
+              energy
 
           extra_headers: Send extra headers
 
@@ -91,6 +99,8 @@ class NewsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "topics": topics,
                     },
@@ -123,9 +133,8 @@ class NewsResource(SyncAPIResource):
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
-              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
+          topics: Comma-separated list of topics. Use `GET /news/feeds` to discover the current
+              topic catalog.
 
           extra_headers: Send extra headers
 
@@ -206,6 +215,8 @@ class AsyncNewsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         topics: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -224,12 +235,16 @@ class AsyncNewsResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Use `ndjson` for row-oriented streaming output.
+
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
-              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Use `GET /news/feeds` to discover
+              the current topic catalog. Default: crypto, geopolitics, macro, equities, ai,
+              energy
 
           extra_headers: Send extra headers
 
@@ -248,6 +263,8 @@ class AsyncNewsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "topics": topics,
                     },
@@ -280,9 +297,8 @@ class AsyncNewsResource(AsyncAPIResource):
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
-              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
+          topics: Comma-separated list of topics. Use `GET /news/feeds` to discover the current
+              topic catalog.
 
           extra_headers: Send extra headers
 

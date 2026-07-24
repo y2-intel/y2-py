@@ -15,7 +15,6 @@ class NewsGetRecapsParams(TypedDict, total=False):
 
     topics: str
     """
-    Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
-    crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-    on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
+    Comma-separated list of topics. Use `GET /news/feeds` to discover the current
+    topic catalog.
     """

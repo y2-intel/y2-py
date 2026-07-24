@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
-from ..types import report_list_params, report_retrieve_audio_params
+from ..types import report_list_params, report_retrieve_params, report_retrieve_audio_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -49,6 +51,9 @@ class ReportsResource(SyncAPIResource):
         self,
         report_id: str,
         *,
+        format: Literal["markdown"] | Omit = omit,
+        include: str | Omit = omit,
+        view: Literal["agent"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,8 +61,10 @@ class ReportsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportRetrieveResponse:
-        """
-        Returns a report's full HTML content, sources, and audio metadata.
+        """Returns a compact report by default.
+
+        Use bounded `include` values or
+        `view=agent`; request `text/markdown` for the canonical Markdown representation.
 
         Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
         authentication. Without a Bearer API key, start the x402 flow from the
@@ -65,6 +72,12 @@ class ReportsResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          format: Explicit representation override.
+
+          include: Comma-separated `content,sources,signals,graph,audio` expansions.
+
+          view: Compact projection optimized for grounded agent context.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -78,7 +91,18 @@ class ReportsResource(SyncAPIResource):
         return self._get(
             path_template("/reports/{report_id}", report_id=report_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "format": format,
+                        "include": include,
+                        "view": view,
+                    },
+                    report_retrieve_params.ReportRetrieveParams,
+                ),
             ),
             cast_to=ReportRetrieveResponse,
         )
@@ -86,6 +110,8 @@ class ReportsResource(SyncAPIResource):
     def list(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         profile_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -105,9 +131,14 @@ class ReportsResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
-          limit: Maximum number of reports to return (hard-capped at 5)
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
 
-          profile_id: Filter reports by profile ID
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
+          limit: Maximum number of report rows to scan for this page.
+
+          profile_id: Filter by stable public profile ID (`prf_...`).
 
           extra_headers: Send extra headers
 
@@ -126,6 +157,8 @@ class ReportsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "profile_id": profile_id,
                     },
@@ -209,6 +242,9 @@ class AsyncReportsResource(AsyncAPIResource):
         self,
         report_id: str,
         *,
+        format: Literal["markdown"] | Omit = omit,
+        include: str | Omit = omit,
+        view: Literal["agent"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -216,8 +252,10 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportRetrieveResponse:
-        """
-        Returns a report's full HTML content, sources, and audio metadata.
+        """Returns a compact report by default.
+
+        Use bounded `include` values or
+        `view=agent`; request `text/markdown` for the canonical Markdown representation.
 
         Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
         authentication. Without a Bearer API key, start the x402 flow from the
@@ -225,6 +263,12 @@ class AsyncReportsResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          format: Explicit representation override.
+
+          include: Comma-separated `content,sources,signals,graph,audio` expansions.
+
+          view: Compact projection optimized for grounded agent context.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -238,7 +282,18 @@ class AsyncReportsResource(AsyncAPIResource):
         return await self._get(
             path_template("/reports/{report_id}", report_id=report_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "format": format,
+                        "include": include,
+                        "view": view,
+                    },
+                    report_retrieve_params.ReportRetrieveParams,
+                ),
             ),
             cast_to=ReportRetrieveResponse,
         )
@@ -246,6 +301,8 @@ class AsyncReportsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         profile_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -265,9 +322,14 @@ class AsyncReportsResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
-          limit: Maximum number of reports to return (hard-capped at 5)
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
 
-          profile_id: Filter reports by profile ID
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
+          limit: Maximum number of report rows to scan for this page.
+
+          profile_id: Filter by stable public profile ID (`prf_...`).
 
           extra_headers: Send extra headers
 
@@ -286,6 +348,8 @@ class AsyncReportsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "profile_id": profile_id,
                     },
