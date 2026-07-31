@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -9,7 +9,33 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 from .topic_enum import TopicEnum
 
-__all__ = ["NewsListResponse", "Data", "DataLinks", "DataSentiment", "DataSource", "Links", "Meta", "MetaPage"]
+__all__ = [
+    "NewsListResponse",
+    "Data",
+    "DataGeography",
+    "DataLinks",
+    "DataSentiment",
+    "DataSource",
+    "Links",
+    "Meta",
+    "MetaPage",
+]
+
+
+class DataGeography(BaseModel):
+    """Normalized country, region, location, coordinates, and resolver provenance."""
+
+    country_code: Optional[str] = FieldInfo(alias="countryCode", default=None)
+
+    lat: Optional[float] = None
+
+    location_name: Optional[str] = FieldInfo(alias="locationName", default=None)
+
+    lon: Optional[float] = None
+
+    provenance: Optional[Dict[str, object]] = None
+
+    region: Optional[str] = None
 
 
 class DataLinks(BaseModel):
@@ -47,6 +73,9 @@ class Data(BaseModel):
     author: Optional[str] = None
 
     content: str
+
+    geography: Optional[DataGeography] = None
+    """Normalized country, region, location, coordinates, and resolver provenance."""
 
     links: DataLinks
 
@@ -97,6 +126,8 @@ class Meta(BaseModel):
     page_count: int = FieldInfo(alias="pageCount")
 
     topics: List[TopicEnum]
+
+    country_code: Optional[str] = FieldInfo(alias="countryCode", default=None)
 
 
 class NewsListResponse(BaseModel):

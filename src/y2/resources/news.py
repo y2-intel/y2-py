@@ -51,6 +51,7 @@ class NewsResource(SyncAPIResource):
     def list(
         self,
         *,
+        country_code: str | Omit = omit,
         cursor: str | Omit = omit,
         format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
@@ -71,6 +72,9 @@ class NewsResource(SyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          country_code: Filter by canonical ISO 3166-1 alpha-2 country code. When supplied without
+              `topics`, the query searches every News Terminal topic.
+
           cursor: Opaque continuation token from the previous response. Bound to the original
               filters and ordering.
 
@@ -99,6 +103,7 @@ class NewsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "country_code": country_code,
                         "cursor": cursor,
                         "format": format,
                         "limit": limit,
@@ -215,6 +220,7 @@ class AsyncNewsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        country_code: str | Omit = omit,
         cursor: str | Omit = omit,
         format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
@@ -235,6 +241,9 @@ class AsyncNewsResource(AsyncAPIResource):
         `PAYMENT-SIGNATURE`.
 
         Args:
+          country_code: Filter by canonical ISO 3166-1 alpha-2 country code. When supplied without
+              `topics`, the query searches every News Terminal topic.
+
           cursor: Opaque continuation token from the previous response. Bound to the original
               filters and ordering.
 
@@ -263,6 +272,7 @@ class AsyncNewsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "country_code": country_code,
                         "cursor": cursor,
                         "format": format,
                         "limit": limit,
