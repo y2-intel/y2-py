@@ -30,11 +30,29 @@ class DataCoordinates(BaseModel):
 
 
 class DataProvenanceEntity(BaseModel):
+    kind: Literal[
+        "person",
+        "organization",
+        "country",
+        "region",
+        "vessel",
+        "aircraft",
+        "facility",
+        "asset",
+        "indicator",
+        "cve",
+        "malware_family",
+        "threat_actor",
+        "vendor",
+        "software",
+        "ai_model",
+        "api_service",
+        "protocol",
+    ]
+    """Entity type"""
+
     name: str
     """Entity name"""
-
-    type: Literal["person", "organization", "country", "location"]
-    """Entity type"""
 
 
 class DataProvenance(BaseModel):
