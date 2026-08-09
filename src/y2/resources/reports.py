@@ -136,7 +136,7 @@ class ReportsResource(SyncAPIResource):
 
           format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
 
-          limit: Maximum number of report rows to scan for this page.
+          limit: Maximum number of reports to return for this page.
 
           profile_id: Filter by stable public profile ID (`prf_...`).
 
@@ -327,7 +327,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
 
-          limit: Maximum number of report rows to scan for this page.
+          limit: Maximum number of reports to return for this page.
 
           profile_id: Filter by stable public profile ID (`prf_...`).
 

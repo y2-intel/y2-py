@@ -20,7 +20,7 @@ class ReportListParams(TypedDict, total=False):
     """`json` uses the resource envelope; `ndjson` streams one canonical row per line."""
 
     limit: int
-    """Maximum number of report rows to scan for this page."""
+    """Maximum number of reports to return for this page."""
 
     profile_id: Annotated[str, PropertyInfo(alias="profileId")]
     """Filter by stable public profile ID (`prf_...`)."""
