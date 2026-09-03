@@ -11,7 +11,6 @@ from y2 import Y2, AsyncY2
 from y2.types import (
     ProfileListResponse,
     ProfileCreateResponse,
-    ProfileDeleteResponse,
     ProfileUpdateResponse,
     ProfilePartialUpdateResponse,
 )
@@ -69,7 +68,7 @@ class TestProfiles:
             },
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="1",
@@ -84,6 +83,7 @@ class TestProfiles:
             },
             tags=["string"],
             tool_config={},
+            idempotency_key="Idempotency-Key",
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
@@ -123,7 +123,11 @@ class TestProfiles:
     @parametrize
     def test_method_update(self, client: Y2) -> None:
         profile = client.profiles.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
@@ -131,7 +135,11 @@ class TestProfiles:
     @parametrize
     def test_method_update_with_all_params(self, client: Y2) -> None:
         profile = client.profiles.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
             audio_config={
                 "enabled": True,
                 "speed": 0,
@@ -144,7 +152,6 @@ class TestProfiles:
                 "max_cost_per_report": 0,
             },
             custom_prompt="customPrompt",
-            frequency="daily",
             freshness_config={
                 "enabled": True,
                 "max_age_ms": 0,
@@ -158,15 +165,13 @@ class TestProfiles:
                 "model_id": "modelId",
                 "temperature": 0,
             },
-            name="name",
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="scheduleDayOfMonth",
             schedule_day_of_week="scheduleDayOfWeek",
-            schedule_time_of_day="73:16",
             search_config={
                 "exclude_domains": ["string"],
                 "include_domains": ["string"],
@@ -177,7 +182,8 @@ class TestProfiles:
             },
             status="active",
             tags=["string"],
-            topic="topic",
+            tool_config={},
+            if_match="If-Match",
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
@@ -185,7 +191,11 @@ class TestProfiles:
     @parametrize
     def test_raw_response_update(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         )
 
         assert response.is_closed is True
@@ -197,7 +207,11 @@ class TestProfiles:
     @parametrize
     def test_streaming_response_update(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -213,6 +227,10 @@ class TestProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
             client.profiles.with_raw_response.update(
                 profile_id="",
+                frequency="daily",
+                name="name",
+                schedule_time_of_day="73:16",
+                topic="topic",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -247,33 +265,42 @@ class TestProfiles:
     @parametrize
     def test_method_delete(self, client: Y2) -> None:
         profile = client.profiles.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert profile is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_delete_with_all_params(self, client: Y2) -> None:
+        profile = client.profiles.delete(
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            if_match="If-Match",
+        )
+        assert profile is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = response.parse()
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert profile is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = response.parse()
-            assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+            assert profile is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -282,14 +309,14 @@ class TestProfiles:
     def test_path_params_delete(self, client: Y2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
             client.profiles.with_raw_response.delete(
-                "",
+                profile_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_partial_update(self, client: Y2) -> None:
         profile = client.profiles.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
@@ -297,7 +324,7 @@ class TestProfiles:
     @parametrize
     def test_method_partial_update_with_all_params(self, client: Y2) -> None:
         profile = client.profiles.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
             audio_config={
                 "enabled": True,
                 "speed": 0,
@@ -327,7 +354,7 @@ class TestProfiles:
             name="name",
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="scheduleDayOfMonth",
@@ -344,6 +371,7 @@ class TestProfiles:
             status="active",
             tags=["string"],
             topic="topic",
+            if_match="If-Match",
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
@@ -351,7 +379,7 @@ class TestProfiles:
     @parametrize
     def test_raw_response_partial_update(self, client: Y2) -> None:
         response = client.profiles.with_raw_response.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
@@ -363,7 +391,7 @@ class TestProfiles:
     @parametrize
     def test_streaming_response_partial_update(self, client: Y2) -> None:
         with client.profiles.with_streaming_response.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -433,7 +461,7 @@ class TestAsyncProfiles:
             },
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="1",
@@ -448,6 +476,7 @@ class TestAsyncProfiles:
             },
             tags=["string"],
             tool_config={},
+            idempotency_key="Idempotency-Key",
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
@@ -487,7 +516,11 @@ class TestAsyncProfiles:
     @parametrize
     async def test_method_update(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
@@ -495,7 +528,11 @@ class TestAsyncProfiles:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
             audio_config={
                 "enabled": True,
                 "speed": 0,
@@ -508,7 +545,6 @@ class TestAsyncProfiles:
                 "max_cost_per_report": 0,
             },
             custom_prompt="customPrompt",
-            frequency="daily",
             freshness_config={
                 "enabled": True,
                 "max_age_ms": 0,
@@ -522,15 +558,13 @@ class TestAsyncProfiles:
                 "model_id": "modelId",
                 "temperature": 0,
             },
-            name="name",
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="scheduleDayOfMonth",
             schedule_day_of_week="scheduleDayOfWeek",
-            schedule_time_of_day="73:16",
             search_config={
                 "exclude_domains": ["string"],
                 "include_domains": ["string"],
@@ -541,7 +575,8 @@ class TestAsyncProfiles:
             },
             status="active",
             tags=["string"],
-            topic="topic",
+            tool_config={},
+            if_match="If-Match",
         )
         assert_matches_type(ProfileUpdateResponse, profile, path=["response"])
 
@@ -549,7 +584,11 @@ class TestAsyncProfiles:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         )
 
         assert response.is_closed is True
@@ -561,7 +600,11 @@ class TestAsyncProfiles:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            frequency="daily",
+            name="name",
+            schedule_time_of_day="73:16",
+            topic="topic",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -577,6 +620,10 @@ class TestAsyncProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
             await async_client.profiles.with_raw_response.update(
                 profile_id="",
+                frequency="daily",
+                name="name",
+                schedule_time_of_day="73:16",
+                topic="topic",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -611,33 +658,42 @@ class TestAsyncProfiles:
     @parametrize
     async def test_method_delete(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert profile is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncY2) -> None:
+        profile = await async_client.profiles.delete(
+            profile_id="prf_210b9798eb53baa4e69d31c1",
+            if_match="If-Match",
+        )
+        assert profile is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         profile = await response.parse()
-        assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+        assert profile is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.delete(
-            "k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             profile = await response.parse()
-            assert_matches_type(ProfileDeleteResponse, profile, path=["response"])
+            assert profile is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -646,14 +702,14 @@ class TestAsyncProfiles:
     async def test_path_params_delete(self, async_client: AsyncY2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `profile_id` but received ''"):
             await async_client.profiles.with_raw_response.delete(
-                "",
+                profile_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_partial_update(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
@@ -661,7 +717,7 @@ class TestAsyncProfiles:
     @parametrize
     async def test_method_partial_update_with_all_params(self, async_client: AsyncY2) -> None:
         profile = await async_client.profiles.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
             audio_config={
                 "enabled": True,
                 "speed": 0,
@@ -691,7 +747,7 @@ class TestAsyncProfiles:
             name="name",
             recursion_config={
                 "enabled": True,
-                "max_depth": 1,
+                "max_depth": 0,
                 "strategy": "breadth-first",
             },
             schedule_day_of_month="scheduleDayOfMonth",
@@ -708,6 +764,7 @@ class TestAsyncProfiles:
             status="active",
             tags=["string"],
             topic="topic",
+            if_match="If-Match",
         )
         assert_matches_type(ProfilePartialUpdateResponse, profile, path=["response"])
 
@@ -715,7 +772,7 @@ class TestAsyncProfiles:
     @parametrize
     async def test_raw_response_partial_update(self, async_client: AsyncY2) -> None:
         response = await async_client.profiles.with_raw_response.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
@@ -727,7 +784,7 @@ class TestAsyncProfiles:
     @parametrize
     async def test_streaming_response_partial_update(self, async_client: AsyncY2) -> None:
         async with async_client.profiles.with_streaming_response.partial_update(
-            profile_id="k57abc123def456",
+            profile_id="prf_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

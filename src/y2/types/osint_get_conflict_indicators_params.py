@@ -23,6 +23,15 @@ class OsintGetConflictIndicatorsParams(TypedDict, total=False):
     ]
     """Filter by event category"""
 
+    cursor: str
+    """Opaque continuation token from the previous response.
+
+    Bound to the original filters and ordering.
+    """
+
+    format: Literal["json", "ndjson"]
+    """`json` uses the resource envelope; `ndjson` streams one canonical row per line."""
+
     limit: int
     """Maximum number of items to return"""
 

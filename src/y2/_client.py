@@ -112,28 +112,28 @@ class Y2(SyncAPIClient):
 
     @cached_property
     def reports(self) -> ReportsResource:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import ReportsResource
 
         return ReportsResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import ProfilesResource
 
         return ProfilesResource(self)
 
     @cached_property
     def news(self) -> NewsResource:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import NewsResource
 
         return NewsResource(self)
 
     @cached_property
     def webhooks(self) -> WebhooksResource:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
@@ -147,7 +147,7 @@ class Y2(SyncAPIClient):
 
     @cached_property
     def osint(self) -> OsintResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import OsintResource
 
         return OsintResource(self)
@@ -331,28 +331,28 @@ class AsyncY2(AsyncAPIClient):
 
     @cached_property
     def reports(self) -> AsyncReportsResource:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import AsyncReportsResource
 
         return AsyncReportsResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import AsyncProfilesResource
 
         return AsyncProfilesResource(self)
 
     @cached_property
     def news(self) -> AsyncNewsResource:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import AsyncNewsResource
 
         return AsyncNewsResource(self)
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import AsyncWebhooksResource
 
         return AsyncWebhooksResource(self)
@@ -366,7 +366,7 @@ class AsyncY2(AsyncAPIClient):
 
     @cached_property
     def osint(self) -> AsyncOsintResource:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import AsyncOsintResource
 
         return AsyncOsintResource(self)
@@ -492,28 +492,28 @@ class Y2WithRawResponse:
 
     @cached_property
     def reports(self) -> reports.ReportsResourceWithRawResponse:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import ReportsResourceWithRawResponse
 
         return ReportsResourceWithRawResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import ProfilesResourceWithRawResponse
 
         return ProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.NewsResourceWithRawResponse:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import NewsResourceWithRawResponse
 
         return NewsResourceWithRawResponse(self._client.news)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import WebhooksResourceWithRawResponse
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
@@ -527,7 +527,7 @@ class Y2WithRawResponse:
 
     @cached_property
     def osint(self) -> osint.OsintResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import OsintResourceWithRawResponse
 
         return OsintResourceWithRawResponse(self._client.osint)
@@ -541,28 +541,28 @@ class AsyncY2WithRawResponse:
 
     @cached_property
     def reports(self) -> reports.AsyncReportsResourceWithRawResponse:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import AsyncReportsResourceWithRawResponse
 
         return AsyncReportsResourceWithRawResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
         return AsyncProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithRawResponse:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import AsyncNewsResourceWithRawResponse
 
         return AsyncNewsResourceWithRawResponse(self._client.news)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
@@ -576,7 +576,7 @@ class AsyncY2WithRawResponse:
 
     @cached_property
     def osint(self) -> osint.AsyncOsintResourceWithRawResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import AsyncOsintResourceWithRawResponse
 
         return AsyncOsintResourceWithRawResponse(self._client.osint)
@@ -590,28 +590,28 @@ class Y2WithStreamedResponse:
 
     @cached_property
     def reports(self) -> reports.ReportsResourceWithStreamingResponse:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import ReportsResourceWithStreamingResponse
 
         return ReportsResourceWithStreamingResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
         return ProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.NewsResourceWithStreamingResponse:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import NewsResourceWithStreamingResponse
 
         return NewsResourceWithStreamingResponse(self._client.news)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import WebhooksResourceWithStreamingResponse
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
@@ -625,7 +625,7 @@ class Y2WithStreamedResponse:
 
     @cached_property
     def osint(self) -> osint.OsintResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import OsintResourceWithStreamingResponse
 
         return OsintResourceWithStreamingResponse(self._client.osint)
@@ -639,28 +639,28 @@ class AsyncY2WithStreamedResponse:
 
     @cached_property
     def reports(self) -> reports.AsyncReportsResourceWithStreamingResponse:
-        """Intelligence report operations"""
+        """Report retrieval, text, audio, signals, and ontology graphs"""
         from .resources.reports import AsyncReportsResourceWithStreamingResponse
 
         return AsyncReportsResourceWithStreamingResponse(self._client.reports)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
-        """Subscription profile operations"""
+        """Profile subscriptions, ownership, and configuration"""
         from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
 
         return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def news(self) -> news.AsyncNewsResourceWithStreamingResponse:
-        """GloriaAI news terminal operations"""
+        """News Terminal items, feeds, and AI recaps"""
         from .resources.news import AsyncNewsResourceWithStreamingResponse
 
         return AsyncNewsResourceWithStreamingResponse(self._client.news)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
-        """Webhook configuration management (Pro feature)"""
+        """Webhook configuration for paid workspaces"""
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
@@ -674,7 +674,7 @@ class AsyncY2WithStreamedResponse:
 
     @cached_property
     def osint(self) -> osint.AsyncOsintResourceWithStreamingResponse:
-        """Situation Room OSINT intelligence operations"""
+        """Situation Room events, feeds, country data, and source health"""
         from .resources.osint import AsyncOsintResourceWithStreamingResponse
 
         return AsyncOsintResourceWithStreamingResponse(self._client.osint)

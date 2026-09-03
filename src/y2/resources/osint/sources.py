@@ -20,7 +20,7 @@ __all__ = ["SourcesResource", "AsyncSourcesResource"]
 
 
 class SourcesResource(SyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> SourcesResourceWithRawResponse:
@@ -52,12 +52,11 @@ class SourcesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SourceGetDataSourceHealthResponse:
         """
-        Returns the health status of all OSINT data sources, including circuit breaker
-        state and failure counts.
+        Lists OSINT source health, circuit-breaker state, and failure counts.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return self._get(
@@ -70,7 +69,7 @@ class SourcesResource(SyncAPIResource):
 
 
 class AsyncSourcesResource(AsyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> AsyncSourcesResourceWithRawResponse:
@@ -102,12 +101,11 @@ class AsyncSourcesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SourceGetDataSourceHealthResponse:
         """
-        Returns the health status of all OSINT data sources, including circuit breaker
-        state and failure counts.
+        Lists OSINT source health, circuit-breaker state, and failure counts.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return await self._get(

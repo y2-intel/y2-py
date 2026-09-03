@@ -19,19 +19,25 @@ __all__ = [
 
 
 class ProfileUpdateParams(TypedDict, total=False):
+    frequency: Required[Literal["daily", "weekly", "biweekly", "monthly"]]
+    """Report generation frequency"""
+
+    name: Required[str]
+
+    schedule_time_of_day: Required[Annotated[str, PropertyInfo(alias="scheduleTimeOfDay")]]
+
+    topic: Required[str]
+
     audio_config: Annotated[AudioConfig, PropertyInfo(alias="audioConfig")]
 
     bluf_structure: Annotated[str, PropertyInfo(alias="blufStructure")]
 
     branding_template_id: Annotated[str, PropertyInfo(alias="brandingTemplateId")]
-    """Branding template ID (Pro feature)"""
+    """Branding template ID (paid workspace feature)"""
 
     budget_config: Annotated[BudgetConfig, PropertyInfo(alias="budgetConfig")]
 
     custom_prompt: Annotated[str, PropertyInfo(alias="customPrompt")]
-
-    frequency: Literal["daily", "weekly", "biweekly", "monthly"]
-    """Report generation frequency"""
 
     freshness_config: Annotated[FreshnessConfig, PropertyInfo(alias="freshnessConfig")]
 
@@ -39,15 +45,11 @@ class ProfileUpdateParams(TypedDict, total=False):
 
     model_config: Annotated[ModelConfig, PropertyInfo(alias="modelConfig")]
 
-    name: str
-
     recursion_config: Annotated[RecursionConfig, PropertyInfo(alias="recursionConfig")]
 
     schedule_day_of_month: Annotated[str, PropertyInfo(alias="scheduleDayOfMonth")]
 
     schedule_day_of_week: Annotated[str, PropertyInfo(alias="scheduleDayOfWeek")]
-
-    schedule_time_of_day: Annotated[str, PropertyInfo(alias="scheduleTimeOfDay")]
 
     search_config: Annotated[SearchConfig, PropertyInfo(alias="searchConfig")]
 
@@ -56,7 +58,10 @@ class ProfileUpdateParams(TypedDict, total=False):
 
     tags: SequenceNotStr[str]
 
-    topic: str
+    tool_config: Annotated[object, PropertyInfo(alias="toolConfig")]
+    """Tool configuration for report generation"""
+
+    if_match: Annotated[str, PropertyInfo(alias="If-Match")]
 
 
 class AudioConfig(TypedDict, total=False):
@@ -95,10 +100,21 @@ class ModelConfig(TypedDict, total=False):
 
 class RecursionConfig(TypedDict, total=False):
     enabled: Required[bool]
+    """When false, runs root-topic research without child subtopics."""
 
     max_depth: Required[Annotated[int, PropertyInfo(alias="maxDepth")]]
+    """Requested child-layer depth.
+
+    The current runtime defaults an enabled value of `0` to `1` and caps values
+    above `1` at one child layer. This field is ignored when `enabled` is false.
+    """
 
     strategy: Required[Literal["breadth-first", "depth-first", "hybrid"]]
+    """Stored strategy preference.
+
+    The current report engine executes its implemented breadth-first child-search
+    path for every value.
+    """
 
 
 class SearchConfig(TypedDict, total=False):
