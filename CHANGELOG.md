@@ -1,8 +1,17 @@
 # Changelog
 
-## 0.8.0 (2026-09-03)
+## 0.8.0 (2026-10-22)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/y2-intel/y2-py/compare/v0.7.0...v0.8.0)
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Python 3.9 is no longer supported; the minimum is now Python 3.10. The aiohttp releases that fix the advisories below require Python >= 3.10.
+
+### Security
+
+* **deps:** bump certifi to 2026.10.19 (GHSA-6q48-6c7w-9gw2) ([e5e8b99](https://github.com/y2-intel/y2-py/commit/e5e8b99))
+* **deps:** require aiohttp>=3.14.4 for the `aiohttp` extra (GHSA-2g87-pp6c-29x5, GHSA-5wr8-gcqf-gqf3, GHSA-9xw5-w5jj-pvcg, GHSA-cq5v-8q36-5273 and related DoS advisories) ([e5e8b99](https://github.com/y2-intel/y2-py/commit/e5e8b99))
 
 ### Features
 
@@ -20,6 +29,7 @@ Full Changelog: [v0.7.0...v0.8.0](https://github.com/y2-intel/y2-py/compare/v0.7
 
 ### Bug Fixes
 
+* **ci:** pin Python 3.10.19 so CI's uv can install it ([f24a2f3](https://github.com/y2-intel/y2-py/commit/f24a2f3))
 * **internal:** resolve build failures ([b34b0ef](https://github.com/y2-intel/y2-py/commit/b34b0ef83f0a0cbcdae9a6d1753c56c71843bade))
 
 ## 0.7.0 (2026-05-15)
