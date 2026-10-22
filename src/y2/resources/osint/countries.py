@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -26,7 +28,7 @@ __all__ = ["CountriesResource", "AsyncCountriesResource"]
 
 
 class CountriesResource(SyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> CountriesResourceWithRawResponse:
@@ -59,12 +61,12 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryInstabilityIndexResponse:
         """
-        Returns the per-country Conflict Indicators Index (CII) score, including
-        baseline, delta, and component breakdown.
+        Returns a country's Conflict Indicators Index (CII) score, baseline, delta, and
+        components.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -90,6 +92,8 @@ class CountriesResource(SyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -99,15 +103,20 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryNewsResponse:
         """
-        Returns recent news items specific to a given country, sourced from the OSINT
-        event pipeline.
+        Returns recent country news from the OSINT event pipeline.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of news items to return
 
           extra_headers: Send extra headers
@@ -127,7 +136,14 @@ class CountriesResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"limit": limit}, country_get_country_news_params.CountryGetCountryNewsParams),
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_country_news_params.CountryGetCountryNewsParams,
+                ),
             ),
             cast_to=CountryGetCountryNewsResponse,
         )
@@ -143,14 +159,12 @@ class CountriesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetIntelligenceBriefResponse:
-        """Returns an AI-generated intelligence brief for a specific country.
+        """
+        Returns a periodically generated, cached intelligence brief for a country.
 
-        Briefs are
-        generated periodically and cached.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -176,6 +190,8 @@ class CountriesResource(SyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -185,15 +201,19 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetPredictionMarketsResponse:
         """
-        Returns prediction market data for a specific country, including probabilities
-        and trading volumes.
+        Returns prediction-market probabilities and trading volumes for a country.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
           limit: Maximum number of predictions to return
 
           extra_headers: Send extra headers
@@ -214,7 +234,12 @@ class CountriesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"limit": limit}, country_get_prediction_markets_params.CountryGetPredictionMarketsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_prediction_markets_params.CountryGetPredictionMarketsParams,
                 ),
             ),
             cast_to=CountryGetPredictionMarketsResponse,
@@ -232,12 +257,11 @@ class CountriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetStockMarketIndexResponse:
         """
-        Returns the primary stock market index data for a specific country, including
-        weekly change and currency.
+        Returns a country's primary stock index, weekly change, and currency.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -261,7 +285,7 @@ class CountriesResource(SyncAPIResource):
 
 
 class AsyncCountriesResource(AsyncAPIResource):
-    """Situation Room OSINT intelligence operations"""
+    """Situation Room events, feeds, country data, and source health"""
 
     @cached_property
     def with_raw_response(self) -> AsyncCountriesResourceWithRawResponse:
@@ -294,12 +318,12 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryInstabilityIndexResponse:
         """
-        Returns the per-country Conflict Indicators Index (CII) score, including
-        baseline, delta, and component breakdown.
+        Returns a country's Conflict Indicators Index (CII) score, baseline, delta, and
+        components.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -325,6 +349,8 @@ class AsyncCountriesResource(AsyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson", "geojson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -334,15 +360,20 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetCountryNewsResponse:
         """
-        Returns recent news items specific to a given country, sourced from the OSINT
-        event pipeline.
+        Returns recent country news from the OSINT event pipeline.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+              FeatureCollection.
+
           limit: Maximum number of news items to return
 
           extra_headers: Send extra headers
@@ -363,7 +394,12 @@ class AsyncCountriesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit}, country_get_country_news_params.CountryGetCountryNewsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_country_news_params.CountryGetCountryNewsParams,
                 ),
             ),
             cast_to=CountryGetCountryNewsResponse,
@@ -380,14 +416,12 @@ class AsyncCountriesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetIntelligenceBriefResponse:
-        """Returns an AI-generated intelligence brief for a specific country.
+        """
+        Returns a periodically generated, cached intelligence brief for a country.
 
-        Briefs are
-        generated periodically and cached.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
@@ -413,6 +447,8 @@ class AsyncCountriesResource(AsyncAPIResource):
         self,
         country_code: str,
         *,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -422,15 +458,19 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetPredictionMarketsResponse:
         """
-        Returns prediction market data for a specific country, including probabilities
-        and trading volumes.
+        Returns prediction-market probabilities and trading volumes for a country.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: `json` uses the resource envelope; `ndjson` streams one canonical row per line.
+
           limit: Maximum number of predictions to return
 
           extra_headers: Send extra headers
@@ -451,7 +491,12 @@ class AsyncCountriesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit}, country_get_prediction_markets_params.CountryGetPredictionMarketsParams
+                    {
+                        "cursor": cursor,
+                        "format": format,
+                        "limit": limit,
+                    },
+                    country_get_prediction_markets_params.CountryGetPredictionMarketsParams,
                 ),
             ),
             cast_to=CountryGetPredictionMarketsResponse,
@@ -469,12 +514,11 @@ class AsyncCountriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CountryGetStockMarketIndexResponse:
         """
-        Returns the primary stock market index data for a specific country, including
-        weekly change and currency.
+        Returns a country's primary stock index, weekly change, and currency.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:

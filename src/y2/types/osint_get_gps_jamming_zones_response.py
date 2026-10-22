@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -49,6 +50,14 @@ class MetaFilters(BaseModel):
 
 
 class Meta(BaseModel):
+    empty_reason: Optional[
+        Literal["no_matching_activity", "source_degraded", "source_stale", "source_unavailable", "source_unknown"]
+    ] = FieldInfo(alias="emptyReason", default=None)
+
+    last_successful_ingest_at: Optional[datetime] = FieldInfo(alias="lastSuccessfulIngestAt", default=None)
+
+    source_status: Literal["healthy", "degraded", "stale", "unavailable", "unknown"] = FieldInfo(alias="sourceStatus")
+
     count: Optional[int] = None
 
     filters: Optional[MetaFilters] = None

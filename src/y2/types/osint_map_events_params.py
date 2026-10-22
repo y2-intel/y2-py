@@ -8,6 +8,18 @@ __all__ = ["OsintMapEventsParams"]
 
 
 class OsintMapEventsParams(TypedDict, total=False):
+    cursor: str
+    """Opaque continuation token from the previous response.
+
+    Bound to the original filters and ordering.
+    """
+
+    format: Literal["json", "ndjson", "geojson"]
+    """
+    Select the JSON resource envelope, row-oriented NDJSON, or an RFC 7946
+    FeatureCollection.
+    """
+
     limit: int
     """Maximum number of events to return"""
 

@@ -78,6 +78,8 @@ class TestCountries:
     def test_method_get_country_news_with_all_params(self, client: Y2) -> None:
         country = client.osint.countries.get_country_news(
             country_code="US",
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(CountryGetCountryNewsResponse, country, path=["response"])
@@ -171,6 +173,8 @@ class TestCountries:
     def test_method_get_prediction_markets_with_all_params(self, client: Y2) -> None:
         country = client.osint.countries.get_prediction_markets(
             country_code="US",
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(CountryGetPredictionMarketsResponse, country, path=["response"])
@@ -312,6 +316,8 @@ class TestAsyncCountries:
     async def test_method_get_country_news_with_all_params(self, async_client: AsyncY2) -> None:
         country = await async_client.osint.countries.get_country_news(
             country_code="US",
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(CountryGetCountryNewsResponse, country, path=["response"])
@@ -405,6 +411,8 @@ class TestAsyncCountries:
     async def test_method_get_prediction_markets_with_all_params(self, async_client: AsyncY2) -> None:
         country = await async_client.osint.countries.get_prediction_markets(
             country_code="US",
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(CountryGetPredictionMarketsResponse, country, path=["response"])

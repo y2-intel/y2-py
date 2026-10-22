@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.8.0 (2026-09-03)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/y2-intel/y2-py/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([a837354](https://github.com/y2-intel/y2-py/commit/a837354e25cd27132e222d4eb8c524b2eb756f5d))
+* **api:** api update ([a6824e1](https://github.com/y2-intel/y2-py/commit/a6824e1b7e02340573399f2ab12e2d3802e656f4))
+* **api:** api update ([26251b5](https://github.com/y2-intel/y2-py/commit/26251b504e7539b7a743f814ddc780cd91d215e5))
+* **api:** api update ([ceaad5e](https://github.com/y2-intel/y2-py/commit/ceaad5e67a1c1aacfc842a9a99014f30eb60121f))
+* **api:** api update ([757b238](https://github.com/y2-intel/y2-py/commit/757b2386b2c5ab826069b98cefe0bf354e259717))
+* **api:** api update ([1e0dae1](https://github.com/y2-intel/y2-py/commit/1e0dae193cd5990be67e9150c40ac8460b52b3fe))
+* **api:** api update ([3d4cf38](https://github.com/y2-intel/y2-py/commit/3d4cf3834c9bba4ecab1516ada518ee1135b1b48))
+* **api:** api update ([5089303](https://github.com/y2-intel/y2-py/commit/5089303f0f3a5704894b3f34f0ad7b9640424bbf))
+* **api:** api update ([cb0d963](https://github.com/y2-intel/y2-py/commit/cb0d963d1f9bf4e3edcd59790cc394f95bb25f8e))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([003d368](https://github.com/y2-intel/y2-py/commit/003d368bf5fc6cb1634a52388666bdd56b2384e8))
+
+
+### Bug Fixes
+
+* **internal:** resolve build failures ([b34b0ef](https://github.com/y2-intel/y2-py/commit/b34b0ef83f0a0cbcdae9a6d1753c56c71843bade))
+
 ## 0.7.0 (2026-05-15)
 
 Full Changelog: [v0.6.1...v0.7.0](https://github.com/y2-intel/y2-py/compare/v0.6.1...v0.7.0)

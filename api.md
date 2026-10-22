@@ -13,7 +13,7 @@ from y2.types import (
 
 Methods:
 
-- <code title="get /reports/{reportId}">client.reports.<a href="./src/y2/resources/reports.py">retrieve</a>(report_id) -> <a href="./src/y2/types/report_retrieve_response.py">ReportRetrieveResponse</a></code>
+- <code title="get /reports/{reportId}">client.reports.<a href="./src/y2/resources/reports.py">retrieve</a>(report_id, \*\*<a href="src/y2/types/report_retrieve_params.py">params</a>) -> <a href="./src/y2/types/report_retrieve_response.py">ReportRetrieveResponse</a></code>
 - <code title="get /reports">client.reports.<a href="./src/y2/resources/reports.py">list</a>(\*\*<a href="src/y2/types/report_list_params.py">params</a>) -> <a href="./src/y2/types/report_list_response.py">ReportListResponse</a></code>
 - <code title="get /reports/{reportId}/audio">client.reports.<a href="./src/y2/resources/reports.py">retrieve_audio</a>(report_id, \*\*<a href="src/y2/types/report_retrieve_audio_params.py">params</a>) -> <a href="./src/y2/types/report_retrieve_audio_response.py">ReportRetrieveAudioResponse</a></code>
 
@@ -26,7 +26,6 @@ from y2.types import (
     ProfileCreateResponse,
     ProfileUpdateResponse,
     ProfileListResponse,
-    ProfileDeleteResponse,
     ProfilePartialUpdateResponse,
 )
 ```
@@ -36,7 +35,7 @@ Methods:
 - <code title="post /profiles">client.profiles.<a href="./src/y2/resources/profiles.py">create</a>(\*\*<a href="src/y2/types/profile_create_params.py">params</a>) -> <a href="./src/y2/types/profile_create_response.py">ProfileCreateResponse</a></code>
 - <code title="put /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">update</a>(profile_id, \*\*<a href="src/y2/types/profile_update_params.py">params</a>) -> <a href="./src/y2/types/profile_update_response.py">ProfileUpdateResponse</a></code>
 - <code title="get /profiles">client.profiles.<a href="./src/y2/resources/profiles.py">list</a>() -> <a href="./src/y2/types/profile_list_response.py">ProfileListResponse</a></code>
-- <code title="delete /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">delete</a>(profile_id) -> <a href="./src/y2/types/profile_delete_response.py">ProfileDeleteResponse</a></code>
+- <code title="delete /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">delete</a>(profile_id) -> None</code>
 - <code title="patch /profiles/{profileId}">client.profiles.<a href="./src/y2/resources/profiles.py">partial_update</a>(profile_id, \*\*<a href="src/y2/types/profile_partial_update_params.py">params</a>) -> <a href="./src/y2/types/profile_partial_update_response.py">ProfilePartialUpdateResponse</a></code>
 
 # News
@@ -68,7 +67,6 @@ from y2.types import (
     WebhookCreateResponse,
     WebhookUpdateResponse,
     WebhookListResponse,
-    WebhookDeleteResponse,
     WebhookTestResponse,
 )
 ```
@@ -78,7 +76,7 @@ Methods:
 - <code title="post /webhooks">client.webhooks.<a href="./src/y2/resources/webhooks.py">create</a>(\*\*<a href="src/y2/types/webhook_create_params.py">params</a>) -> <a href="./src/y2/types/webhook_create_response.py">WebhookCreateResponse</a></code>
 - <code title="put /webhooks/{webhookId}">client.webhooks.<a href="./src/y2/resources/webhooks.py">update</a>(webhook_id, \*\*<a href="src/y2/types/webhook_update_params.py">params</a>) -> <a href="./src/y2/types/webhook_update_response.py">WebhookUpdateResponse</a></code>
 - <code title="get /webhooks">client.webhooks.<a href="./src/y2/resources/webhooks.py">list</a>() -> <a href="./src/y2/types/webhook_list_response.py">WebhookListResponse</a></code>
-- <code title="delete /webhooks/{webhookId}">client.webhooks.<a href="./src/y2/resources/webhooks.py">delete</a>(webhook_id) -> <a href="./src/y2/types/webhook_delete_response.py">WebhookDeleteResponse</a></code>
+- <code title="delete /webhooks/{webhookId}">client.webhooks.<a href="./src/y2/resources/webhooks.py">delete</a>(webhook_id) -> None</code>
 - <code title="post /webhooks/{webhookId}/test">client.webhooks.<a href="./src/y2/resources/webhooks.py">test</a>(webhook_id) -> <a href="./src/y2/types/webhook_test_response.py">WebhookTestResponse</a></code>
 
 # Subscriptions

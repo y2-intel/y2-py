@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,8 +10,17 @@ __all__ = ["ReportListParams"]
 
 
 class ReportListParams(TypedDict, total=False):
+    cursor: str
+    """Opaque continuation token from the previous response.
+
+    Bound to the original filters and ordering.
+    """
+
+    format: Literal["json", "ndjson"]
+    """`json` uses the resource envelope; `ndjson` streams one canonical row per line."""
+
     limit: int
-    """Maximum number of reports to return (hard-capped at 5)"""
+    """Maximum number of reports to return for this page."""
 
     profile_id: Annotated[str, PropertyInfo(alias="profileId")]
-    """Filter reports by profile ID"""
+    """Filter by stable public profile ID (`prf_...`)."""

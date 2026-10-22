@@ -12,7 +12,6 @@ from y2.types import (
     WebhookListResponse,
     WebhookTestResponse,
     WebhookCreateResponse,
-    WebhookDeleteResponse,
     WebhookUpdateResponse,
 )
 from tests.utils import assert_matches_type
@@ -40,6 +39,7 @@ class TestWebhooks:
             url="https://example.com/webhook",
             headers={"foo": "string"},
             secret="secret",
+            idempotency_key="Idempotency-Key",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -75,7 +75,9 @@ class TestWebhooks:
     @parametrize
     def test_method_update(self, client: Y2) -> None:
         webhook = client.webhooks.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         )
         assert_matches_type(WebhookUpdateResponse, webhook, path=["response"])
 
@@ -83,12 +85,13 @@ class TestWebhooks:
     @parametrize
     def test_method_update_with_all_params(self, client: Y2) -> None:
         webhook = client.webhooks.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
             headers={"foo": "string"},
             is_active=True,
-            name="name",
             secret="secret",
-            url="https://example.com",
+            if_match="If-Match",
         )
         assert_matches_type(WebhookUpdateResponse, webhook, path=["response"])
 
@@ -96,7 +99,9 @@ class TestWebhooks:
     @parametrize
     def test_raw_response_update(self, client: Y2) -> None:
         response = client.webhooks.with_raw_response.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         )
 
         assert response.is_closed is True
@@ -108,7 +113,9 @@ class TestWebhooks:
     @parametrize
     def test_streaming_response_update(self, client: Y2) -> None:
         with client.webhooks.with_streaming_response.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -124,6 +131,8 @@ class TestWebhooks:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             client.webhooks.with_raw_response.update(
                 webhook_id="",
+                name="My Webhook",
+                url="https://example.com/webhook",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -158,33 +167,42 @@ class TestWebhooks:
     @parametrize
     def test_method_delete(self, client: Y2) -> None:
         webhook = client.webhooks.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         )
-        assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+        assert webhook is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_delete_with_all_params(self, client: Y2) -> None:
+        webhook = client.webhooks.delete(
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            if_match="If-Match",
+        )
+        assert webhook is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Y2) -> None:
         response = client.webhooks.with_raw_response.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = response.parse()
-        assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+        assert webhook is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Y2) -> None:
         with client.webhooks.with_streaming_response.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = response.parse()
-            assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+            assert webhook is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -193,14 +211,14 @@ class TestWebhooks:
     def test_path_params_delete(self, client: Y2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             client.webhooks.with_raw_response.delete(
-                "",
+                webhook_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_test(self, client: Y2) -> None:
         webhook = client.webhooks.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(WebhookTestResponse, webhook, path=["response"])
 
@@ -208,7 +226,7 @@ class TestWebhooks:
     @parametrize
     def test_raw_response_test(self, client: Y2) -> None:
         response = client.webhooks.with_raw_response.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
@@ -220,7 +238,7 @@ class TestWebhooks:
     @parametrize
     def test_streaming_response_test(self, client: Y2) -> None:
         with client.webhooks.with_streaming_response.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -261,6 +279,7 @@ class TestAsyncWebhooks:
             url="https://example.com/webhook",
             headers={"foo": "string"},
             secret="secret",
+            idempotency_key="Idempotency-Key",
         )
         assert_matches_type(WebhookCreateResponse, webhook, path=["response"])
 
@@ -296,7 +315,9 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_update(self, async_client: AsyncY2) -> None:
         webhook = await async_client.webhooks.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         )
         assert_matches_type(WebhookUpdateResponse, webhook, path=["response"])
 
@@ -304,12 +325,13 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncY2) -> None:
         webhook = await async_client.webhooks.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
             headers={"foo": "string"},
             is_active=True,
-            name="name",
             secret="secret",
-            url="https://example.com",
+            if_match="If-Match",
         )
         assert_matches_type(WebhookUpdateResponse, webhook, path=["response"])
 
@@ -317,7 +339,9 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncY2) -> None:
         response = await async_client.webhooks.with_raw_response.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         )
 
         assert response.is_closed is True
@@ -329,7 +353,9 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncY2) -> None:
         async with async_client.webhooks.with_streaming_response.update(
-            webhook_id="webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            name="My Webhook",
+            url="https://example.com/webhook",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -345,6 +371,8 @@ class TestAsyncWebhooks:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             await async_client.webhooks.with_raw_response.update(
                 webhook_id="",
+                name="My Webhook",
+                url="https://example.com/webhook",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -379,33 +407,42 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_method_delete(self, async_client: AsyncY2) -> None:
         webhook = await async_client.webhooks.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         )
-        assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+        assert webhook is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncY2) -> None:
+        webhook = await async_client.webhooks.delete(
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
+            if_match="If-Match",
+        )
+        assert webhook is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncY2) -> None:
         response = await async_client.webhooks.with_raw_response.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = await response.parse()
-        assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+        assert webhook is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncY2) -> None:
         async with async_client.webhooks.with_streaming_response.delete(
-            "webhookId",
+            webhook_id="whk_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = await response.parse()
-            assert_matches_type(WebhookDeleteResponse, webhook, path=["response"])
+            assert webhook is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -414,14 +451,14 @@ class TestAsyncWebhooks:
     async def test_path_params_delete(self, async_client: AsyncY2) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `webhook_id` but received ''"):
             await async_client.webhooks.with_raw_response.delete(
-                "",
+                webhook_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_test(self, async_client: AsyncY2) -> None:
         webhook = await async_client.webhooks.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         )
         assert_matches_type(WebhookTestResponse, webhook, path=["response"])
 
@@ -429,7 +466,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_raw_response_test(self, async_client: AsyncY2) -> None:
         response = await async_client.webhooks.with_raw_response.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         )
 
         assert response.is_closed is True
@@ -441,7 +478,7 @@ class TestAsyncWebhooks:
     @parametrize
     async def test_streaming_response_test(self, async_client: AsyncY2) -> None:
         async with async_client.webhooks.with_streaming_response.test(
-            "webhookId",
+            "whk_210b9798eb53baa4e69d31c1",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

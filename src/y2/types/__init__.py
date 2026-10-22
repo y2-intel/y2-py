@@ -17,12 +17,11 @@ from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .webhook_test_response import WebhookTestResponse as WebhookTestResponse
 from .webhook_update_params import WebhookUpdateParams as WebhookUpdateParams
 from .news_get_recaps_params import NewsGetRecapsParams as NewsGetRecapsParams
+from .report_retrieve_params import ReportRetrieveParams as ReportRetrieveParams
 from .osint_map_events_params import OsintMapEventsParams as OsintMapEventsParams
 from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
-from .profile_delete_response import ProfileDeleteResponse as ProfileDeleteResponse
 from .profile_update_response import ProfileUpdateResponse as ProfileUpdateResponse
 from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse
-from .webhook_delete_response import WebhookDeleteResponse as WebhookDeleteResponse
 from .webhook_update_response import WebhookUpdateResponse as WebhookUpdateResponse
 from .news_get_recaps_response import NewsGetRecapsResponse as NewsGetRecapsResponse
 from .news_list_feeds_response import NewsListFeedsResponse as NewsListFeedsResponse

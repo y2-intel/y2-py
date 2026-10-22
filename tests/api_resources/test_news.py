@@ -31,6 +31,9 @@ class TestNews:
     @parametrize
     def test_method_list_with_all_params(self, client: Y2) -> None:
         news = client.news.list(
+            country_code="ES",
+            cursor="cursor",
+            format="json",
             limit=1,
             topics="crypto,ai_agents,bitcoin",
         )
@@ -139,6 +142,9 @@ class TestAsyncNews:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncY2) -> None:
         news = await async_client.news.list(
+            country_code="ES",
+            cursor="cursor",
+            format="json",
             limit=1,
             topics="crypto,ai_agents,bitcoin",
         )

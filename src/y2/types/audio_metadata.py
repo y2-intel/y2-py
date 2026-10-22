@@ -17,15 +17,15 @@ class AudioMetadata(BaseModel):
     duration_formatted: Optional[str] = FieldInfo(alias="durationFormatted", default=None)
     """Duration as HH:MM:SS"""
 
-    file_size: Optional[int] = FieldInfo(alias="fileSize", default=None)
-    """File size in bytes"""
+    duration_seconds: Optional[float] = FieldInfo(alias="durationSeconds", default=None)
+    """Canonical duration in seconds."""
+
+    file_size_bytes: Optional[int] = FieldInfo(alias="fileSizeBytes", default=None)
+    """File size in bytes."""
 
     format: Optional[Literal["mp3"]] = None
 
     mime_type: Optional[Literal["audio/mpeg"]] = FieldInfo(alias="mimeType", default=None)
-
-    storage_id: Optional[str] = FieldInfo(alias="storageId", default=None)
-    """Convex storage ID for internal reference"""
 
     url: Optional[str] = None
     """CDN URL for audio file"""

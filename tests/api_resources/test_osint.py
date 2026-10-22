@@ -36,6 +36,8 @@ class TestOsint:
     def test_method_get_conflict_indicators_with_all_params(self, client: Y2) -> None:
         osint = client.osint.get_conflict_indicators(
             category="seismic",
+            cursor="cursor",
+            format="json",
             limit=1,
             region="mena",
         )
@@ -73,6 +75,8 @@ class TestOsint:
     @parametrize
     def test_method_get_gps_jamming_zones_with_all_params(self, client: Y2) -> None:
         osint = client.osint.get_gps_jamming_zones(
+            cursor="cursor",
+            format="json",
             limit=1,
             severity="low",
         )
@@ -110,6 +114,8 @@ class TestOsint:
     @parametrize
     def test_method_get_military_posture_with_all_params(self, client: Y2) -> None:
         osint = client.osint.get_military_posture(
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(OsintGetMilitaryPostureResponse, osint, path=["response"])
@@ -146,6 +152,8 @@ class TestOsint:
     @parametrize
     def test_method_list_aircraft_with_all_params(self, client: Y2) -> None:
         osint = client.osint.list_aircraft(
+            cursor="cursor",
+            format="json",
             limit=1,
             theater="theater",
         )
@@ -184,6 +192,8 @@ class TestOsint:
     def test_method_list_events_with_all_params(self, client: Y2) -> None:
         osint = client.osint.list_events(
             category="seismic",
+            cursor="cursor",
+            format="json",
             limit=1,
             severity="low",
         )
@@ -221,6 +231,8 @@ class TestOsint:
     @parametrize
     def test_method_list_vessels_with_all_params(self, client: Y2) -> None:
         osint = client.osint.list_vessels(
+            cursor="cursor",
+            format="json",
             limit=1,
             region="region",
         )
@@ -258,6 +270,8 @@ class TestOsint:
     @parametrize
     def test_method_map_events_with_all_params(self, client: Y2) -> None:
         osint = client.osint.map_events(
+            cursor="cursor",
+            format="json",
             limit=1,
             region="mena",
         )
@@ -302,6 +316,8 @@ class TestAsyncOsint:
     async def test_method_get_conflict_indicators_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.get_conflict_indicators(
             category="seismic",
+            cursor="cursor",
+            format="json",
             limit=1,
             region="mena",
         )
@@ -339,6 +355,8 @@ class TestAsyncOsint:
     @parametrize
     async def test_method_get_gps_jamming_zones_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.get_gps_jamming_zones(
+            cursor="cursor",
+            format="json",
             limit=1,
             severity="low",
         )
@@ -376,6 +394,8 @@ class TestAsyncOsint:
     @parametrize
     async def test_method_get_military_posture_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.get_military_posture(
+            cursor="cursor",
+            format="json",
             limit=1,
         )
         assert_matches_type(OsintGetMilitaryPostureResponse, osint, path=["response"])
@@ -412,6 +432,8 @@ class TestAsyncOsint:
     @parametrize
     async def test_method_list_aircraft_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.list_aircraft(
+            cursor="cursor",
+            format="json",
             limit=1,
             theater="theater",
         )
@@ -450,6 +472,8 @@ class TestAsyncOsint:
     async def test_method_list_events_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.list_events(
             category="seismic",
+            cursor="cursor",
+            format="json",
             limit=1,
             severity="low",
         )
@@ -487,6 +511,8 @@ class TestAsyncOsint:
     @parametrize
     async def test_method_list_vessels_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.list_vessels(
+            cursor="cursor",
+            format="json",
             limit=1,
             region="region",
         )
@@ -524,6 +550,8 @@ class TestAsyncOsint:
     @parametrize
     async def test_method_map_events_with_all_params(self, async_client: AsyncY2) -> None:
         osint = await async_client.osint.map_events(
+            cursor="cursor",
+            format="json",
             limit=1,
             region="mena",
         )

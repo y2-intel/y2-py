@@ -15,5 +15,8 @@ class SubscriptionUpdateDeliveryParams(TypedDict, total=False):
     ]
     """Subscription delivery method"""
 
+    email_audience: Annotated[Literal["individual", "workspace"], PropertyInfo(alias="emailAudience")]
+    """Email recipients for email-capable subscription delivery"""
+
     webhook_config_id: Annotated[str, PropertyInfo(alias="webhookConfigId")]
     """Required when deliveryMethod is "webhook" """

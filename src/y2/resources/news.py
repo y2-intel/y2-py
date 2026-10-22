@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import TimeframeEnum, news_list_params, news_get_recaps_params
@@ -25,7 +27,7 @@ __all__ = ["NewsResource", "AsyncNewsResource"]
 
 
 class NewsResource(SyncAPIResource):
-    """GloriaAI news terminal operations"""
+    """News Terminal items, feeds, and AI recaps"""
 
     @cached_property
     def with_raw_response(self) -> NewsResourceWithRawResponse:
@@ -49,6 +51,9 @@ class NewsResource(SyncAPIResource):
     def list(
         self,
         *,
+        country_code: str | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         topics: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -58,23 +63,28 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the GloriaAI terminal cache.
+        """
+        Lists cached Y2 News Terminal items with topic filters and pagination.
 
-        Supports filtering by
-        topics and pagination.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          country_code: Filter by canonical ISO 3166-1 alpha-2 country code. When supplied without
+              `topics`, the query searches every News Terminal topic.
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Use `ndjson` for row-oriented streaming output.
+
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
-              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Use `GET /news/feeds` to discover
+              the current topic catalog. Default: crypto, geopolitics, macro, equities, ai,
+              energy
 
           extra_headers: Send extra headers
 
@@ -93,6 +103,9 @@ class NewsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "country_code": country_code,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "topics": topics,
                     },
@@ -115,20 +128,18 @@ class NewsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsGetRecapsResponse:
         """
-        Returns AI-generated recap summaries for specified topics within a given
-        timeframe.
+        Lists AI-generated recaps for selected topics and timeframe.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
-              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
+          topics: Comma-separated list of topics. Use `GET /news/feeds` to discover the current
+              topic catalog.
 
           extra_headers: Send extra headers
 
@@ -166,12 +177,13 @@ class NewsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """
-        Returns all available news feed topics with descriptions.
+        """Lists news feed topics and descriptions.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request.
+
+        Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return self._get(
@@ -184,7 +196,7 @@ class NewsResource(SyncAPIResource):
 
 
 class AsyncNewsResource(AsyncAPIResource):
-    """GloriaAI news terminal operations"""
+    """News Terminal items, feeds, and AI recaps"""
 
     @cached_property
     def with_raw_response(self) -> AsyncNewsResourceWithRawResponse:
@@ -208,6 +220,9 @@ class AsyncNewsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        country_code: str | Omit = omit,
+        cursor: str | Omit = omit,
+        format: Literal["json", "ndjson"] | Omit = omit,
         limit: int | Omit = omit,
         topics: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -217,23 +232,28 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListResponse:
-        """Returns news items from the GloriaAI terminal cache.
+        """
+        Lists cached Y2 News Terminal items with topic filters and pagination.
 
-        Supports filtering by
-        topics and pagination.
-
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
+          country_code: Filter by canonical ISO 3166-1 alpha-2 country code. When supplied without
+              `topics`, the query searches every News Terminal topic.
+
+          cursor: Opaque continuation token from the previous response. Bound to the original
+              filters and ordering.
+
+          format: Use `ndjson` for row-oriented streaming output.
+
           limit: Maximum number of items to return
 
-          topics: Comma-separated list of topics to filter by. Valid topics: ai, ai_agents, base,
-              bitcoin, crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals.
-              Default: crypto, ai_agents, macro, bitcoin, ethereum, tech
+          topics: Comma-separated list of topics to filter by. Use `GET /news/feeds` to discover
+              the current topic catalog. Default: crypto, geopolitics, macro, equities, ai,
+              energy
 
           extra_headers: Send extra headers
 
@@ -252,6 +272,9 @@ class AsyncNewsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "country_code": country_code,
+                        "cursor": cursor,
+                        "format": format,
                         "limit": limit,
                         "topics": topics,
                     },
@@ -274,20 +297,18 @@ class AsyncNewsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsGetRecapsResponse:
         """
-        Returns AI-generated recap summaries for specified topics within a given
-        timeframe.
+        Lists AI-generated recaps for selected topics and timeframe.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request. Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
 
         Args:
           timeframe: Time period for recaps
 
-          topics: Comma-separated list of topics. Valid topics: ai, ai_agents, base, bitcoin,
-              crypto, dats, defi, ethereum, hyperliquid, machine_learning, macro,
-              on_chain_whale, perps, ripple, rwa, solana, tech, token_listings, virtuals
+          topics: Comma-separated list of topics. Use `GET /news/feeds` to discover the current
+              topic catalog.
 
           extra_headers: Send extra headers
 
@@ -325,12 +346,13 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NewsListFeedsResponse:
-        """
-        Returns all available news feed topics with descriptions.
+        """Lists news feed topics and descriptions.
 
-        This endpoint also supports x402 pay-per-request access. Requests with a valid
-        Bearer token use the normal API-key flow. Requests without Authorization return
-        `402 Payment Required` with a `PAYMENT-REQUIRED` header and can be retried with
+        Supports x402 pay-per-request.
+
+        Requests with a valid Bearer token use API-key
+        authentication. Without a Bearer API key, start the x402 flow from the
+        `402 Payment Required` response and `PAYMENT-REQUIRED` header; retry with
         `PAYMENT-SIGNATURE`.
         """
         return await self._get(

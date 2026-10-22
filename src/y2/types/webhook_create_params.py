@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["WebhookCreateParams"]
 
@@ -20,3 +22,5 @@ class WebhookCreateParams(TypedDict, total=False):
 
     secret: str
     """Shared secret for signature verification"""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]

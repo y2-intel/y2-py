@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -12,95 +12,244 @@ from .audio_metadata import AudioMetadata
 __all__ = [
     "ReportRetrieveResponse",
     "Data",
+    "DataAudio",
+    "DataIntelligence",
+    "DataIntelligenceGraph",
     "DataContent",
-    "DataMetadata",
-    "DataMetadataFreshnessMetadata",
-    "DataMetadataRecursionMetadata",
+    "DataGraph",
+    "DataGraphEdge",
+    "DataGraphEdgeSource",
+    "DataGraphIncident",
+    "DataGraphIncidentSource",
+    "DataGraphNode",
+    "DataGraphNodeSource",
+    "DataGraphSource",
+    "DataProfile",
+    "DataSignal",
+    "DataSignalSource",
+    "DataSignalSubject",
+    "DataSource",
 ]
 
 
+class DataAudio(BaseModel):
+    duration_seconds: Optional[float] = FieldInfo(alias="durationSeconds", default=None)
+
+    media_type: Optional[str] = FieldInfo(alias="mediaType", default=None)
+
+    status: Literal["available", "unavailable"]
+
+
+class DataIntelligenceGraph(BaseModel):
+    edge_count: int = FieldInfo(alias="edgeCount")
+
+    incident_count: int = FieldInfo(alias="incidentCount")
+
+    node_count: int = FieldInfo(alias="nodeCount")
+
+
+class DataIntelligence(BaseModel):
+    graph: Optional[DataIntelligenceGraph] = None
+
+    signal_count: int = FieldInfo(alias="signalCount")
+
+
 class DataContent(BaseModel):
-    html: Optional[str] = None
-    """Full HTML content"""
+    markdown: str
+
+    media_type: Literal["text/markdown"] = FieldInfo(alias="mediaType")
+
+
+class DataGraphEdgeSource(BaseModel):
+    id: str
+
+    url: str
+
+
+class DataGraphEdge(BaseModel):
+    id: str
+
+    confidence: float
+
+    from_: str = FieldInfo(alias="from")
+
+    source: Optional[DataGraphEdgeSource] = None
+
+    to: str
+
+    type: str
+
+
+class DataGraphIncidentSource(BaseModel):
+    id: str
+
+    url: str
+
+
+class DataGraphIncident(BaseModel):
+    id: str
+
+    category: str
+
+    entity_ids: List[str] = FieldInfo(alias="entityIds")
+
+    occurred_at: datetime = FieldInfo(alias="occurredAt")
+
+    severity: str
+
+    sources: List[DataGraphIncidentSource]
+
+    title: str
+
+    type: Literal["incident"]
+
+
+class DataGraphNodeSource(BaseModel):
+    id: str
+
+    url: str
+
+
+class DataGraphNode(BaseModel):
+    id: str
+
+    kind: str
+
+    label: str
+
+    sources: List[DataGraphNodeSource]
 
     summary: Optional[str] = None
-    """SMS-friendly summary"""
+
+    type: Literal["entity"]
 
 
-class DataMetadataFreshnessMetadata(BaseModel):
-    """Source freshness validation results"""
+class DataGraphSource(BaseModel):
+    id: str
 
-    accessible_links: Optional[int] = FieldInfo(alias="accessibleLinks", default=None)
-
-    average_age_ms: Optional[int] = FieldInfo(alias="averageAgeMs", default=None)
-    """Average source age in milliseconds"""
-
-    freshness_score: Optional[float] = FieldInfo(alias="freshnessScore", default=None)
-    """Overall freshness score (higher = fresher)"""
-
-    stale_sources_count: Optional[int] = FieldInfo(alias="staleSourcesCount", default=None)
-
-    total_links: Optional[int] = FieldInfo(alias="totalLinks", default=None)
-
-    validated_at: Optional[int] = FieldInfo(alias="validatedAt", default=None)
+    url: str
 
 
-class DataMetadataRecursionMetadata(BaseModel):
-    """Metadata about recursive research execution"""
+class DataGraph(BaseModel):
+    edges: List[DataGraphEdge]
 
-    depth: Optional[int] = None
-    """Recursion depth achieved (0 = standard report)"""
+    generated_at: datetime = FieldInfo(alias="generatedAt")
 
-    fallback_reason: Optional[str] = FieldInfo(alias="fallbackReason", default=None)
-    """Reason if fallback to standard generation occurred"""
+    incidents: List[DataGraphIncident]
 
-    layers_processed: Optional[int] = FieldInfo(alias="layersProcessed", default=None)
+    nodes: List[DataGraphNode]
 
-    strategy: Optional[Literal["breadth-first", "depth-first", "hybrid"]] = None
+    sources: List[DataGraphSource]
 
-    subtopics_generated: Optional[List[str]] = FieldInfo(alias="subtopicsGenerated", default=None)
-
-    total_sources_collected: Optional[int] = FieldInfo(alias="totalSourcesCollected", default=None)
-
-    total_time_ms: Optional[int] = FieldInfo(alias="totalTimeMs", default=None)
-
-    unique_sources_aggregated: Optional[int] = FieldInfo(alias="uniqueSourcesAggregated", default=None)
+    summary: str
 
 
-class DataMetadata(BaseModel):
-    freshness_metadata: Optional[DataMetadataFreshnessMetadata] = FieldInfo(alias="freshnessMetadata", default=None)
-    """Source freshness validation results"""
+class DataProfile(BaseModel):
+    id: str
 
-    model: Optional[str] = None
+    name: Optional[str] = None
 
-    recursion_metadata: Optional[DataMetadataRecursionMetadata] = FieldInfo(alias="recursionMetadata", default=None)
-    """Metadata about recursive research execution"""
+    topic: Optional[str] = None
 
-    total_cost: Optional[float] = FieldInfo(alias="totalCost", default=None)
+
+class DataSignalSource(BaseModel):
+    id: str
+
+    url: str
+
+
+class DataSignalSubject(BaseModel):
+    entity_id: Optional[str] = FieldInfo(alias="entityId", default=None)
+
+    key: str
+
+    kind: str
+
+    label: str
+
+
+class DataSignal(BaseModel):
+    action_type: str = FieldInfo(alias="actionType")
+
+    confidence: float
+
+    decision: str
+
+    domain: str
+
+    inference_type: str = FieldInfo(alias="inferenceType")
+
+    justification: str
+
+    priority: str
+
+    signal: str
+
+    sources: List[DataSignalSource]
+
+    subjects: List[DataSignalSubject]
+
+    tags: List[str]
+
+    time_horizon: str = FieldInfo(alias="timeHorizon")
+
+    title: str
+
+
+class DataSource(BaseModel):
+    id: str
+
+    language: Optional[str] = None
+
+    published_at: Optional[datetime] = FieldInfo(alias="publishedAt", default=None)
+
+    publisher: Optional[str] = None
+
+    retrieved_at: datetime = FieldInfo(alias="retrievedAt")
+
+    source_type: str = FieldInfo(alias="sourceType")
+
+    title: Optional[str] = None
+
+    url: str
 
 
 class Data(BaseModel):
     id: str
 
-    content: DataContent
+    audio: DataAudio
 
-    generated_at: int = FieldInfo(alias="generatedAt")
+    generated_at: datetime = FieldInfo(alias="generatedAt")
 
-    generated_at_iso: datetime = FieldInfo(alias="generatedAtISO")
+    intelligence: DataIntelligence
+
+    language: str
+
+    links: Dict[str, Optional[str]]
 
     profile_id: str = FieldInfo(alias="profileId")
 
-    audio: Optional[AudioMetadata] = None
+    published_at: datetime = FieldInfo(alias="publishedAt")
 
-    metadata: Optional[DataMetadata] = None
+    status: Literal["published"]
 
-    profile_name: Optional[str] = FieldInfo(alias="profileName", default=None)
-
-    profile_topic: Optional[str] = FieldInfo(alias="profileTopic", default=None)
-
-    sources: Optional[List[str]] = None
+    summary: Optional[str] = None
 
     topic: Optional[str] = None
+
+    type: Literal["report"]
+
+    audio_representation: Optional[AudioMetadata] = FieldInfo(alias="audioRepresentation", default=None)
+
+    content: Optional[DataContent] = None
+
+    graph: Optional[DataGraph] = None
+
+    profile: Optional[DataProfile] = None
+
+    signals: Optional[List[DataSignal]] = None
+
+    sources: Optional[List[DataSource]] = None
 
 
 class ReportRetrieveResponse(BaseModel):

@@ -2,12 +2,44 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["CountryGetPredictionMarketsResponse", "Data", "Meta"]
+__all__ = [
+    "CountryGetPredictionMarketsResponse",
+    "Data",
+    "DataOutcome",
+    "DataLiquidityMeasurement",
+    "DataVolumeMeasurement",
+    "Meta",
+]
+
+
+class DataOutcome(BaseModel):
+    label: str
+
+    probability: float
+
+
+class DataLiquidityMeasurement(BaseModel):
+    basis: Literal["provider_reported"]
+
+    currency: Optional[str] = None
+    """ISO 4217 code when the source identifies one; otherwise null."""
+
+    value: Optional[float] = None
+
+
+class DataVolumeMeasurement(BaseModel):
+    basis: Literal["provider_reported"]
+
+    currency: Optional[str] = None
+    """ISO 4217 code when the source identifies one; otherwise null."""
+
+    value: Optional[float] = None
 
 
 class Data(BaseModel):
@@ -18,14 +50,23 @@ class Data(BaseModel):
     is documented separately as `PredictionMarket`.
     """
 
+    id: str
+
     market_id: str = FieldInfo(alias="marketId")
     """Prediction market identifier"""
+
+    outcomes: List[DataOutcome]
+    """Typed outcome labels with normalized fractional probabilities."""
 
     probability: float
     """Current probability (0-1)"""
 
+    probability_basis: Literal["fraction_0_to_1"] = FieldInfo(alias="probabilityBasis")
+
     title: str
     """Market question/title"""
+
+    type: Literal["prediction_market"]
 
     end_date: Optional[datetime] = FieldInfo(alias="endDate", default=None)
     """Market resolution date"""
@@ -33,11 +74,7 @@ class Data(BaseModel):
     liquidity: Optional[float] = None
     """Market liquidity (null if unavailable)"""
 
-    outcome_prices: Optional[List[str]] = FieldInfo(alias="outcomePrices", default=None)
-    """Outcome prices corresponding to each outcome (null if unavailable)"""
-
-    outcomes: Optional[List[str]] = None
-    """Possible market outcomes"""
+    liquidity_measurement: Optional[DataLiquidityMeasurement] = FieldInfo(alias="liquidityMeasurement", default=None)
 
     polymarket_url: Optional[str] = FieldInfo(alias="polymarketUrl", default=None)
     """Polymarket URL for this market"""
@@ -47,6 +84,8 @@ class Data(BaseModel):
 
     volume: Optional[float] = None
     """Trading volume"""
+
+    volume_measurement: Optional[DataVolumeMeasurement] = FieldInfo(alias="volumeMeasurement", default=None)
 
 
 class Meta(BaseModel):
